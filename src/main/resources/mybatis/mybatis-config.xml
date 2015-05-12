@@ -16,6 +16,10 @@
 		<typeAlias type="com.kakasure.util.PageData" alias="pd"/>
 		<!-- 分页 -->
 		<typeAlias type="com.kakasure.entity.Page" alias="Page"/>
+		
+		<typeAlias type="com.kakasure.entity.yunear.CopyrightMulti" alias="CopyrightMulti"/>
+		<typeAlias type="com.kakasure.entity.yunear.AnnounceMulti" alias="AnnounceMulti"/>
+		<typeAlias type="com.kakasure.entity.yunear.Code" alias="Code"/>
 	</typeAliases>
 	
 	<plugins>
@@ -43,13 +47,13 @@
 		
 		<!-- yunear 	开始-->
 		<!-- 用户表 -->
-		<!-- <mapper resource="mybatis/yunear/TbUserMapper.xml"/>
-		版权方多媒体
-		<mapper resource="mybatis/yunear/TbCopyrightMultiMapper.xml"/>
-		发布方多媒体
-		<mapper resource="mybatis/yunear/TbAnnounceMultiMapper.xml"/>
-		二维码
-		<mapper resource="mybatis/yunear/TbCodeMapper.xml"/> -->
+		<mapper resource="mybatis/yunear/UserplusMapper.xml"/>
+		<!-- 版权方多媒体 -->
+		<mapper resource="mybatis/yunear/CopyrightMultiMapper.xml"/>
+		<!-- 发布方多媒体 -->
+		<mapper resource="mybatis/yunear/AnnounceMultiMapper.xml"/>
+		<!-- 二维码 -->
+		<mapper resource="mybatis/yunear/CodeMapper.xml"/>
 		
 		<!-- yunear 	结束-->
 		

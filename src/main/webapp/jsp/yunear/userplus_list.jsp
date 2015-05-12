@@ -34,7 +34,7 @@
 	<div class="row-fluid">
 	
 			<!-- 检索  -->
-			<form action="user/list.do" method="post" name="Form" id="Form">
+			<form action="userplus/list.do" method="post" name="Form" id="Form">
 			<table>
 				<tr>
 					<td>
@@ -79,6 +79,7 @@
 						<th>联系人姓名</th>
 						<th>联系人手机号</th>
 						<th>审核状态</th>
+						<th>审核日期</th>
 						<th>创建日期</th>
 						<th>修改日期</th>
 						<th>账户余额</th>
@@ -97,7 +98,7 @@
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
 								<td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${var.USER_ID}" /><span class="lbl"></span></label>
+									<label><input type='checkbox' name='ids' value="${var.USERPLUS_ID}" /><span class="lbl"></span></label>
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td>
 										<td>${var.USER_NAME}</td>
@@ -112,6 +113,7 @@
 										<td>${var.CONTACT_MOBILE}</td>
 										<td>${var.AUDIT_STATUS}</td>
 										<td>${var.AUDIT_TIME}</td>
+										<td>${var.CREATE_TIME}</td>
 										<td>${var.UPD_TIME}</td>
 										<td>${var.ACCOUNT_BALANCE}</td>
 										<td>${var.STATUS}</td>
@@ -126,10 +128,10 @@
 										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
 										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
 											<c:if test="${QX.edit == 1 }">
-											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.USER_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
+											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.USERPLUS_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
 											</c:if>
 											<c:if test="${QX.del == 1 }">
-											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.USER_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
+											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.USERPLUS_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
 											</c:if>
 										</ul>
 										</div>
@@ -215,7 +217,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="新增";
-			 diag.URL = '<%=basePath%>/user/goAdd.do';
+			 diag.URL = '<%=basePath%>/userplus/goAdd.do';
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -236,7 +238,7 @@
 		function del(Id){
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
-					var url = "<%=basePath%>/user/delete.do?USER_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>/userplus/delete.do?USERPLUS_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						if(data=="success"){
 							nextPage(${page.currentPage});
@@ -252,7 +254,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>/user/goEdit.do?USER_ID='+Id;
+			 diag.URL = '<%=basePath%>/userplus/goEdit.do?USERPLUS_ID='+Id;
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -327,7 +329,7 @@
 						if(msg == '确定要删除选中的数据吗?'){
 							$.ajax({
 								type: "POST",
-								url: '<%=basePath%>/user/deleteAll.do?tm='+new Date().getTime(),
+								url: '<%=basePath%>/userplus/deleteAll.do?tm='+new Date().getTime(),
 						    	data: {DATA_IDS:str},
 								dataType:'json',
 								//beforeSend: validateData,
@@ -346,7 +348,7 @@
 		
 		//导出excel
 		function toExcel(){
-			window.location.href='<%=basePath%>/user/excel.do';
+			window.location.href='<%=basePath%>/userplus/excel.do';
 		}
 		</script>
 		<script type="text/javascript" src="js/jquery.cookie.js"></script>

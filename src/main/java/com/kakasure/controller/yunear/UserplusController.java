@@ -21,33 +21,33 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kakasure.controller.base.BaseController;
 import com.kakasure.entity.Page;
-import com.kakasure.service.yunear.UserService;
+import com.kakasure.service.yunear.UserplusService;
 import com.kakasure.util.AppUtil;
 import com.kakasure.util.ObjectExcelView;
 import com.kakasure.util.PageData;
 
 /** 
- * 类名称：UserController
+ * 类名称：UserplusController
  * 创建人：FH 
  * 创建时间：2015-05-12
  */
 @Controller
-@RequestMapping(value="/user")
-public class UserController extends BaseController {
+@RequestMapping(value="/userplus")
+public class UserplusController extends BaseController {
 	
-	@Resource(name="userService")
-	private UserService userService;
+	@Resource(name="userplusService")
+	private UserplusService userplusService;
 	
 	/**
 	 * 新增
 	 */
 	@RequestMapping(value="/save")
 	public ModelAndView save() throws Exception{
-		logBefore(logger, "新增User");
+		logBefore(logger, "新增Userplus");
 		
 		pd = this.getPageData();
-		pd.put("USER_ID", this.get32UUID());	//主键
-		userService.save(pd);
+		pd.put("USERPLUS_ID", this.get32UUID());	//主键
+		userplusService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
@@ -58,11 +58,11 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value="/delete")
 	public void delete(PrintWriter out){
-		logBefore(logger, "删除User");
+		logBefore(logger, "删除Userplus");
 		
 		try{
 			pd = this.getPageData();
-			userService.delete(pd);
+			userplusService.delete(pd);
 			out.write("success");
 			out.close();
 		} catch(Exception e){
@@ -76,10 +76,10 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value="/edit")
 	public ModelAndView edit() throws Exception{
-		logBefore(logger, "修改User");
+		logBefore(logger, "修改Userplus");
 		
 		pd = this.getPageData();
-		userService.edit(pd);
+		userplusService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
@@ -90,14 +90,14 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page){
-		logBefore(logger, "列表User");
+		logBefore(logger, "列表Userplus");
 		
 		try{
 			pd = this.getPageData();
 			page.setPd(pd);
-			List<PageData>	varList = userService.list(page);	//列出User列表
+			List<PageData>	varList = userplusService.list(page);	//列出Userplus列表
 			getHC(); //调用权限
-			mv.setViewName("yunear/user/user_list");
+			mv.setViewName("yunear/userplus/userplus_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 		} catch(Exception e){
@@ -111,11 +111,11 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value="/goAdd")
 	public ModelAndView goAdd(){
-		logBefore(logger, "去新增User页面");
+		logBefore(logger, "去新增Userplus页面");
 		
 		pd = this.getPageData();
 		try {
-			mv.setViewName("yunear/user/user_edit");
+			mv.setViewName("yunear/userplus/userplus_edit");
 			mv.addObject("msg", "save");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -129,12 +129,12 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value="/goEdit")
 	public ModelAndView goEdit(){
-		logBefore(logger, "去修改User页面");
+		logBefore(logger, "去修改Userplus页面");
 		
 		pd = this.getPageData();
 		try {
-			pd = userService.findById(pd);	//根据ID读取
-			mv.setViewName("yunear/user/user_edit");
+			pd = userplusService.findById(pd);	//根据ID读取
+			mv.setViewName("yunear/userplus/userplus_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -149,7 +149,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value="/deleteAll")
 	@ResponseBody
 	public Object deleteAll() {
-		logBefore(logger, "批量删除User");
+		logBefore(logger, "批量删除Userplus");
 		Map map = new HashMap();
 		try {
 			pd = this.getPageData();
@@ -157,7 +157,7 @@ public class UserController extends BaseController {
 			String DATA_IDS = pd.getString("DATA_IDS");
 			if(null != DATA_IDS && !"".equals(DATA_IDS)){
 				String ArrayDATA_IDS[] = DATA_IDS.split(",");
-				userService.deleteAll(ArrayDATA_IDS);
+				userplusService.deleteAll(ArrayDATA_IDS);
 				pd.put("msg", "ok");
 			}else{
 				pd.put("msg", "no");
@@ -178,7 +178,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value="/excel")
 	public ModelAndView exportExcel(){
-		logBefore(logger, "导出User到excel");
+		logBefore(logger, "导出Userplus到excel");
 		ModelAndView mv = new ModelAndView();
 		pd = this.getPageData();
 		try{
@@ -195,13 +195,14 @@ public class UserController extends BaseController {
 			titles.add("联系人姓名");	//9
 			titles.add("联系人手机号");	//10
 			titles.add("审核状态");	//11
-			titles.add("创建日期");	//12
-			titles.add("修改日期");	//13
-			titles.add("账户余额");	//14
-			titles.add("状态");	//15
-			titles.add("描述");	//16
+			titles.add("审核日期");	//12
+			titles.add("创建日期");	//13
+			titles.add("修改日期");	//14
+			titles.add("账户余额");	//15
+			titles.add("状态");	//16
+			titles.add("描述");	//17
 			dataMap.put("titles", titles);
-			List<PageData> varOList = userService.listAll(pd);
+			List<PageData> varOList = userplusService.listAll(pd);
 			List<PageData> varList = new ArrayList<PageData>();
 			for(int i=0;i<varOList.size();i++){
 				PageData vpd = new PageData();
@@ -217,10 +218,11 @@ public class UserController extends BaseController {
 				vpd.put("var10", varOList.get(i).getString("CONTACT_MOBILE"));	//10
 				vpd.put("var11", varOList.get(i).getString("AUDIT_STATUS"));	//11
 				vpd.put("var12", varOList.get(i).getString("AUDIT_TIME"));	//12
-				vpd.put("var13", varOList.get(i).getString("UPD_TIME"));	//13
-				vpd.put("var14", varOList.get(i).getString("ACCOUNT_BALANCE"));	//14
-				vpd.put("var15", varOList.get(i).getString("STATUS"));	//15
-				vpd.put("var16", varOList.get(i).getString("DESCR"));	//16
+				vpd.put("var13", varOList.get(i).getString("CREATE_TIME"));	//13
+				vpd.put("var14", varOList.get(i).getString("UPD_TIME"));	//14
+				vpd.put("var15", varOList.get(i).getString("ACCOUNT_BALANCE"));	//15
+				vpd.put("var16", varOList.get(i).getString("STATUS"));	//16
+				vpd.put("var17", varOList.get(i).getString("DESCR"));	//17
 				varList.add(vpd);
 			}
 			dataMap.put("varList", varList);

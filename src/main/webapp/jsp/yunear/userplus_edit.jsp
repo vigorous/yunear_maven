@@ -150,11 +150,21 @@
 		if($("#AUDIT_TIME").val()==""){
 			$("#AUDIT_TIME").tips({
 				side:3,
-	            msg:'请输入创建日期',
+	            msg:'请输入审核日期',
 	            bg:'#AE81FF',
 	            time:2
 	        });
 			$("#AUDIT_TIME").focus();
+			return false;
+		}
+		if($("#CREATE_TIME").val()==""){
+			$("#CREATE_TIME").tips({
+				side:3,
+	            msg:'请输入创建日期',
+	            bg:'#AE81FF',
+	            time:2
+	        });
+			$("#CREATE_TIME").focus();
 			return false;
 		}
 		if($("#UPD_TIME").val()==""){
@@ -205,8 +215,8 @@
 </script>
 	</head>
 <body>
-	<form action="user/${msg }.do" name="Form" id="Form" method="post">
-		<input type="hidden" name="USER_ID" id="USER_ID" value="${pd.USER_ID}"/>
+	<form action="userplus/${msg }.do" name="Form" id="Form" method="post">
+		<input type="hidden" name="USERPLUS_ID" id="USERPLUS_ID" value="${pd.USERPLUS_ID}"/>
 		<div id="zhongxin">
 		<table>
 			<tr>
@@ -243,7 +253,10 @@
 				<td><input type="text" name="AUDIT_STATUS" id="AUDIT_STATUS" value="${pd.AUDIT_STATUS}" maxlength="32" placeholder="这里输入审核状态" title="审核状态"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="AUDIT_TIME" id="AUDIT_TIME" value="${pd.AUDIT_TIME}" maxlength="32" placeholder="这里输入创建日期" title="创建日期"/></td>
+				<td><input type="text" name="AUDIT_TIME" id="AUDIT_TIME" value="${pd.AUDIT_TIME}" maxlength="32" placeholder="这里输入审核日期" title="审核日期"/></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="CREATE_TIME" id="CREATE_TIME" value="${pd.CREATE_TIME}" maxlength="32" placeholder="这里输入创建日期" title="创建日期"/></td>
 			</tr>
 			<tr>
 				<td><input type="text" name="UPD_TIME" id="UPD_TIME" value="${pd.UPD_TIME}" maxlength="32" placeholder="这里输入修改日期" title="修改日期"/></td>
