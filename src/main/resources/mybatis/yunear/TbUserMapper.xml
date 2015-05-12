@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TbUserMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_TBUSER(
+			USER_NAME,	
+			PASSWORD,	
+			CORPORATION_NAME,	
+			COPYRIGHT_FILE,	
+			COPYRIGHT_NO,	
+			TAX_CERT,	
+			BUSINESS_LICENSE,	
+			BANK_NAME,	
+			BANK_ACCOUNT,	
+			CONTACT_NAME,	
+			CONTACT_MOBILE,	
+			AUDIT_STATUS,	
+			EMAIL,	
+			PHONE,	
+			AUDIT_TIME,	
+			CREATE_TIME,	
+			UPD_TIME,	
+			ROLE_TYPE,	
+			ROLE_DESC,	
+			ACCOUNT_BALANCE,	
+			STATUS,	
+			DESCR,	
+			TBUSER_ID
+		) values (
+			#{USER_NAME},	
+			#{PASSWORD},	
+			#{CORPORATION_NAME},	
+			#{COPYRIGHT_FILE},	
+			#{COPYRIGHT_NO},	
+			#{TAX_CERT},	
+			#{BUSINESS_LICENSE},	
+			#{BANK_NAME},	
+			#{BANK_ACCOUNT},	
+			#{CONTACT_NAME},	
+			#{CONTACT_MOBILE},	
+			#{AUDIT_STATUS},	
+			#{EMAIL},	
+			#{PHONE},	
+			#{AUDIT_TIME},	
+			#{CREATE_TIME},	
+			#{UPD_TIME},	
+			#{ROLE_TYPE},	
+			#{ROLE_DESC},	
+			#{ACCOUNT_BALANCE},	
+			#{STATUS},	
+			#{DESCR},	
+			#{TBUSER_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_TBUSER
+		where 
+			TBUSER_ID = #{TBUSER_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_TBUSER
+			set 
+				USER_NAME = #{USER_NAME},
+				PASSWORD = #{PASSWORD},
+				CORPORATION_NAME = #{CORPORATION_NAME},
+				COPYRIGHT_FILE = #{COPYRIGHT_FILE},
+				COPYRIGHT_NO = #{COPYRIGHT_NO},
+				TAX_CERT = #{TAX_CERT},
+				BUSINESS_LICENSE = #{BUSINESS_LICENSE},
+				BANK_NAME = #{BANK_NAME},
+				BANK_ACCOUNT = #{BANK_ACCOUNT},
+				CONTACT_NAME = #{CONTACT_NAME},
+				CONTACT_MOBILE = #{CONTACT_MOBILE},
+				AUDIT_STATUS = #{AUDIT_STATUS},
+				EMAIL = #{EMAIL},
+				PHONE = #{PHONE},
+				AUDIT_TIME = #{AUDIT_TIME},
+				CREATE_TIME = #{CREATE_TIME},
+				UPD_TIME = #{UPD_TIME},
+				ROLE_TYPE = #{ROLE_TYPE},
+				ROLE_DESC = #{ROLE_DESC},
+				ACCOUNT_BALANCE = #{ACCOUNT_BALANCE},
+				STATUS = #{STATUS},
+				DESCR = #{DESCR},
+			TBUSER_ID = TBUSER_ID
+			where 
+				TBUSER_ID = #{TBUSER_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			USER_NAME,	
+			PASSWORD,	
+			CORPORATION_NAME,	
+			COPYRIGHT_FILE,	
+			COPYRIGHT_NO,	
+			TAX_CERT,	
+			BUSINESS_LICENSE,	
+			BANK_NAME,	
+			BANK_ACCOUNT,	
+			CONTACT_NAME,	
+			CONTACT_MOBILE,	
+			AUDIT_STATUS,	
+			EMAIL,	
+			PHONE,	
+			AUDIT_TIME,	
+			CREATE_TIME,	
+			UPD_TIME,	
+			ROLE_TYPE,	
+			ROLE_DESC,	
+			ACCOUNT_BALANCE,	
+			STATUS,	
+			DESCR,	
+			TBUSER_ID
+		from 
+			TB_TBUSER
+		where 
+			TBUSER_ID = #{TBUSER_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.USER_NAME,	
+				a.PASSWORD,	
+				a.CORPORATION_NAME,	
+				a.COPYRIGHT_FILE,	
+				a.COPYRIGHT_NO,	
+				a.TAX_CERT,	
+				a.BUSINESS_LICENSE,	
+				a.BANK_NAME,	
+				a.BANK_ACCOUNT,	
+				a.CONTACT_NAME,	
+				a.CONTACT_MOBILE,	
+				a.AUDIT_STATUS,	
+				a.EMAIL,	
+				a.PHONE,	
+				a.AUDIT_TIME,	
+				a.CREATE_TIME,	
+				a.UPD_TIME,	
+				a.ROLE_TYPE,	
+				a.ROLE_DESC,	
+				a.ACCOUNT_BALANCE,	
+				a.STATUS,	
+				a.DESCR,	
+				a.TBUSER_ID
+		from 
+				TB_TBUSER a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.USER_NAME,	
+				a.PASSWORD,	
+				a.CORPORATION_NAME,	
+				a.COPYRIGHT_FILE,	
+				a.COPYRIGHT_NO,	
+				a.TAX_CERT,	
+				a.BUSINESS_LICENSE,	
+				a.BANK_NAME,	
+				a.BANK_ACCOUNT,	
+				a.CONTACT_NAME,	
+				a.CONTACT_MOBILE,	
+				a.AUDIT_STATUS,	
+				a.EMAIL,	
+				a.PHONE,	
+				a.AUDIT_TIME,	
+				a.CREATE_TIME,	
+				a.UPD_TIME,	
+				a.ROLE_TYPE,	
+				a.ROLE_DESC,	
+				a.ACCOUNT_BALANCE,	
+				a.STATUS,	
+				a.DESCR,	
+				a.TBUSER_ID
+		from 
+				TB_TBUSER a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_TBUSER
+		where 
+			TBUSER_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

@@ -40,6 +40,15 @@
 		<!-- 数据字典 -->
 		<mapper resource="mybatis/system/ZidianMapper.xml"/>
 		<!-- 系统模块    结束 -->
+		
+		<!-- yunear -->
+		<!-- 用户表 -->
+		<mapper resource="mybatis/yunear/TbUser.xml"/>
+		<!-- 多媒体表 -->
+		<mapper resource="mybatis/yunear/TbCopyrightMultiMapper.xml"/>
+		
+		
+		
 	</mappers>
 	
 </configuration>
