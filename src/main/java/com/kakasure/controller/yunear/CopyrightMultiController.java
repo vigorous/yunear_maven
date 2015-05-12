@@ -97,7 +97,7 @@ public class CopyrightMultiController extends BaseController {
 			page.setPd(pd);
 			List<PageData>	varList = copyrightmultiService.list(page);	//列出CopyrightMulti列表
 			getHC(); //调用权限
-			mv.setViewName("yunear/copyrightmulti/copyrightmulti_list");
+			mv.setViewName("yunear/copyrightmulti_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 		} catch(Exception e){
@@ -115,7 +115,7 @@ public class CopyrightMultiController extends BaseController {
 		
 		pd = this.getPageData();
 		try {
-			mv.setViewName("yunear/copyrightmulti/copyrightmulti_edit");
+			mv.setViewName("yunear/copyrightmulti_edit");
 			mv.addObject("msg", "save");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -134,7 +134,7 @@ public class CopyrightMultiController extends BaseController {
 		pd = this.getPageData();
 		try {
 			pd = copyrightmultiService.findById(pd);	//根据ID读取
-			mv.setViewName("yunear/copyrightmulti/copyrightmulti_edit");
+			mv.setViewName("yunear/copyrightmulti_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -206,7 +206,7 @@ public class CopyrightMultiController extends BaseController {
 				PageData vpd = new PageData();
 				vpd.put("var1", varOList.get(i).getString("USER_ID"));	//1
 				vpd.put("var2", varOList.get(i).getString("MEDIA_NAME"));	//2
-				vpd.put("var3", varOList.get(i).getString("MEDIA_THEM"));	//3
+				vpd.put("var3", varOList.get(i).getString("MEDIA_THEME"));	//3
 				vpd.put("var4", varOList.get(i).getString("KEYWORD"));	//4
 				vpd.put("var5", varOList.get(i).getString("PAY_TYPE"));	//5
 				vpd.put("var6", varOList.get(i).getString("DESCR"));	//6
