@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CodeMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into YUNEAR_CODE(
+			CODE_NAME,	
+			USER_ID,	
+			MEDIA_ID,	
+			SCAN_CODE_LINK,	
+			SCAN_CODE_NUM,	
+			IMG_LINK,	
+			STATUS,	
+			CREATE_TIME,	
+			UPD_TIME,	
+			CODE_ID
+		) values (
+			#{CODE_NAME},	
+			#{USER_ID},	
+			#{MEDIA_ID},	
+			#{SCAN_CODE_LINK},	
+			#{SCAN_CODE_NUM},	
+			#{IMG_LINK},	
+			#{STATUS},	
+			#{CREATE_TIME},	
+			#{UPD_TIME},	
+			#{CODE_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from YUNEAR_CODE
+		where 
+			CODE_ID = #{CODE_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  YUNEAR_CODE
+			set 
+				CODE_NAME = #{CODE_NAME},
+				USER_ID = #{USER_ID},
+				MEDIA_ID = #{MEDIA_ID},
+				SCAN_CODE_LINK = #{SCAN_CODE_LINK},
+				SCAN_CODE_NUM = #{SCAN_CODE_NUM},
+				IMG_LINK = #{IMG_LINK},
+				STATUS = #{STATUS},
+				CREATE_TIME = #{CREATE_TIME},
+				UPD_TIME = #{UPD_TIME},
+			CODE_ID = CODE_ID
+			where 
+				CODE_ID = #{CODE_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			CODE_NAME,	
+			USER_ID,	
+			MEDIA_ID,	
+			SCAN_CODE_LINK,	
+			SCAN_CODE_NUM,	
+			IMG_LINK,	
+			STATUS,	
+			CREATE_TIME,	
+			UPD_TIME,	
+			CODE_ID
+		from 
+			YUNEAR_CODE
+		where 
+			CODE_ID = #{CODE_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.CODE_NAME,	
+				a.USER_ID,	
+				a.MEDIA_ID,	
+				a.SCAN_CODE_LINK,	
+				a.SCAN_CODE_NUM,	
+				a.IMG_LINK,	
+				a.STATUS,	
+				a.CREATE_TIME,	
+				a.UPD_TIME,	
+				a.CODE_ID
+		from 
+				YUNEAR_CODE a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.CODE_NAME,	
+				a.USER_ID,	
+				a.MEDIA_ID,	
+				a.SCAN_CODE_LINK,	
+				a.SCAN_CODE_NUM,	
+				a.IMG_LINK,	
+				a.STATUS,	
+				a.CREATE_TIME,	
+				a.UPD_TIME,	
+				a.CODE_ID
+		from 
+				YUNEAR_CODE a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from YUNEAR_CODE
+		where 
+			CODE_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>
