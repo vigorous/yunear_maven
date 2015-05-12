@@ -109,7 +109,7 @@ public class ${objectName}Controller extends BaseController {
 			pd = this.getPageData();
 			page.setPd(pd);
 			List<PageData>	varList = ${objectNameLower}Service.list(page);	//列出${objectName}列表
-			this.getHC(); //调用权限
+			getHC(); //调用权限
 			mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
@@ -222,16 +222,6 @@ public class ${objectName}Controller extends BaseController {
 		}
 		return mv;
 	}
-	
-	/* ===============================权限================================== */
-	public void getHC(){
-		HttpSession session = this.getRequest().getSession();
-		Map<String, String> map = (Map<String, String>)session.getAttribute(Const.SESSION_QX);
-		mv.addObject(Const.SESSION_QX,map);	//按钮权限
-		List<Menu> menuList = (List)session.getAttribute(Const.SESSION_menuList);
-		mv.addObject(Const.SESSION_menuList, menuList);//菜单权限
-	}
-	/* ===============================权限================================== */
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder){
