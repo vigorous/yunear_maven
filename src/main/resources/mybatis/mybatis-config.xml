@@ -43,13 +43,13 @@
 		
 		<!-- yunear 	开始-->
 		<!-- 用户表 -->
-		<mapper resource="mybatis/yunear/TbUserMapper.xml"/>
-		<!-- 版权方多媒体 -->
+		<!-- <mapper resource="mybatis/yunear/TbUserMapper.xml"/>
+		版权方多媒体
 		<mapper resource="mybatis/yunear/TbCopyrightMultiMapper.xml"/>
-		<!-- 发布方多媒体 -->
+		发布方多媒体
 		<mapper resource="mybatis/yunear/TbAnnounceMultiMapper.xml"/>
-		<!-- 二维码 -->
-		<mapper resource="mybatis/yunear/TbCodeMapper.xml"/>
+		二维码
+		<mapper resource="mybatis/yunear/TbCodeMapper.xml"/> -->
 		
 		<!-- yunear 	结束-->
 		
