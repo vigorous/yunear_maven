@@ -2,10 +2,10 @@
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `TB_${objectNameUpper}`
+-- Table structure for `YUNEAR_${objectNameUpper}`
 -- ----------------------------
-DROP TABLE IF EXISTS `TB_${objectNameUpper}`;
-CREATE TABLE `TB_${objectNameUpper}` (
+DROP TABLE IF EXISTS `YUNEAR_${objectNameUpper}`;
+CREATE TABLE `YUNEAR_${objectNameUpper}` (
  		`${objectNameUpper}_ID` varchar(100) NOT NULL,
 	<#list fieldList as var>
 		<#if var[1] == 'Integer'>
