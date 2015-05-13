@@ -76,15 +76,15 @@
 	                    	<div style="float: left;" class="codediv"><input type="text" name="code" id="code" class="login_code" style="height:16px; padding-top:0px;"/></div>
                     		<div style="float: left;"><i><img style="height:22px;" id="codeImg" alt="点击更换" title="点击更换" src=""/></i></div>
                     
-                    <span class="pull-right" style="padding-right:3%;"><a href="javascript:quxiao();" class="btn btn-success">取消</a></span>
+                    <!-- <span class="pull-right" style="padding-right:3%;"><a href="javascript:quxiao();" class="btn btn-success">取消</a></span> -->
+                    <span class="pull-right" style="padding-right:3%;"><a href="<%=path %>jsp/system/admin/register.jsp" class="btn btn-success" data-target="#signup-box">注册</a></span>
                     <span class="pull-right"><a onclick="denglu();" class="flip-link btn btn-info" id="to-recover">登录</a></span>
                 	
                 	</div>
                 </div>
                 
             </form>
-            
-            
+       
       		<div class="controls">
                <div class="main_input_box">
                          	<font color="white"><span id="nameerr">Copyright © FH 2100</span></font>
@@ -92,6 +92,8 @@
            </div>
    		</div>
    	</div>
+   	
+ 
      <div id="templatemo_banner_slide" class="container_wapper">
         <div class="camera_wrap camera_emboss" id="camera_slide">
             <div data-src="<%=path %>/admin00/login/images/banner_slide_01.jpg">
@@ -102,6 +104,7 @@
             </div>
         </div><!-- #camera_wrap_3 -->    
     </div>
+
 
 	<script type="text/javascript">
 		var errInfo = "${errInfo}";
