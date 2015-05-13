@@ -299,6 +299,10 @@ public class LoginController extends BaseController {
 //				mv.addObject("strXML", strXML);
 				// FusionCharts 报表
 
+				if (null == session.getAttribute(Const.SESSION_QX)) {
+					session.setAttribute(Const.SESSION_QX, this.getUQX(session)); // 按钮权限放到session中
+				}
+				
 				mv.setViewName("system/admin/index");
 				mv.addObject("user", user);
 				mv.addObject("menuList", allmenuList);
