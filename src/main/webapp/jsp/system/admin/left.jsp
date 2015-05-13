@@ -1,4 +1,5 @@
-﻿<%
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
 	String pathl = request.getContextPath();
 	String basePathl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pathl+"/";
 %>
@@ -9,9 +10,9 @@
 
 					<div id="sidebar-shortcuts-large">
 
-						<button class="btn btn-small btn-success" onclick="changeMenu();" title="切换菜单"><i class="icon-pencil"></i></button>
+						<!-- <button class="btn btn-small btn-success" onclick="changeMenu();" title="切换菜单"><i class="icon-pencil"></i></button> -->
 
-						<button class="btn btn-small btn-info" title="UI实例" onclick="window.open('<%=basePathl%>UI_new');"><i class="icon-eye-open"></i></button>
+						<button class="btn btn-small btn-info" title="UI实例11" onclick="window.open('<%=basePathl%>UI_new');"><i class="icon-eye-open"></i></button>
 
 						<button class="btn btn-small btn-warning" title="数据字典" id="adminzidian" onclick="zidian();"><i class="icon-book"></i></button>
 						

@@ -1,32 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
-	//out.print(path);
 %>
 <!DOCTYPE html>
 <html lang="en">
-    
-<head>
-        <title>${pd.SYSNAME}</title><meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        
-        <link rel="stylesheet" href="<%=path %>/admin00/login/bootstrap.min.css" />
-        <link rel="stylesheet" href="<%=path %>/admin00/login/css/camera.css" />
-		<link rel="stylesheet" href="<%=path %>/admin00/login/bootstrap-responsive.min.css" />
-        <link rel="stylesheet" href="<%=path %>/admin00/login/matrix-login.css" />
-        <link href="<%=path %>/admin00/login/font-awesome.css" rel="stylesheet" />
-		
-		<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
-        
 
-	<c:if test="${error != null && error != '' }">
+<head>
+<title>${pd.SYSNAME}</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet" href="<%=path %>/admin00/login/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=path %>/admin00/login/css/camera.css" />
+<link rel="stylesheet"
+	href="<%=path %>/admin00/login/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="<%=path %>/admin00/login/matrix-login.css" />
+<link href="<%=path %>/admin00/login/font-awesome.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+
+
+<c:if test="${error != null && error != '' }">
 	<script type="text/javascript">
 		alert("${error}");
 	</script>
-	</c:if>
-	
-	<script type="text/javascript">
+</c:if>
+
+<script type="text/javascript">
 		function denglu(){
 			
 			if($("#saveid").attr("checked")){
@@ -41,67 +43,92 @@
 			$("#password").val('');
 		}
 	</script>
-	
-    </head>
-   <body>
+
+</head>
+<body>
 
 
 
-	<div style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
-    	 <div id="loginbox">            
-            <form action="login_login.do" method="post" name="loginForm" id="loginForm" onsubmit="return check();">
-				 <div class="control-group normal_text"> <h3><img src="<%=path %>/admin00/login/logo.png" alt="Logo" /></h3></div>
-                <div class="control-group">
-                    <div class="controls">
-                        <div class="main_input_box">
-                            <span class="add-on bg_lg"><i><img height="37" src="<%=path %>/admin00/login/user.png" /></i></span><input type="text" name="loginname" id="loginname" value="${loginname }" placeholder="请输入用户名" />
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <div class="main_input_box">
-                            <span class="add-on bg_ly"><i><img height="37" src="<%=path %>/admin00/login/suo.png" /></i></span><input  type="password" name="password" id="password" placeholder="请输入密码" value="${password }" />
-                        </div>
-                    </div>
-                </div>
-                			<div style="float:right;padding-right:10%;">
-                    			<div style="float: left;margin-top:3px;margin-right:2px;"><font color="white">记住密码</font></div>
-                    			<div style="float: left;"><input name="form-field-checkbox" id="saveid" type="checkbox" onclick="savePaw();" style="padding-top:0px;"/></div>
-                    		</div>
-                <div class="form-actions">
-                	<div style="width:86%;padding-left:8%;">
-                   
-	                    	<div style="float: left;"><i><img src="<%=path %>/admin00/login/yan.png" /></i></div>
-	                    	<div style="float: left;" class="codediv"><input type="text" name="code" id="code" class="login_code" style="height:16px; padding-top:0px;"/></div>
-                    		<div style="float: left;"><i><img style="height:22px;" id="codeImg" alt="点击更换" title="点击更换" src=""/></i></div>
-                    
-                    <span class="pull-right" style="padding-right:3%;"><a href="javascript:quxiao();" class="btn btn-success">取消</a></span>
-                    <span class="pull-right"><a onclick="denglu();" class="flip-link btn btn-info" id="to-recover">登录</a></span>
-                	
-                	</div>
-                </div>
-                
-            </form>
-            
-            
-      		<div class="controls">
-               <div class="main_input_box">
-                         	<font color="white"><span id="nameerr">Copyright © FH 2100</span></font>
-               </div>
-           </div>
-   		</div>
-   	</div>
-     <div id="templatemo_banner_slide" class="container_wapper">
-        <div class="camera_wrap camera_emboss" id="camera_slide">
-            <div data-src="<%=path %>/admin00/login/images/banner_slide_01.jpg">
-            </div>
-            <div data-src="<%=path %>/admin00/login/images/banner_slide_02.jpg">
-            </div>
-            <div data-src="<%=path %>/admin00/login/images/banner_slide_03.jpg">
-            </div>
-        </div><!-- #camera_wrap_3 -->    
-    </div>
+	<div
+		style="width: 100%; text-align: center; margin: 0 auto; position: absolute;">
+		<div id="loginbox">
+			<form action="login_login.do" method="post" name="loginForm"
+				id="loginForm" onsubmit="return check();">
+				<div class="control-group normal_text">
+					<h3>
+						<img src="<%=path %>/admin00/login/logo.png" alt="Logo" />
+					</h3>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<div class="main_input_box">
+							<span class="add-on bg_lg"><i><img height="37"
+									src="<%=path %>/admin00/login/user.png" /></i></span><input type="text"
+								name="loginname" id="loginname" value="${loginname }"
+								placeholder="请输入用户名" />
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<div class="main_input_box">
+							<span class="add-on bg_ly"><i><img height="37"
+									src="<%=path %>/admin00/login/suo.png" /></i></span><input
+								type="password" name="password" id="password"
+								placeholder="请输入密码" value="${password }" />
+						</div>
+					</div>
+				</div>
+				<div style="float: right; padding-right: 10%;">
+					<div style="float: left; margin-top: 3px; margin-right: 2px;">
+						<font color="white">记住密码</font>
+					</div>
+					<div style="float: left;">
+						<input name="form-field-checkbox" id="saveid" type="checkbox"
+							onclick="savePaw();" style="padding-top: 0px;" />
+					</div>
+				</div>
+				<div class="form-actions">
+					<div style="width: 86%; padding-left: 8%;">
+
+						<div style="float: left;">
+							<i><img src="<%=path %>/admin00/login/yan.png" /></i>
+						</div>
+						<div style="float: left;" class="codediv">
+							<input type="text" name="code" id="code" class="login_code"
+								style="height: 16px; padding-top: 0px;" />
+						</div>
+						<div style="float: left;">
+							<i><img style="height: 22px;" id="codeImg" alt="点击更换"
+								title="点击更换" src="" /></i>
+						</div>
+
+						<span class="pull-right" style="padding-right: 3%;"><a
+							href="javascript:quxiao();" class="btn btn-success">取消</a></span> <span
+							class="pull-right"><a onclick="denglu();"
+							class="flip-link btn btn-info" id="to-recover">登录</a></span>
+					</div>
+				</div>
+			</form>
+
+			<div class="controls">
+				<div class="main_input_box">
+					<font color="white"><span id="nameerr">Copyright © kakasure.com 2015</span></font>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="templatemo_banner_slide" class="container_wapper">
+		<div class="camera_wrap camera_emboss" id="camera_slide">
+			<div data-src="<%=path %>/admin00/login/images/banner_slide_01.jpg">
+			</div>
+			<div data-src="<%=path %>/admin00/login/images/banner_slide_02.jpg">
+			</div>
+			<div data-src="<%=path %>/admin00/login/images/banner_slide_03.jpg">
+			</div>
+		</div>
+		<!-- #camera_wrap_3 -->
+	</div>
 
 	<script type="text/javascript">
 		var errInfo = "${errInfo}";
@@ -219,23 +246,24 @@
 			}
 		});
 		
-		</script>		
-		<script>
+		</script>
+	<script>
 		//TOCMAT重启之后 点击左侧列表跳转登录首页 
 		if (window != top) {
 			top.location.href = location.href; 
 		}
 	  </script>
-	  
-		<script src="js/jquery-1.7.2.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="<%=path %>/admin00/login/js/jquery.easing.1.3.js"></script>
-	    <script src="<%=path %>/admin00/login/js/jquery.mobile.customized.min.js"></script>
-	    <script src="<%=path %>/admin00/login/js/camera.min.js"></script>
-	    <script src="<%=path %>/admin00/login/js/templatemo_script.js"></script>
-	    <script type="text/javascript" src="js/jquery.tips.js"></script>
-	    <script type="text/javascript" src="js/jquery.cookie.js"></script>
-	    <script type="text/javascript" src="js/jquery.singlePageNav.min.js"></script>
+
+	<script src="js/jquery-1.7.2.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="<%=path %>/admin00/login/js/jquery.easing.1.3.js"></script>
+	<script
+		src="<%=path %>/admin00/login/js/jquery.mobile.customized.min.js"></script>
+	<script src="<%=path %>/admin00/login/js/camera.min.js"></script>
+	<script src="<%=path %>/admin00/login/js/templatemo_script.js"></script>
+	<script type="text/javascript" src="js/jquery.tips.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/jquery.singlePageNav.min.js"></script>
 </body>
 
 </html>

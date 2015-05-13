@@ -255,7 +255,8 @@ public class LoginController extends BaseController {
 					allmenuList = (List<Menu>) session.getAttribute(Const.SESSION_allmenuList);
 				}
 
-				// 切换菜单=====
+				//先不要切换菜单的功能，by zhangbin at 2015-05-13
+				/*// 切换菜单=====
 				List<Menu> menuList = new ArrayList<Menu>();
 				if (null == session.getAttribute(Const.SESSION_menuList)
 						|| "yes".equals(pd.getString("changeMenu"))) {
@@ -291,16 +292,16 @@ public class LoginController extends BaseController {
 				// 切换菜单=====
 				if (null == session.getAttribute(Const.SESSION_QX)) {
 					session.setAttribute(Const.SESSION_QX, this.getUQX(session)); // 按钮权限放到session中
-				}
+				}*/
 
 				// FusionCharts 报表
-				String strXML = "<graph caption='前12个月订单销量柱状图' xAxisName='月份' yAxisName='值' decimalPrecision='0' formatNumberScale='0'><set name='2013-05' value='4' color='AFD8F8'/><set name='2013-04' value='0' color='AFD8F8'/><set name='2013-03' value='0' color='AFD8F8'/><set name='2013-02' value='0' color='AFD8F8'/><set name='2013-01' value='0' color='AFD8F8'/><set name='2012-01' value='0' color='AFD8F8'/><set name='2012-11' value='0' color='AFD8F8'/><set name='2012-10' value='0' color='AFD8F8'/><set name='2012-09' value='0' color='AFD8F8'/><set name='2012-08' value='0' color='AFD8F8'/><set name='2012-07' value='0' color='AFD8F8'/><set name='2012-06' value='0' color='AFD8F8'/></graph>";
-				mv.addObject("strXML", strXML);
+//				String strXML = "<graph caption='前12个月订单销量柱状图' xAxisName='月份' yAxisName='值' decimalPrecision='0' formatNumberScale='0'><set name='2013-05' value='4' color='AFD8F8'/><set name='2013-04' value='0' color='AFD8F8'/><set name='2013-03' value='0' color='AFD8F8'/><set name='2013-02' value='0' color='AFD8F8'/><set name='2013-01' value='0' color='AFD8F8'/><set name='2012-01' value='0' color='AFD8F8'/><set name='2012-11' value='0' color='AFD8F8'/><set name='2012-10' value='0' color='AFD8F8'/><set name='2012-09' value='0' color='AFD8F8'/><set name='2012-08' value='0' color='AFD8F8'/><set name='2012-07' value='0' color='AFD8F8'/><set name='2012-06' value='0' color='AFD8F8'/></graph>";
+//				mv.addObject("strXML", strXML);
 				// FusionCharts 报表
 
 				mv.setViewName("system/admin/index");
 				mv.addObject("user", user);
-				mv.addObject("menuList", menuList);
+				mv.addObject("menuList", allmenuList);
 			} else {
 				mv.setViewName("system/admin/login");// session失效后跳转登录页面
 			}

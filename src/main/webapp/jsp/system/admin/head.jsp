@@ -10,7 +10,7 @@
 					class="icon-leaf"></i> ${pdm.SYSNAME}</small> </a>
 
 			<ul class="nav ace-nav pull-right">
-				<li class="grey"><a href="javascript:alert('预留功能,待开发');"
+				<!-- <li class="grey"><a href="javascript:alert('预留功能,待开发');"
 					class="dropdown-toggle" data-toggle="dropdown"> <i
 						class="icon-tasks"></i> <span class="badge">4</span>
 				</a>
@@ -142,7 +142,8 @@
 								class="icon-arrow-right"></i>
 						</a></li>
 
-					</ul></li>
+					</ul>
+				</li> -->
 				<li class="light-blue user-profile"><a
 					class="user-menu dropdown-toggle"
 					href="javascript:alert('预留功能,待开发');" data-toggle="dropdown"> <img
