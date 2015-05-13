@@ -100,7 +100,8 @@
 						<li><a href="javascript:alert('预留功能,待开发');"> 查看所有消息 <i
 								class="icon-arrow-right"></i>
 						</a></li>
-					</ul></li>
+					</ul>
+				</li> -->
 				<li class="green"><a href="javascript:alert('预留功能,待开发');"
 					class="dropdown-toggle" data-toggle="dropdown"> <i
 						class="icon-envelope-alt icon-animated-vertical icon-only"></i> <span
@@ -143,7 +144,7 @@
 						</a></li>
 
 					</ul>
-				</li> -->
+				</li>
 				<li class="light-blue user-profile"><a
 					class="user-menu dropdown-toggle"
 					href="javascript:alert('预留功能,待开发');" data-toggle="dropdown"> <img
