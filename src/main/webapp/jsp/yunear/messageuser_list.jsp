@@ -34,7 +34,7 @@
 	<div class="row-fluid">
 	
 			<!-- 检索  -->
-			<form action="announcemulti/list.do" method="post" name="Form" id="Form">
+			<form action="messageuser/list.do" method="post" name="Form" id="Form">
 			<table>
 				<tr>
 					<td>
@@ -68,12 +68,9 @@
 						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
 						</th>
 						<th>序号</th>
-						<th>发布方ID</th>
-						<th>多媒体ID</th>
-						<th>二维码ID</th>
-						<th>扫码链接</th>
-						<th>扫码数</th>
-						<th>图片链接</th>
+						<th>消息ID</th>
+						<th>用户ID</th>
+						<th>状态：0-未阅读，1-已阅读</th>
 						<th>创建日期</th>
 						<th>修改日期</th>
 						<th>状态：0-未删除，1-已删除</th>
@@ -90,15 +87,12 @@
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
 								<td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${var.ANNOUNCEMULTI_ID}" /><span class="lbl"></span></label>
+									<label><input type='checkbox' name='ids' value="${var.MESSAGEUSER_ID}" /><span class="lbl"></span></label>
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td>
+										<td>${var.MESSAGE_ID}</td>
 										<td>${var.USER_ID}</td>
-										<td>${var.MEDIA_ID}</td>
-										<td>${var.CODE_ID}</td>
-										<td>${var.SCAN_CODE_LINK}</td>
-										<td>${var.SCAN_CODE_NUM}</td>
-										<td>${var.IMG_LINK}</td>
+										<td>${var.STATUS}</td>
 										<td>${var.DATE_CREATE}</td>
 										<td>${var.DATE_MODIFY}</td>
 										<td>${var.IS_DELETE}</td>
@@ -112,10 +106,10 @@
 										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
 										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
 											<c:if test="${QX.edit == 1 }">
-											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.ANNOUNCEMULTI_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
+											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.MESSAGEUSER_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
 											</c:if>
 											<c:if test="${QX.del == 1 }">
-											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.ANNOUNCEMULTI_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
+											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.MESSAGEUSER_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
 											</c:if>
 										</ul>
 										</div>
@@ -201,7 +195,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="新增";
-			 diag.URL = '<%=basePath%>/announcemulti/goAdd.do';
+			 diag.URL = '<%=basePath%>/messageuser/goAdd.do';
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -222,7 +216,7 @@
 		function del(Id){
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
-					var url = "<%=basePath%>/announcemulti/delete.do?ANNOUNCEMULTI_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>/messageuser/delete.do?MESSAGEUSER_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						if(data=="success"){
 							nextPage(${page.currentPage});
@@ -238,7 +232,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>/announcemulti/goEdit.do?ANNOUNCEMULTI_ID='+Id;
+			 diag.URL = '<%=basePath%>/messageuser/goEdit.do?MESSAGEUSER_ID='+Id;
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -313,7 +307,7 @@
 						if(msg == '确定要删除选中的数据吗?'){
 							$.ajax({
 								type: "POST",
-								url: '<%=basePath%>/announcemulti/deleteAll.do?tm='+new Date().getTime(),
+								url: '<%=basePath%>/messageuser/deleteAll.do?tm='+new Date().getTime(),
 						    	data: {DATA_IDS:str},
 								dataType:'json',
 								//beforeSend: validateData,
@@ -332,7 +326,7 @@
 		
 		//导出excel
 		function toExcel(){
-			window.location.href='<%=basePath%>/announcemulti/excel.do';
+			window.location.href='<%=basePath%>/messageuser/excel.do';
 		}
 		</script>
 		<script type="text/javascript" src="js/jquery.cookie.js"></script>

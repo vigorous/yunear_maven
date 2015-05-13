@@ -9,7 +9,7 @@
 <html lang="en">
 	<head>
 	<base href="<%=basePath%>"><!-- jsp文件头和头部 -->
-	<%@ include file="../system/admin/top.jsp"%> 
+	<%@ include file="../../system/admin/top.jsp"%> 
 	</head>
 <body>
 		
@@ -70,19 +70,19 @@
 						<th>序号</th>
 						<th>版权方ID</th>
 						<th>多媒体名称</th>
-						<th>主题</th>
 						<th>关键字</th>
-						<th>支付方式</th>
+						<th>付费类型:0-免费，1-收费</th>
 						<th>描述</th>
 						<th>多媒体路径</th>
-						<th>多媒体类型</th>
-						<th>审核状态</th>
+						<th>多媒体类型:01-视频，02-音频</th>
+						<th>审核状态：99-待审核，00-审核通过，01-审核不通过</th>
 						<th>价格</th>
-						<th>上传日期</th>
-						<th>修改日期</th>
-						<th>状态</th>
 						<th>推广次数</th>
 						<th>点击数</th>
+						<th>扫码次数</th>
+						<th>创建日期</th>
+						<th>修改日期</th>
+						<th>状态：0-未删除，1-已删除</th>
 						<th class="center">操作</th>
 					</tr>
 				</thead>
@@ -101,19 +101,19 @@
 								<td class='center' style="width: 30px;">${vs.index+1}</td>
 										<td>${var.USER_ID}</td>
 										<td>${var.MEDIA_NAME}</td>
-										<td>${var.MEDIA_THEME}</td>
-										<td>${var.KEYWORD}</td>
+										<td>${var.KEYWORDS}</td>
 										<td>${var.PAY_TYPE}</td>
 										<td>${var.DESCR}</td>
 										<td>${var.PATH}</td>
 										<td>${var.TYPE}</td>
 										<td>${var.AUDIT_STATUS}</td>
 										<td>${var.PRICE}</td>
-										<td>${var.UPLOAD_TIME}</td>
-										<td>${var.UPD_TIME}</td>
-										<td>${var.STATUS}</td>
 										<td>${var.SPREAD_NUM}</td>
 										<td>${var.CLICK_NUM}</td>
+										<td>${var.SCAN_CODE_NUM}</td>
+										<td>${var.DATE_CREATE}</td>
+										<td>${var.DATE_MODIFY}</td>
+										<td>${var.IS_DELETE}</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
 									
@@ -196,12 +196,6 @@
 		<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script><!-- 日期框 -->
 		<script type="text/javascript" src="js/bootbox.min.js"></script><!-- 确认窗口 -->
 		<!-- 引入 -->
-		
-		<!--引入弹窗组件start-->
-		<script type="text/javascript" src="js/attention/zDialog/zDrag.js"></script>
-		<script type="text/javascript" src="js/attention/zDialog/zDialog.js"></script>
-		<!--引入弹窗组件end-->
-		
 		<script type="text/javascript" src="js/jquery.tips.js"></script><!--提示框-->
 		<script type="text/javascript">
 		

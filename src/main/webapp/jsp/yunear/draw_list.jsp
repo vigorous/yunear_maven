@@ -9,7 +9,7 @@
 <html lang="en">
 	<head>
 	<base href="<%=basePath%>"><!-- jsp文件头和头部 -->
-	<%@ include file="../system/admin/top.jsp"%> 
+	<%@ include file="../../system/admin/top.jsp"%> 
 	</head>
 <body>
 		
@@ -34,7 +34,7 @@
 	<div class="row-fluid">
 	
 			<!-- 检索  -->
-			<form action="code/list.do" method="post" name="Form" id="Form">
+			<form action="draw/list.do" method="post" name="Form" id="Form">
 			<table>
 				<tr>
 					<td>
@@ -68,15 +68,11 @@
 						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
 						</th>
 						<th>序号</th>
-						<th>二维码名称</th>
-						<th>发布方ID</th>
-						<th>多媒体ID</th>
-						<th>扫码链接</th>
-						<th>扫码次数</th>
-						<th>图片链接</th>
-						<th>状态</th>
-						<th>创建日期</th>
-						<th>修改日期</th>
+						<th>用户ID</th>
+						<th>正在提现金额</th>
+						<th>提现状态： 0 - 提现中， 1 - 提现失败， 2 - 提现成功</th>
+						<th>提现开始日期</th>
+						<th>提现结束日期</th>
 						<th class="center">操作</th>
 					</tr>
 				</thead>
@@ -90,18 +86,14 @@
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
 								<td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${var.CODE_ID}" /><span class="lbl"></span></label>
+									<label><input type='checkbox' name='ids' value="${var.DRAW_ID}" /><span class="lbl"></span></label>
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td>
-										<td>${var.CODE_NAME}</td>
 										<td>${var.USER_ID}</td>
-										<td>${var.MEDIA_ID}</td>
-										<td>${var.SCAN_CODE_LINK}</td>
-										<td>${var.SCAN_CODE_NUM}</td>
-										<td>${var.IMG_LINK}</td>
+										<td>${var.AMOUNT}</td>
 										<td>${var.STATUS}</td>
-										<td>${var.CREATE_TIME}</td>
-										<td>${var.UPD_TIME}</td>
+										<td>${var.DATE_CREATE}</td>
+										<td>${var.DATE_STATUS}</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
 									
@@ -112,10 +104,10 @@
 										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
 										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
 											<c:if test="${QX.edit == 1 }">
-											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.CODE_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
+											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.DRAW_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
 											</c:if>
 											<c:if test="${QX.del == 1 }">
-											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.CODE_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
+											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.DRAW_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
 											</c:if>
 										</ul>
 										</div>
@@ -201,7 +193,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="新增";
-			 diag.URL = '<%=basePath%>/code/goAdd.do';
+			 diag.URL = '<%=basePath%>/draw/goAdd.do';
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -222,7 +214,7 @@
 		function del(Id){
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
-					var url = "<%=basePath%>/code/delete.do?CODE_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>/draw/delete.do?DRAW_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						if(data=="success"){
 							nextPage(${page.currentPage});
@@ -238,7 +230,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>/code/goEdit.do?CODE_ID='+Id;
+			 diag.URL = '<%=basePath%>/draw/goEdit.do?DRAW_ID='+Id;
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -313,7 +305,7 @@
 						if(msg == '确定要删除选中的数据吗?'){
 							$.ajax({
 								type: "POST",
-								url: '<%=basePath%>/code/deleteAll.do?tm='+new Date().getTime(),
+								url: '<%=basePath%>/draw/deleteAll.do?tm='+new Date().getTime(),
 						    	data: {DATA_IDS:str},
 								dataType:'json',
 								//beforeSend: validateData,
@@ -332,7 +324,7 @@
 		
 		//导出excel
 		function toExcel(){
-			window.location.href='<%=basePath%>/code/excel.do';
+			window.location.href='<%=basePath%>/draw/excel.do';
 		}
 		</script>
 		<script type="text/javascript" src="js/jquery.cookie.js"></script>
