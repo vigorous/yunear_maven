@@ -11,8 +11,8 @@ import com.kakasure.entity.Page;
 import com.kakasure.util.PageData;
 
 
-@Service("codeService")
-public class CodeService {
+@Service("messageuserService")
+public class MessageUserService {
 
 	@Resource(name = "daoSupport")
 	private DaoSupport dao;
@@ -21,49 +21,49 @@ public class CodeService {
 	* 新增
 	*/
 	public void save(PageData pd)throws Exception{
-		dao.save("CodeMapper.save", pd);
+		dao.save("MessageUserMapper.save", pd);
 	}
 	
 	/*
 	* 删除
 	*/
 	public void delete(PageData pd)throws Exception{
-		dao.delete("CodeMapper.delete", pd);
+		dao.delete("MessageUserMapper.delete", pd);
 	}
 	
 	/*
 	* 修改
 	*/
 	public void edit(PageData pd)throws Exception{
-		dao.update("CodeMapper.edit", pd);
+		dao.update("MessageUserMapper.edit", pd);
 	}
 	
 	/*
 	*列表
 	*/
 	public List<PageData> list(Page page)throws Exception{
-		return (List<PageData>)dao.findForList("CodeMapper.datalistPage", page);
+		return (List<PageData>)dao.findForList("MessageUserMapper.datalistPage", page);
 	}
 	
 	/*
 	*列表(全部)
 	*/
 	public List<PageData> listAll(PageData pd)throws Exception{
-		return (List<PageData>)dao.findForList("CodeMapper.listAll", pd);
+		return (List<PageData>)dao.findForList("MessageUserMapper.listAll", pd);
 	}
 	
 	/*
 	* 通过id获取数据
 	*/
 	public PageData findById(PageData pd)throws Exception{
-		return (PageData)dao.findForObject("CodeMapper.findById", pd);
+		return (PageData)dao.findForObject("MessageUserMapper.findById", pd);
 	}
 	
 	/*
 	* 批量删除
 	*/
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
-		dao.delete("CodeMapper.deleteAll", ArrayDATA_IDS);
+		dao.delete("MessageUserMapper.deleteAll", ArrayDATA_IDS);
 	}
 	
 }

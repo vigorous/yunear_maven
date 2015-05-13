@@ -37,94 +37,64 @@
 	
 	//保存
 	function save(){
-			if($("#CODE_NAME").val()==""){
-			$("#CODE_NAME").tips({
+			if($("#MESSAGE_ID").val()==""){
+			$("#MESSAGE_ID").tips({
 				side:3,
-	            msg:'请输入二维码名称',
+	            msg:'请输入消息ID',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#CODE_NAME").focus();
+			$("#MESSAGE_ID").focus();
 			return false;
 		}
 		if($("#USER_ID").val()==""){
 			$("#USER_ID").tips({
 				side:3,
-	            msg:'请输入发布方ID',
+	            msg:'请输入用户ID',
 	            bg:'#AE81FF',
 	            time:2
 	        });
 			$("#USER_ID").focus();
 			return false;
 		}
-		if($("#MEDIA_ID").val()==""){
-			$("#MEDIA_ID").tips({
-				side:3,
-	            msg:'请输入多媒体ID',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#MEDIA_ID").focus();
-			return false;
-		}
-		if($("#SCAN_CODE_LINK").val()==""){
-			$("#SCAN_CODE_LINK").tips({
-				side:3,
-	            msg:'请输入扫码链接',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#SCAN_CODE_LINK").focus();
-			return false;
-		}
-		if($("#SCAN_CODE_NUM").val()==""){
-			$("#SCAN_CODE_NUM").tips({
-				side:3,
-	            msg:'请输入扫码次数',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#SCAN_CODE_NUM").focus();
-			return false;
-		}
-		if($("#IMG_LINK").val()==""){
-			$("#IMG_LINK").tips({
-				side:3,
-	            msg:'请输入图片链接',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#IMG_LINK").focus();
-			return false;
-		}
 		if($("#STATUS").val()==""){
 			$("#STATUS").tips({
 				side:3,
-	            msg:'请输入状态',
+	            msg:'请输入状态：0-未阅读，1-已阅读',
 	            bg:'#AE81FF',
 	            time:2
 	        });
 			$("#STATUS").focus();
 			return false;
 		}
-		if($("#CREATE_TIME").val()==""){
-			$("#CREATE_TIME").tips({
+		if($("#DATE_CREATE").val()==""){
+			$("#DATE_CREATE").tips({
 				side:3,
 	            msg:'请输入创建日期',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#CREATE_TIME").focus();
+			$("#DATE_CREATE").focus();
 			return false;
 		}
-		if($("#UPD_TIME").val()==""){
-			$("#UPD_TIME").tips({
+		if($("#DATE_MODIFY").val()==""){
+			$("#DATE_MODIFY").tips({
 				side:3,
 	            msg:'请输入修改日期',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#UPD_TIME").focus();
+			$("#DATE_MODIFY").focus();
+			return false;
+		}
+		if($("#IS_DELETE").val()==""){
+			$("#IS_DELETE").tips({
+				side:3,
+	            msg:'请输入状态：0-未删除，1-已删除',
+	            bg:'#AE81FF',
+	            time:2
+	        });
+			$("#IS_DELETE").focus();
 			return false;
 		}
 		$("#Form").submit();
@@ -135,36 +105,27 @@
 </script>
 	</head>
 <body>
-	<form action="code/${msg }.do" name="Form" id="Form" method="post">
-		<input type="hidden" name="CODE_ID" id="CODE_ID" value="${pd.CODE_ID}"/>
+	<form action="messageuser/${msg }.do" name="Form" id="Form" method="post">
+		<input type="hidden" name="MESSAGEUSER_ID" id="MESSAGEUSER_ID" value="${pd.MESSAGEUSER_ID}"/>
 		<div id="zhongxin">
 		<table>
 			<tr>
-				<td><input type="text" name="CODE_NAME" id="CODE_NAME" value="${pd.CODE_NAME}" maxlength="32" placeholder="这里输入二维码名称" title="二维码名称"/></td>
+				<td><input type="text" name="MESSAGE_ID" id="MESSAGE_ID" value="${pd.MESSAGE_ID}" maxlength="32" placeholder="这里输入消息ID" title="消息ID"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="USER_ID" id="USER_ID" value="${pd.USER_ID}" maxlength="32" placeholder="这里输入发布方ID" title="发布方ID"/></td>
+				<td><input type="text" name="USER_ID" id="USER_ID" value="${pd.USER_ID}" maxlength="32" placeholder="这里输入用户ID" title="用户ID"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="MEDIA_ID" id="MEDIA_ID" value="${pd.MEDIA_ID}" maxlength="32" placeholder="这里输入多媒体ID" title="多媒体ID"/></td>
+				<td><input type="text" name="STATUS" id="STATUS" value="${pd.STATUS}" maxlength="32" placeholder="这里输入状态：0-未阅读，1-已阅读" title="状态：0-未阅读，1-已阅读"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="SCAN_CODE_LINK" id="SCAN_CODE_LINK" value="${pd.SCAN_CODE_LINK}" maxlength="32" placeholder="这里输入扫码链接" title="扫码链接"/></td>
+				<td><input type="text" name="DATE_CREATE" id="DATE_CREATE" value="${pd.DATE_CREATE}" maxlength="32" placeholder="这里输入创建日期" title="创建日期"/></td>
 			</tr>
 			<tr>
-				<td><input type="number" name="SCAN_CODE_NUM" id="SCAN_CODE_NUM" value="${pd.SCAN_CODE_NUM}" maxlength="32" placeholder="这里输入扫码次数" title="扫码次数"/></td>
+				<td><input type="text" name="DATE_MODIFY" id="DATE_MODIFY" value="${pd.DATE_MODIFY}" maxlength="32" placeholder="这里输入修改日期" title="修改日期"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="IMG_LINK" id="IMG_LINK" value="${pd.IMG_LINK}" maxlength="32" placeholder="这里输入图片链接" title="图片链接"/></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="STATUS" id="STATUS" value="${pd.STATUS}" maxlength="32" placeholder="这里输入状态" title="状态"/></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="CREATE_TIME" id="CREATE_TIME" value="${pd.CREATE_TIME}" maxlength="32" placeholder="这里输入创建日期" title="创建日期"/></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="UPD_TIME" id="UPD_TIME" value="${pd.UPD_TIME}" maxlength="32" placeholder="这里输入修改日期" title="修改日期"/></td>
+				<td><input type="text" name="IS_DELETE" id="IS_DELETE" value="${pd.IS_DELETE}" maxlength="32" placeholder="这里输入状态：0-未删除，1-已删除" title="状态：0-未删除，1-已删除"/></td>
 			</tr>
 			<tr>
 				<td style="text-align: center;">

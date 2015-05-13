@@ -57,30 +57,20 @@
 			$("#MEDIA_NAME").focus();
 			return false;
 		}
-		if($("#MEDIA_THEME").val()==""){
-			$("#MEDIA_THEME").tips({
-				side:3,
-	            msg:'请输入主题',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#MEDIA_THEME").focus();
-			return false;
-		}
-		if($("#KEYWORD").val()==""){
-			$("#KEYWORD").tips({
+		if($("#KEYWORDS").val()==""){
+			$("#KEYWORDS").tips({
 				side:3,
 	            msg:'请输入关键字',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#KEYWORD").focus();
+			$("#KEYWORDS").focus();
 			return false;
 		}
 		if($("#PAY_TYPE").val()==""){
 			$("#PAY_TYPE").tips({
 				side:3,
-	            msg:'请输入支付方式',
+	            msg:'请输入付费类型:0-免费，1-收费',
 	            bg:'#AE81FF',
 	            time:2
 	        });
@@ -110,7 +100,7 @@
 		if($("#TYPE").val()==""){
 			$("#TYPE").tips({
 				side:3,
-	            msg:'请输入多媒体类型',
+	            msg:'请输入多媒体类型:01-视频，02-音频',
 	            bg:'#AE81FF',
 	            time:2
 	        });
@@ -120,7 +110,7 @@
 		if($("#AUDIT_STATUS").val()==""){
 			$("#AUDIT_STATUS").tips({
 				side:3,
-	            msg:'请输入审核状态',
+	            msg:'请输入审核状态：99-待审核，00-审核通过，01-审核不通过',
 	            bg:'#AE81FF',
 	            time:2
 	        });
@@ -135,36 +125,6 @@
 	            time:2
 	        });
 			$("#PRICE").focus();
-			return false;
-		}
-		if($("#UPLOAD_TIME").val()==""){
-			$("#UPLOAD_TIME").tips({
-				side:3,
-	            msg:'请输入上传日期',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#UPLOAD_TIME").focus();
-			return false;
-		}
-		if($("#UPD_TIME").val()==""){
-			$("#UPD_TIME").tips({
-				side:3,
-	            msg:'请输入修改日期',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#UPD_TIME").focus();
-			return false;
-		}
-		if($("#STATUS").val()==""){
-			$("#STATUS").tips({
-				side:3,
-	            msg:'请输入状态',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#STATUS").focus();
 			return false;
 		}
 		if($("#SPREAD_NUM").val()==""){
@@ -187,6 +147,46 @@
 			$("#CLICK_NUM").focus();
 			return false;
 		}
+		if($("#SCAN_CODE_NUM").val()==""){
+			$("#SCAN_CODE_NUM").tips({
+				side:3,
+	            msg:'请输入扫码次数',
+	            bg:'#AE81FF',
+	            time:2
+	        });
+			$("#SCAN_CODE_NUM").focus();
+			return false;
+		}
+		if($("#DATE_CREATE").val()==""){
+			$("#DATE_CREATE").tips({
+				side:3,
+	            msg:'请输入创建日期',
+	            bg:'#AE81FF',
+	            time:2
+	        });
+			$("#DATE_CREATE").focus();
+			return false;
+		}
+		if($("#DATE_MODIFY").val()==""){
+			$("#DATE_MODIFY").tips({
+				side:3,
+	            msg:'请输入修改日期',
+	            bg:'#AE81FF',
+	            time:2
+	        });
+			$("#DATE_MODIFY").focus();
+			return false;
+		}
+		if($("#IS_DELETE").val()==""){
+			$("#IS_DELETE").tips({
+				side:3,
+	            msg:'请输入状态：0-未删除，1-已删除',
+	            bg:'#AE81FF',
+	            time:2
+	        });
+			$("#IS_DELETE").focus();
+			return false;
+		}
 		$("#Form").submit();
 		$("#zhongxin").hide();
 		$("#zhongxin2").show();
@@ -206,13 +206,10 @@
 				<td><input type="text" name="MEDIA_NAME" id="MEDIA_NAME" value="${pd.MEDIA_NAME}" maxlength="32" placeholder="这里输入多媒体名称" title="多媒体名称"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="MEDIA_THEME" id="MEDIA_THEME" value="${pd.MEDIA_THEME}" maxlength="32" placeholder="这里输入主题" title="主题"/></td>
+				<td><input type="text" name="KEYWORDS" id="KEYWORDS" value="${pd.KEYWORDS}" maxlength="32" placeholder="这里输入关键字" title="关键字"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="KEYWORD" id="KEYWORD" value="${pd.KEYWORD}" maxlength="32" placeholder="这里输入关键字" title="关键字"/></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="PAY_TYPE" id="PAY_TYPE" value="${pd.PAY_TYPE}" maxlength="32" placeholder="这里输入支付方式" title="支付方式"/></td>
+				<td><input type="text" name="PAY_TYPE" id="PAY_TYPE" value="${pd.PAY_TYPE}" maxlength="32" placeholder="这里输入付费类型:0-免费，1-收费" title="付费类型:0-免费，1-收费"/></td>
 			</tr>
 			<tr>
 				<td><input type="text" name="DESCR" id="DESCR" value="${pd.DESCR}" maxlength="32" placeholder="这里输入描述" title="描述"/></td>
@@ -221,28 +218,31 @@
 				<td><input type="text" name="PATH" id="PATH" value="${pd.PATH}" maxlength="32" placeholder="这里输入多媒体路径" title="多媒体路径"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="TYPE" id="TYPE" value="${pd.TYPE}" maxlength="32" placeholder="这里输入多媒体类型" title="多媒体类型"/></td>
+				<td><input type="text" name="TYPE" id="TYPE" value="${pd.TYPE}" maxlength="32" placeholder="这里输入多媒体类型:01-视频，02-音频" title="多媒体类型:01-视频，02-音频"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="AUDIT_STATUS" id="AUDIT_STATUS" value="${pd.AUDIT_STATUS}" maxlength="32" placeholder="这里输入审核状态" title="审核状态"/></td>
+				<td><input type="text" name="AUDIT_STATUS" id="AUDIT_STATUS" value="${pd.AUDIT_STATUS}" maxlength="32" placeholder="这里输入审核状态：99-待审核，00-审核通过，01-审核不通过" title="审核状态：99-待审核，00-审核通过，01-审核不通过"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="PRICE" id="PRICE" value="${pd.PRICE}" maxlength="32" placeholder="这里输入价格" title="价格"/></td>
+				<td><input type="number" name="PRICE" id="PRICE" value="${pd.PRICE}" maxlength="32" placeholder="这里输入价格" title="价格"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="UPLOAD_TIME" id="UPLOAD_TIME" value="${pd.UPLOAD_TIME}" maxlength="32" placeholder="这里输入上传日期" title="上传日期"/></td>
+				<td><input type="number" name="SPREAD_NUM" id="SPREAD_NUM" value="${pd.SPREAD_NUM}" maxlength="32" placeholder="这里输入推广次数" title="推广次数"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="UPD_TIME" id="UPD_TIME" value="${pd.UPD_TIME}" maxlength="32" placeholder="这里输入修改日期" title="修改日期"/></td>
+				<td><input type="number" name="CLICK_NUM" id="CLICK_NUM" value="${pd.CLICK_NUM}" maxlength="32" placeholder="这里输入点击数" title="点击数"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="STATUS" id="STATUS" value="${pd.STATUS}" maxlength="32" placeholder="这里输入状态" title="状态"/></td>
+				<td><input type="number" name="SCAN_CODE_NUM" id="SCAN_CODE_NUM" value="${pd.SCAN_CODE_NUM}" maxlength="32" placeholder="这里输入扫码次数" title="扫码次数"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="SPREAD_NUM" id="SPREAD_NUM" value="${pd.SPREAD_NUM}" maxlength="32" placeholder="这里输入推广次数" title="推广次数"/></td>
+				<td><input class="span10 date-picker" name="DATE_CREATE" id="DATE_CREATE" value="${pd.DATE_CREATE}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="创建日期" title="创建日期"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="CLICK_NUM" id="CLICK_NUM" value="${pd.CLICK_NUM}" maxlength="32" placeholder="这里输入点击数" title="点击数"/></td>
+				<td><input class="span10 date-picker" name="DATE_MODIFY" id="DATE_MODIFY" value="${pd.DATE_MODIFY}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="修改日期" title="修改日期"/></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="IS_DELETE" id="IS_DELETE" value="${pd.IS_DELETE}" maxlength="32" placeholder="这里输入状态：0-未删除，1-已删除" title="状态：0-未删除，1-已删除"/></td>
 			</tr>
 			<tr>
 				<td style="text-align: center;">

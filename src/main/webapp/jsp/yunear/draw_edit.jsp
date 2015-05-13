@@ -40,91 +40,51 @@
 			if($("#USER_ID").val()==""){
 			$("#USER_ID").tips({
 				side:3,
-	            msg:'请输入发布方ID',
+	            msg:'请输入用户ID',
 	            bg:'#AE81FF',
 	            time:2
 	        });
 			$("#USER_ID").focus();
 			return false;
 		}
-		if($("#MEDIA_ID").val()==""){
-			$("#MEDIA_ID").tips({
+		if($("#AMOUNT").val()==""){
+			$("#AMOUNT").tips({
 				side:3,
-	            msg:'请输入多媒体ID',
+	            msg:'请输入正在提现金额',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#MEDIA_ID").focus();
+			$("#AMOUNT").focus();
 			return false;
 		}
-		if($("#CODE_ID").val()==""){
-			$("#CODE_ID").tips({
+		if($("#STATUS").val()==""){
+			$("#STATUS").tips({
 				side:3,
-	            msg:'请输入二维码ID',
+	            msg:'请输入提现状态： 0 - 提现中， 1 - 提现失败， 2 - 提现成功',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#CODE_ID").focus();
-			return false;
-		}
-		if($("#SCAN_CODE_LINK").val()==""){
-			$("#SCAN_CODE_LINK").tips({
-				side:3,
-	            msg:'请输入扫码链接',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#SCAN_CODE_LINK").focus();
-			return false;
-		}
-		if($("#SCAN_CODE_NUM").val()==""){
-			$("#SCAN_CODE_NUM").tips({
-				side:3,
-	            msg:'请输入扫码数',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#SCAN_CODE_NUM").focus();
-			return false;
-		}
-		if($("#IMG_LINK").val()==""){
-			$("#IMG_LINK").tips({
-				side:3,
-	            msg:'请输入图片链接',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#IMG_LINK").focus();
+			$("#STATUS").focus();
 			return false;
 		}
 		if($("#DATE_CREATE").val()==""){
 			$("#DATE_CREATE").tips({
 				side:3,
-	            msg:'请输入创建日期',
+	            msg:'请输入提现开始日期',
 	            bg:'#AE81FF',
 	            time:2
 	        });
 			$("#DATE_CREATE").focus();
 			return false;
 		}
-		if($("#DATE_MODIFY").val()==""){
-			$("#DATE_MODIFY").tips({
+		if($("#DATE_STATUS").val()==""){
+			$("#DATE_STATUS").tips({
 				side:3,
-	            msg:'请输入修改日期',
+	            msg:'请输入提现结束日期',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#DATE_MODIFY").focus();
-			return false;
-		}
-		if($("#IS_DELETE").val()==""){
-			$("#IS_DELETE").tips({
-				side:3,
-	            msg:'请输入状态：0-未删除，1-已删除',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#IS_DELETE").focus();
+			$("#DATE_STATUS").focus();
 			return false;
 		}
 		$("#Form").submit();
@@ -135,36 +95,24 @@
 </script>
 	</head>
 <body>
-	<form action="announcemulti/${msg }.do" name="Form" id="Form" method="post">
-		<input type="hidden" name="ANNOUNCEMULTI_ID" id="ANNOUNCEMULTI_ID" value="${pd.ANNOUNCEMULTI_ID}"/>
+	<form action="draw/${msg }.do" name="Form" id="Form" method="post">
+		<input type="hidden" name="DRAW_ID" id="DRAW_ID" value="${pd.DRAW_ID}"/>
 		<div id="zhongxin">
 		<table>
 			<tr>
-				<td><input type="text" name="USER_ID" id="USER_ID" value="${pd.USER_ID}" maxlength="32" placeholder="这里输入发布方ID" title="发布方ID"/></td>
+				<td><input type="text" name="USER_ID" id="USER_ID" value="${pd.USER_ID}" maxlength="32" placeholder="这里输入用户ID" title="用户ID"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="MEDIA_ID" id="MEDIA_ID" value="${pd.MEDIA_ID}" maxlength="32" placeholder="这里输入多媒体ID" title="多媒体ID"/></td>
+				<td><input type="number" name="AMOUNT" id="AMOUNT" value="${pd.AMOUNT}" maxlength="32" placeholder="这里输入正在提现金额" title="正在提现金额"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="CODE_ID" id="CODE_ID" value="${pd.CODE_ID}" maxlength="32" placeholder="这里输入二维码ID" title="二维码ID"/></td>
+				<td><input type="text" name="STATUS" id="STATUS" value="${pd.STATUS}" maxlength="32" placeholder="这里输入提现状态： 0 - 提现中， 1 - 提现失败， 2 - 提现成功" title="提现状态： 0 - 提现中， 1 - 提现失败， 2 - 提现成功"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="SCAN_CODE_LINK" id="SCAN_CODE_LINK" value="${pd.SCAN_CODE_LINK}" maxlength="32" placeholder="这里输入扫码链接" title="扫码链接"/></td>
+				<td><input class="span10 date-picker" name="DATE_CREATE" id="DATE_CREATE" value="${pd.DATE_CREATE}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="提现开始日期" title="提现开始日期"/></td>
 			</tr>
 			<tr>
-				<td><input type="number" name="SCAN_CODE_NUM" id="SCAN_CODE_NUM" value="${pd.SCAN_CODE_NUM}" maxlength="32" placeholder="这里输入扫码数" title="扫码数"/></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="IMG_LINK" id="IMG_LINK" value="${pd.IMG_LINK}" maxlength="32" placeholder="这里输入图片链接" title="图片链接"/></td>
-			</tr>
-			<tr>
-				<td><input class="span10 date-picker" name="DATE_CREATE" id="DATE_CREATE" value="${pd.DATE_CREATE}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="创建日期" title="创建日期"/></td>
-			</tr>
-			<tr>
-				<td><input class="span10 date-picker" name="DATE_MODIFY" id="DATE_MODIFY" value="${pd.DATE_MODIFY}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="修改日期" title="修改日期"/></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="IS_DELETE" id="IS_DELETE" value="${pd.IS_DELETE}" maxlength="32" placeholder="这里输入状态：0-未删除，1-已删除" title="状态：0-未删除，1-已删除"/></td>
+				<td><input class="span10 date-picker" name="DATE_STATUS" id="DATE_STATUS" value="${pd.DATE_STATUS}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="提现结束日期" title="提现结束日期"/></td>
 			</tr>
 			<tr>
 				<td style="text-align: center;">

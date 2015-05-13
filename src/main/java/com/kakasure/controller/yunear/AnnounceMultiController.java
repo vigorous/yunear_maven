@@ -29,7 +29,7 @@ import com.kakasure.util.PageData;
 /** 
  * 类名称：AnnounceMultiController
  * 创建人：FH 
- * 创建时间：2015-05-12
+ * 创建时间：2015-05-13
  */
 @Controller
 @RequestMapping(value="/announcemulti")
@@ -37,8 +37,6 @@ public class AnnounceMultiController extends BaseController {
 	
 	@Resource(name="announcemultiService")
 	private AnnounceMultiService announcemultiService;
-	
-	//public 
 	
 	/**
 	 * 新增
@@ -186,25 +184,29 @@ public class AnnounceMultiController extends BaseController {
 		try{
 			Map<String,Object> dataMap = new HashMap<String,Object>();
 			List<String> titles = new ArrayList<String>();
-			titles.add("多媒体名称");	//1
-			titles.add("发布方ID");	//2
-			titles.add("多媒体ID");	//3
-			titles.add("二维码ID");	//4
-			titles.add("状态");	//5
-			titles.add("创建日期");	//6
-			titles.add("修改日期");	//7
+			titles.add("发布方ID");	//1
+			titles.add("多媒体ID");	//2
+			titles.add("二维码ID");	//3
+			titles.add("扫码链接");	//4
+			titles.add("扫码数");	//5
+			titles.add("图片链接");	//6
+			titles.add("创建日期");	//7
+			titles.add("修改日期");	//8
+			titles.add("状态：0-未删除，1-已删除");	//9
 			dataMap.put("titles", titles);
 			List<PageData> varOList = announcemultiService.listAll(pd);
 			List<PageData> varList = new ArrayList<PageData>();
 			for(int i=0;i<varOList.size();i++){
 				PageData vpd = new PageData();
-				vpd.put("var1", varOList.get(i).getString("NAME"));	//1
-				vpd.put("var2", varOList.get(i).getString("USER_ID"));	//2
-				vpd.put("var3", varOList.get(i).getString("MEDIA_ID"));	//3
-				vpd.put("var4", varOList.get(i).getString("CODE_ID"));	//4
-				vpd.put("var5", varOList.get(i).getString("STATUS"));	//5
-				vpd.put("var6", varOList.get(i).getString("CREATE_TIME"));	//6
-				vpd.put("var7", varOList.get(i).getString("UPD_TIME"));	//7
+				vpd.put("var1", varOList.get(i).getString("USER_ID"));	//1
+				vpd.put("var2", varOList.get(i).getString("MEDIA_ID"));	//2
+				vpd.put("var3", varOList.get(i).getString("CODE_ID"));	//3
+				vpd.put("var4", varOList.get(i).getString("SCAN_CODE_LINK"));	//4
+				vpd.put("var5", varOList.get(i).get("SCAN_CODE_NUM").toString());	//5
+				vpd.put("var6", varOList.get(i).getString("IMG_LINK"));	//6
+				vpd.put("var7", varOList.get(i).getString("DATE_CREATE"));	//7
+				vpd.put("var8", varOList.get(i).getString("DATE_MODIFY"));	//8
+				vpd.put("var9", varOList.get(i).getString("IS_DELETE"));	//9
 				varList.add(vpd);
 			}
 			dataMap.put("varList", varList);

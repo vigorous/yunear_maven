@@ -21,33 +21,33 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kakasure.controller.base.BaseController;
 import com.kakasure.entity.Page;
-import com.kakasure.service.yunear.UserplusService;
+import com.kakasure.service.yunear.DrawService;
 import com.kakasure.util.AppUtil;
 import com.kakasure.util.ObjectExcelView;
 import com.kakasure.util.PageData;
 
 /** 
- * 类名称：UserplusController
+ * 类名称：DrawController
  * 创建人：FH 
- * 创建时间：2015-05-12
+ * 创建时间：2015-05-13
  */
 @Controller
-@RequestMapping(value="/userplus")
-public class UserplusController extends BaseController {
+@RequestMapping(value="/draw")
+public class DrawController extends BaseController {
 	
-	@Resource(name="userplusService")
-	private UserplusService userplusService;
+	@Resource(name="drawService")
+	private DrawService drawService;
 	
 	/**
 	 * 新增
 	 */
 	@RequestMapping(value="/save")
 	public ModelAndView save() throws Exception{
-		logBefore(logger, "新增Userplus");
+		logBefore(logger, "新增Draw");
 		
 		pd = this.getPageData();
-		pd.put("USERPLUS_ID", this.get32UUID());	//主键
-		userplusService.save(pd);
+		pd.put("DRAW_ID", this.get32UUID());	//主键
+		drawService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
@@ -58,11 +58,11 @@ public class UserplusController extends BaseController {
 	 */
 	@RequestMapping(value="/delete")
 	public void delete(PrintWriter out){
-		logBefore(logger, "删除Userplus");
+		logBefore(logger, "删除Draw");
 		
 		try{
 			pd = this.getPageData();
-			userplusService.delete(pd);
+			drawService.delete(pd);
 			out.write("success");
 			out.close();
 		} catch(Exception e){
@@ -76,10 +76,10 @@ public class UserplusController extends BaseController {
 	 */
 	@RequestMapping(value="/edit")
 	public ModelAndView edit() throws Exception{
-		logBefore(logger, "修改Userplus");
+		logBefore(logger, "修改Draw");
 		
 		pd = this.getPageData();
-		userplusService.edit(pd);
+		drawService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
@@ -90,14 +90,14 @@ public class UserplusController extends BaseController {
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page){
-		logBefore(logger, "列表Userplus");
+		logBefore(logger, "列表Draw");
 		
 		try{
 			pd = this.getPageData();
 			page.setPd(pd);
-			List<PageData>	varList = userplusService.list(page);	//列出Userplus列表
+			List<PageData>	varList = drawService.list(page);	//列出Draw列表
 			getHC(); //调用权限
-			mv.setViewName("yunear/userplus/userplus_list");
+			mv.setViewName("yunear/draw/draw_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 		} catch(Exception e){
@@ -111,11 +111,11 @@ public class UserplusController extends BaseController {
 	 */
 	@RequestMapping(value="/goAdd")
 	public ModelAndView goAdd(){
-		logBefore(logger, "去新增Userplus页面");
+		logBefore(logger, "去新增Draw页面");
 		
 		pd = this.getPageData();
 		try {
-			mv.setViewName("yunear/userplus/userplus_edit");
+			mv.setViewName("yunear/draw/draw_edit");
 			mv.addObject("msg", "save");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -129,12 +129,12 @@ public class UserplusController extends BaseController {
 	 */
 	@RequestMapping(value="/goEdit")
 	public ModelAndView goEdit(){
-		logBefore(logger, "去修改Userplus页面");
+		logBefore(logger, "去修改Draw页面");
 		
 		pd = this.getPageData();
 		try {
-			pd = userplusService.findById(pd);	//根据ID读取
-			mv.setViewName("yunear/userplus/userplus_edit");
+			pd = drawService.findById(pd);	//根据ID读取
+			mv.setViewName("yunear/draw/draw_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -149,7 +149,7 @@ public class UserplusController extends BaseController {
 	@RequestMapping(value="/deleteAll")
 	@ResponseBody
 	public Object deleteAll() {
-		logBefore(logger, "批量删除Userplus");
+		logBefore(logger, "批量删除Draw");
 		Map map = new HashMap();
 		try {
 			pd = this.getPageData();
@@ -157,7 +157,7 @@ public class UserplusController extends BaseController {
 			String DATA_IDS = pd.getString("DATA_IDS");
 			if(null != DATA_IDS && !"".equals(DATA_IDS)){
 				String ArrayDATA_IDS[] = DATA_IDS.split(",");
-				userplusService.deleteAll(ArrayDATA_IDS);
+				drawService.deleteAll(ArrayDATA_IDS);
 				pd.put("msg", "ok");
 			}else{
 				pd.put("msg", "no");
@@ -178,51 +178,27 @@ public class UserplusController extends BaseController {
 	 */
 	@RequestMapping(value="/excel")
 	public ModelAndView exportExcel(){
-		logBefore(logger, "导出Userplus到excel");
+		logBefore(logger, "导出Draw到excel");
 		ModelAndView mv = new ModelAndView();
 		pd = this.getPageData();
 		try{
 			Map<String,Object> dataMap = new HashMap<String,Object>();
 			List<String> titles = new ArrayList<String>();
-			titles.add("用户名");	//1
-			titles.add("企业名称");	//2
-			titles.add("版权证明文件");	//3
-			titles.add("版权号");	//4
-			titles.add("税务登记证");	//5
-			titles.add("营业执照");	//6
-			titles.add("银行名称");	//7
-			titles.add("银行帐号");	//8
-			titles.add("联系人姓名");	//9
-			titles.add("联系人手机号");	//10
-			titles.add("审核状态");	//11
-			titles.add("审核日期");	//12
-			titles.add("创建日期");	//13
-			titles.add("修改日期");	//14
-			titles.add("账户余额");	//15
-			titles.add("状态");	//16
-			titles.add("描述");	//17
+			titles.add("用户ID");	//1
+			titles.add("正在提现金额");	//2
+			titles.add("提现状态： 0 - 提现中， 1 - 提现失败， 2 - 提现成功");	//3
+			titles.add("提现开始日期");	//4
+			titles.add("提现结束日期");	//5
 			dataMap.put("titles", titles);
-			List<PageData> varOList = userplusService.listAll(pd);
+			List<PageData> varOList = drawService.listAll(pd);
 			List<PageData> varList = new ArrayList<PageData>();
 			for(int i=0;i<varOList.size();i++){
 				PageData vpd = new PageData();
-				vpd.put("var1", varOList.get(i).getString("USER_NAME"));	//1
-				vpd.put("var2", varOList.get(i).getString("CORPORATION_NAME"));	//2
-				vpd.put("var3", varOList.get(i).getString("COPYRIGHT_FILE"));	//3
-				vpd.put("var4", varOList.get(i).getString("COPYRIGHT_NO"));	//4
-				vpd.put("var5", varOList.get(i).getString("TAX_CERT"));	//5
-				vpd.put("var6", varOList.get(i).getString("BUSINESS_LICENSE"));	//6
-				vpd.put("var7", varOList.get(i).getString("BANK_NAME"));	//7
-				vpd.put("var8", varOList.get(i).getString("BANK_ACCOUNT"));	//8
-				vpd.put("var9", varOList.get(i).getString("CONTACT_NAME"));	//9
-				vpd.put("var10", varOList.get(i).getString("CONTACT_MOBILE"));	//10
-				vpd.put("var11", varOList.get(i).getString("AUDIT_STATUS"));	//11
-				vpd.put("var12", varOList.get(i).getString("AUDIT_TIME"));	//12
-				vpd.put("var13", varOList.get(i).getString("CREATE_TIME"));	//13
-				vpd.put("var14", varOList.get(i).getString("UPD_TIME"));	//14
-				vpd.put("var15", varOList.get(i).getString("ACCOUNT_BALANCE"));	//15
-				vpd.put("var16", varOList.get(i).getString("STATUS"));	//16
-				vpd.put("var17", varOList.get(i).getString("DESCR"));	//17
+				vpd.put("var1", varOList.get(i).getString("USER_ID"));	//1
+				vpd.put("var2", varOList.get(i).get("AMOUNT").toString());	//2
+				vpd.put("var3", varOList.get(i).getString("STATUS"));	//3
+				vpd.put("var4", varOList.get(i).getString("DATE_CREATE"));	//4
+				vpd.put("var5", varOList.get(i).getString("DATE_STATUS"));	//5
 				varList.add(vpd);
 			}
 			dataMap.put("varList", varList);

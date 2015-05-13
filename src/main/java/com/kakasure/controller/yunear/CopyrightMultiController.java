@@ -29,7 +29,7 @@ import com.kakasure.util.PageData;
 /** 
  * 类名称：CopyrightMultiController
  * 创建人：FH 
- * 创建时间：2015-05-12
+ * 创建时间：2015-05-13
  */
 @Controller
 @RequestMapping(value="/copyrightmulti")
@@ -97,7 +97,7 @@ public class CopyrightMultiController extends BaseController {
 			page.setPd(pd);
 			List<PageData>	varList = copyrightmultiService.list(page);	//列出CopyrightMulti列表
 			getHC(); //调用权限
-			mv.setViewName("yunear/copyrightmulti_list");
+			mv.setViewName("yunear/copyrightmulti/copyrightmulti_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 		} catch(Exception e){
@@ -115,7 +115,7 @@ public class CopyrightMultiController extends BaseController {
 		
 		pd = this.getPageData();
 		try {
-			mv.setViewName("yunear/copyrightmulti_edit");
+			mv.setViewName("yunear/copyrightmulti/copyrightmulti_edit");
 			mv.addObject("msg", "save");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -134,7 +134,7 @@ public class CopyrightMultiController extends BaseController {
 		pd = this.getPageData();
 		try {
 			pd = copyrightmultiService.findById(pd);	//根据ID读取
-			mv.setViewName("yunear/copyrightmulti_edit");
+			mv.setViewName("yunear/copyrightmulti/copyrightmulti_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -186,19 +186,19 @@ public class CopyrightMultiController extends BaseController {
 			List<String> titles = new ArrayList<String>();
 			titles.add("版权方ID");	//1
 			titles.add("多媒体名称");	//2
-			titles.add("主题");	//3
-			titles.add("关键字");	//4
-			titles.add("支付方式");	//5
-			titles.add("描述");	//6
-			titles.add("多媒体路径");	//7
-			titles.add("多媒体类型");	//8
-			titles.add("审核状态");	//9
-			titles.add("价格");	//10
-			titles.add("上传日期");	//11
-			titles.add("修改日期");	//12
-			titles.add("状态");	//13
-			titles.add("推广次数");	//14
-			titles.add("点击数");	//15
+			titles.add("关键字");	//3
+			titles.add("付费类型:0-免费，1-收费");	//4
+			titles.add("描述");	//5
+			titles.add("多媒体路径");	//6
+			titles.add("多媒体类型:01-视频，02-音频");	//7
+			titles.add("审核状态：99-待审核，00-审核通过，01-审核不通过");	//8
+			titles.add("价格");	//9
+			titles.add("推广次数");	//10
+			titles.add("点击数");	//11
+			titles.add("扫码次数");	//12
+			titles.add("创建日期");	//13
+			titles.add("修改日期");	//14
+			titles.add("状态：0-未删除，1-已删除");	//15
 			dataMap.put("titles", titles);
 			List<PageData> varOList = copyrightmultiService.listAll(pd);
 			List<PageData> varList = new ArrayList<PageData>();
@@ -206,19 +206,19 @@ public class CopyrightMultiController extends BaseController {
 				PageData vpd = new PageData();
 				vpd.put("var1", varOList.get(i).getString("USER_ID"));	//1
 				vpd.put("var2", varOList.get(i).getString("MEDIA_NAME"));	//2
-				vpd.put("var3", varOList.get(i).getString("MEDIA_THEME"));	//3
-				vpd.put("var4", varOList.get(i).getString("KEYWORD"));	//4
-				vpd.put("var5", varOList.get(i).getString("PAY_TYPE"));	//5
-				vpd.put("var6", varOList.get(i).getString("DESCR"));	//6
-				vpd.put("var7", varOList.get(i).getString("PATH"));	//7
-				vpd.put("var8", varOList.get(i).getString("TYPE"));	//8
-				vpd.put("var9", varOList.get(i).getString("AUDIT_STATUS"));	//9
-				vpd.put("var10", varOList.get(i).getString("PRICE"));	//10
-				vpd.put("var11", varOList.get(i).getString("UPLOAD_TIME"));	//11
-				vpd.put("var12", varOList.get(i).getString("UPD_TIME"));	//12
-				vpd.put("var13", varOList.get(i).getString("STATUS"));	//13
-				vpd.put("var14", varOList.get(i).getString("SPREAD_NUM"));	//14
-				vpd.put("var15", varOList.get(i).getString("CLICK_NUM"));	//15
+				vpd.put("var3", varOList.get(i).getString("KEYWORDS"));	//3
+				vpd.put("var4", varOList.get(i).getString("PAY_TYPE"));	//4
+				vpd.put("var5", varOList.get(i).getString("DESCR"));	//5
+				vpd.put("var6", varOList.get(i).getString("PATH"));	//6
+				vpd.put("var7", varOList.get(i).getString("TYPE"));	//7
+				vpd.put("var8", varOList.get(i).getString("AUDIT_STATUS"));	//8
+				vpd.put("var9", varOList.get(i).get("PRICE").toString());	//9
+				vpd.put("var10", varOList.get(i).get("SPREAD_NUM").toString());	//10
+				vpd.put("var11", varOList.get(i).get("CLICK_NUM").toString());	//11
+				vpd.put("var12", varOList.get(i).get("SCAN_CODE_NUM").toString());	//12
+				vpd.put("var13", varOList.get(i).getString("DATE_CREATE"));	//13
+				vpd.put("var14", varOList.get(i).getString("DATE_MODIFY"));	//14
+				vpd.put("var15", varOList.get(i).getString("IS_DELETE"));	//15
 				varList.add(vpd);
 			}
 			dataMap.put("varList", varList);
