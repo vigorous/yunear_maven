@@ -57,14 +57,14 @@
 			$("#MEDIA_NAME").focus();
 			return false;
 		}
-		if($("#MEDIA_THEM").val()==""){
-			$("#MEDIA_THEM").tips({
+		if($("#MEDIA_THEME").val()==""){
+			$("#MEDIA_THEME").tips({
 				side:3,
 	            msg:'请输入主题',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#MEDIA_THEM").focus();
+			$("#MEDIA_THEME").focus();
 			return false;
 		}
 		if($("#KEYWORD").val()==""){
@@ -206,7 +206,7 @@
 				<td><input type="text" name="MEDIA_NAME" id="MEDIA_NAME" value="${pd.MEDIA_NAME}" maxlength="32" placeholder="这里输入多媒体名称" title="多媒体名称"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="MEDIA_THEM" id="MEDIA_THEM" value="${pd.MEDIA_THEM}" maxlength="32" placeholder="这里输入主题" title="主题"/></td>
+				<td><input type="text" name="MEDIA_THEME" id="MEDIA_THEME" value="${pd.MEDIA_THEME}" maxlength="32" placeholder="这里输入主题" title="主题"/></td>
 			</tr>
 			<tr>
 				<td><input type="text" name="KEYWORD" id="KEYWORD" value="${pd.KEYWORD}" maxlength="32" placeholder="这里输入关键字" title="关键字"/></td>

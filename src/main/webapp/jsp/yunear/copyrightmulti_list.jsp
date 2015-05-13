@@ -9,7 +9,7 @@
 <html lang="en">
 	<head>
 	<base href="<%=basePath%>"><!-- jsp文件头和头部 -->
-	<%@ include file="../../system/admin/top.jsp"%> 
+	<%@ include file="../system/admin/top.jsp"%> 
 	</head>
 <body>
 		
@@ -101,7 +101,7 @@
 								<td class='center' style="width: 30px;">${vs.index+1}</td>
 										<td>${var.USER_ID}</td>
 										<td>${var.MEDIA_NAME}</td>
-										<td>${var.MEDIA_THEM}</td>
+										<td>${var.MEDIA_THEME}</td>
 										<td>${var.KEYWORD}</td>
 										<td>${var.PAY_TYPE}</td>
 										<td>${var.DESCR}</td>
@@ -196,6 +196,12 @@
 		<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script><!-- 日期框 -->
 		<script type="text/javascript" src="js/bootbox.min.js"></script><!-- 确认窗口 -->
 		<!-- 引入 -->
+		
+		<!--引入弹窗组件start-->
+		<script type="text/javascript" src="js/attention/zDialog/zDrag.js"></script>
+		<script type="text/javascript" src="js/attention/zDialog/zDialog.js"></script>
+		<!--引入弹窗组件end-->
+		
 		<script type="text/javascript" src="js/jquery.tips.js"></script><!--提示框-->
 		<script type="text/javascript">
 		

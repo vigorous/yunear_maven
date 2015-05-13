@@ -38,6 +38,8 @@ public class AnnounceMultiController extends BaseController {
 	@Resource(name="announcemultiService")
 	private AnnounceMultiService announcemultiService;
 	
+	//public 
+	
 	/**
 	 * 新增
 	 */

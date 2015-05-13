@@ -8,7 +8,7 @@
 		insert into YUNEAR_COPYRIGHTMULTI(
 			USER_ID,	
 			MEDIA_NAME,	
-			MEDIA_THEM,	
+			MEDIA_THEME,	
 			KEYWORD,	
 			PAY_TYPE,	
 			DESCR,	
@@ -25,7 +25,7 @@
 		) values (
 			#{USER_ID},	
 			#{MEDIA_NAME},	
-			#{MEDIA_THEM},	
+			#{MEDIA_THEME},	
 			#{KEYWORD},	
 			#{PAY_TYPE},	
 			#{DESCR},	
@@ -57,7 +57,7 @@
 			set 
 				USER_ID = #{USER_ID},
 				MEDIA_NAME = #{MEDIA_NAME},
-				MEDIA_THEM = #{MEDIA_THEM},
+				MEDIA_THEME = #{MEDIA_THEME},
 				KEYWORD = #{KEYWORD},
 				PAY_TYPE = #{PAY_TYPE},
 				DESCR = #{DESCR},
@@ -81,7 +81,7 @@
 		select 
 			USER_ID,	
 			MEDIA_NAME,	
-			MEDIA_THEM,	
+			MEDIA_THEME,	
 			KEYWORD,	
 			PAY_TYPE,	
 			DESCR,	
@@ -107,7 +107,7 @@
 		select
 				a.USER_ID,	
 				a.MEDIA_NAME,	
-				a.MEDIA_THEM,	
+				a.MEDIA_THEME,	
 				a.KEYWORD,	
 				a.PAY_TYPE,	
 				a.DESCR,	
@@ -130,7 +130,7 @@
 		select
 				a.USER_ID,	
 				a.MEDIA_NAME,	
-				a.MEDIA_THEM,	
+				a.MEDIA_THEME,	
 				a.KEYWORD,	
 				a.PAY_TYPE,	
 				a.DESCR,	
