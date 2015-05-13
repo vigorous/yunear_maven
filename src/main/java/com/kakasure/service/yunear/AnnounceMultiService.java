@@ -39,6 +39,13 @@ public class AnnounceMultiService {
 	}
 	
 	/*
+	*版权方多媒体列表
+	*/
+	public List<PageData> allMultiList(Page page)throws Exception{
+		return (List<PageData>)dao.findForList("AnnounceMultiMapper.multilistPage", page);
+	}
+	
+	/*
 	*列表
 	*/
 	public List<PageData> list(Page page)throws Exception{

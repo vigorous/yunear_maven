@@ -88,6 +88,27 @@ public class AnnounceMultiController extends BaseController {
 	/**
 	 * 列表
 	 */
+	@RequestMapping(value="/allMultiList")
+	public ModelAndView allMultiList(Page page){
+		logBefore(logger, "列表CopyrightMulti");
+		
+		try{
+			pd = this.getPageData();
+			page.setPd(pd);
+			List<PageData>	varList = announcemultiService.allMultiList(page);	//列出CopyrightMulti列表
+			getHC(); //调用权限
+			mv.setViewName("yunear/announce_copyrightmulti_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
+		return mv;
+	}
+	
+	/**
+	 * 列表
+	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page){
 		logBefore(logger, "列表AnnounceMulti");
@@ -97,7 +118,7 @@ public class AnnounceMultiController extends BaseController {
 			page.setPd(pd);
 			List<PageData>	varList = announcemultiService.list(page);	//列出AnnounceMulti列表
 			getHC(); //调用权限
-			mv.setViewName("yunear/announcemulti/announcemulti_list");
+			mv.setViewName("yunear/announcemulti_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 		} catch(Exception e){

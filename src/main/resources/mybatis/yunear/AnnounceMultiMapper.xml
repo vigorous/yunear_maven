@@ -77,7 +77,6 @@
 			ANNOUNCEMULTI_ID = #{ANNOUNCEMULTI_ID}
 	</select>
 	
-	
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
@@ -121,5 +120,30 @@
                  #{item}
 		</foreach>
 	</delete>
+	
+	<!-- 版权方多媒体查询列表 -->
+	<select id="multilistPage" parameterType="page" resultType="pd">
+		select
+				a.USER_ID,	
+				a.MEDIA_NAME,	
+				a.KEYWORDS,	
+				a.PAY_TYPE,	
+				a.DESCR,	
+				a.PATH,	
+				a.TYPE,	
+				a.AUDIT_STATUS,	
+				a.PRICE,	
+				a.SPREAD_NUM,	
+				a.CLICK_NUM,	
+				a.SCAN_CODE_NUM,	
+				a.DATE_CREATE,	
+				a.DATE_MODIFY,	
+				a.IS_DELETE,	
+				a.COPYRIGHTMULTI_ID
+		from 
+				YUNEAR_COPYRIGHTMULTI a
+		where a.IS_DELETE = '0'
+			and a.AUDIT_STATUS = '00'
+	</select>
 	
 </mapper>
