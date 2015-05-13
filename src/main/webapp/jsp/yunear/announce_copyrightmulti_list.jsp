@@ -34,17 +34,17 @@
 	<div class="row-fluid">
 	
 			<!-- 检索  -->
-			<form action="announcemulti/list.do" method="post" name="Form" id="Form">
+			<form action="announcemulti/allMultiList.do" method="post" name="Form" id="Form">
 			<table>
 				<tr>
 					<td>
 						<span class="input-icon">
-							<input autocomplete="off" id="nav-search-input" type="text" name="field1" value="" placeholder="这里输入关键词" />
+							<input autocomplete="off" id="nav-search-input" type="text" name="KEYWORDS" value="" placeholder="这里输入关键词" />
 							<i id="nav-search-icon" class="icon-search"></i>
 						</span>
 					</td>
-					<td><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart" value="${pd.lastLoginStart}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
-					<td><input class="span10 date-picker" name="lastLoginEnd" id="lastLoginEnd" value="${pd.lastLoginEnd}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
+					<td><input class="span10 date-picker" name="DATE_CREATE_START" id="DATE_CREATE_START" value="${pd.DATE_CREATE_START}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
+					<td><input class="span10 date-picker" name="DATE_CREATE_END" id="DATE_CREATE_END" value="${pd.DATE_CREATE_END}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
 					<td style="vertical-align:top;"> 
 					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
 							<option value="">1</option>
@@ -68,7 +68,7 @@
 						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
 						</th>
 						<th>序号</th>
-						<th>版权方ID</th>
+						<th style="display:none">版权方ID</th>
 						<th>多媒体名称</th>
 						<th>关键字</th>
 						<th>付费类型</th>
@@ -99,21 +99,21 @@
 									<label><input type='checkbox' name='ids' value="${var.COPYRIGHTMULTI_ID}" /><span class="lbl"></span></label>
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td>
-										<td>${var.USER_ID}</td>
+										<td style="display:none">${var.USER_ID}</td>
 										<td>${var.MEDIA_NAME}</td>
 										<td>${var.KEYWORDS}</td>
-										<td>${var.PAY_TYPE}</td>
+										<td>${var.PAY_TYPE=='0'?'免费':'收费'}</td>
 										<td>${var.DESCR}</td>
 										<td>${var.PATH}</td>
-										<td>${var.TYPE}</td>
-										<td>${var.AUDIT_STATUS}</td>
+										<td>${var.TYPE=='0'?'视频':'音频'}</td>
+										<td>${var.AUDIT_STATUS=='00'?'审核通过':''}</td>
 										<td>${var.PRICE}</td>
 										<td>${var.SPREAD_NUM}</td>
 										<td>${var.CLICK_NUM}</td>
 										<td>${var.SCAN_CODE_NUM}</td>
 										<td>${var.DATE_CREATE}</td>
 										<td>${var.DATE_MODIFY}</td>
-										<td>${var.IS_DELETE}</td>
+										<td>${var.IS_DELETE=='0'?'未删除':'已删除'}</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
 									
@@ -250,7 +250,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>/copyrightmulti/goEdit.do?COPYRIGHTMULTI_ID='+Id;
+			 diag.URL = '<%=basePath%>/announcemulti/tuiguan.do?COPYRIGHTMULTI_ID='+Id;
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
