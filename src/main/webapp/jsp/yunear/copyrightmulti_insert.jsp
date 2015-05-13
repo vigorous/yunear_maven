@@ -232,20 +232,19 @@
 					</select>
 						<div id="v2" style="display: none;">
 							<div>
-								<input type="number" name="PRICE" id="PRICE"
-						value="0.0" maxlength="32" placeholder="价格" title="价格" />
+								<input type="number" name="PRICE" id="PRICE" value="0.0"
+									maxlength="32" placeholder="价格" title="价格" />
 							</div>
 						</div></td>
 				</tr>
 				<tr>
-					<td><textarea rows="" cols="" name="DESCR" id="DESCR"  maxlength="32" placeholder="描述" title="描述"></textarea></td>
+					<td><textarea rows="" cols="" name="DESCR" id="DESCR"
+							maxlength="32" placeholder="描述" title="描述"></textarea></td>
 				</tr>
 				<tr>
-					<td>
-						<input type="file" name="file_upload" id="file_upload">
-						<input type="hidden" name="PATH" id="PATH"
-						value="${pd.PATH}" maxlength="32" placeholder="多媒体路径"
-						title="多媒体路径" /></td>
+					<td><input type="file" name="file_upload" id="file_upload">
+						<input type="hidden" name="PATH" id="PATH" value="${pd.PATH}"
+						maxlength="32" placeholder="多媒体路径" title="多媒体路径" /></td>
 				</tr>
 				<tr>
 					<td><input type="text" name="TYPE" id="TYPE"
@@ -262,12 +261,7 @@
 		</div>
 
 		<div id="zhongxin2" class="center" style="display: none">
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<img src="images/jiazai.gif" /><br />
+			<br /> <br /> <br /> <br /> <br /> <img src="images/jiazai.gif" /><br />
 			<h4 class="lighter block green">提交中...</h4>
 		</div>
 
@@ -283,6 +277,10 @@
 	<!-- 下拉框 -->
 	<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
 	<!-- 日期框 -->
+	<link href="uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+	<script src="uploadify/jquery.uploadify.v2.1.4.min.js"
+		type="text/javascript"></script>
+	<script src="uploadify/swfobject.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(window.parent.hangge());
 		$(function() {
@@ -296,27 +294,40 @@
 			
 		});
 		
-		$(function() {
-			$('#file_upload')
+		  $(document).ready(function () {
+			  //$('#file_upload').change(function(){
+				  $('#file_upload')
 					.uploadify({
 								//校验数据				
-								'swf' : '<%=basePath%>static/uploadify/uploadify.swf', //指定上传控件的主体文件，默认‘uploader.swf’
-								'uploader' : '<%=basePath%>upload/upload1', //指定服务器端上传处理文件，默认‘upload.php’
+								'script' : '<%=basePath%>uploadify/uploadFile.jsp', //指定上传控件的主体文件，默认‘uploader.swf’
+								'uploader' : 'uploadify/uploadify.swf', //指定服务器端上传处理文件，默认‘upload.php’
 								'auto' : true, //手动上传												
 								'multi' : false, //单文件上传
+								'cancelImg': 'uploadify/cancel.png', //取消图片路径 
 								'fileTypeExts' : '*.avi;*.rmvb;*.rm;*.asf;*.divx;*.mpg;*.mpeg;*.mpe;*.wmv;*.mp4;*.mkv;*.vob;', //允许上传的文件后缀
 								'fileSizeLimit' : '300MB', //上传文件的大小限制，单位为B, KB, MB, 或 GB
 								'successTimeout' : '30', //成功等待时间
 								'buttonText' : '上传多媒体',
 								'onUploadSuccess' : function(file, data,
 										response) {//每成功完成一次文件上传时触发一次
+									console.log(file);
+									console.log(response);
+									console.log(data);
 									document.getElementById("PATH").value=data;								
 								},
+								'onComplete' : function(event, queueID, fileObj,  
+			                            response, data) {  
+									console.log(fileObj);
+									console.log(response);
+									console.log(data);
+			                    },
 								'onUploadError' : function(file, data, response) {//当上传返回错误时触发
 									$('#url').append("<li>" + data + "</li>");
 								}
 							});
-			});
+			//});
+			  })
+			
 		
 		function feeType(){
 			var feeType = $("#selectError3").val();

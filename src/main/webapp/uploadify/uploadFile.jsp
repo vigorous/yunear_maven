@@ -7,6 +7,7 @@
 	public void upload(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		String savePath = this.getServletConfig().getServletContext().getRealPath("");
 		savePath = savePath + PATH;
+		System.out.print(savePath);
 		File f1 = new File(savePath);
 		//System.out.println(savePath);
 		//这里接收了name的值
