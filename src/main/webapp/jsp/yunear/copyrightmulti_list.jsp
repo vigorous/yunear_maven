@@ -111,7 +111,7 @@
 										<td>${var.SCAN_CODE_NUM}</td>
 										<td>${var.DATE_CREATE}</td>
 										<td>${var.DATE_MODIFY}</td>
-										<td>${var.IS_DELETE=="0"?"未删除":""}</td>
+										<td class="label label-success arrowed">${var.IS_DELETE=="0"?"未删除":""}</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
 									

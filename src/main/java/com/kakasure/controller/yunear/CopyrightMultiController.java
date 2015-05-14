@@ -1,8 +1,10 @@
 package com.kakasure.controller.yunear;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Blob;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,13 +27,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kakasure.controller.base.BaseController;
 import com.kakasure.entity.Page;
 import com.kakasure.entity.system.User;
-import com.kakasure.entity.yunear.Message;
 import com.kakasure.service.yunear.CopyrightMultiService;
 import com.kakasure.service.yunear.MessageService;
 import com.kakasure.util.AppUtil;
 import com.kakasure.util.ObjectExcelView;
 import com.kakasure.util.PageData;
-import com.mysql.jdbc.Blob;
 
 /** 
  * 类名称：CopyrightMultiController
@@ -49,6 +49,24 @@ public class CopyrightMultiController extends BaseController {
 	@Resource(name="messageService")
 	private MessageService messageService;
 
+	
+	/**
+	 * 把blob类型转换为string类型
+	 */
+	public String conventBlobToString(Blob blob){
+		String result = "";
+		try {
+			ByteArrayInputStream msgContent = (ByteArrayInputStream) blob.getBinaryStream();
+			byte[] byte_date = new byte[msgContent.available()];
+			msgContent.read(byte_date,0,byte_date.length);
+			result = new String(byte_date);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	/**
 	 * 新增
 	 */
@@ -160,13 +178,25 @@ public class CopyrightMultiController extends BaseController {
 	@RequestMapping(value="/goEdit")
 	public ModelAndView goEdit(){
 		logBefore(logger, "去修改CopyrightMulti页面");
-		
+		System.out.println("---------------");
 		pd = this.getPageData();
 		try {
 			pd = copyrightmultiService.findById(pd);	//根据ID读取
-			String DESCR=pd.get("DESCR").toString();
+			/*String DESCR=pd.get("DESCR").toString();
 			System.out.println(DESCR);
-			pd.put("DESCR", DESCR);
+			pd.put("DESCR", DESCR);*/
+			/*ResultSet rs =(ResultSet) pd.get("DESCR");
+			Blob blob = rs.getBlob("content");  
+			int bolblen = (int) blob.length();  
+			byte[] data = blob.getBytes(1, bolblen);  
+			String DESCR = new String(data);  
+			System.out.println(DESCR);*/
+			/*System.out.println(blob);
+			if (blob!=null) {
+				String DESCR = conventBlobToString(blob);
+				System.out.println(DESCR);
+				pd.put("DESCR", DESCR);
+			}			*/
 			mv.setViewName("yunear/copyrightmulti_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
