@@ -1,6 +1,7 @@
 package com.kakasure.controller.yunear;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -119,12 +120,25 @@ public class CopyrightMultiController extends BaseController {
 			
 			/*for (PageData pageData : varList) {
 				Blob blob = (Blob) pageData.get("DESCR");
+<<<<<<< HEAD
 				ByteArrayInputStream msgContent = (ByteArrayInputStream) blob.getBinaryStream();
 				byte[] byte_data = new byte[msgContent.available()];
 				msgContent.read(byte_data, 0,byte_data.length);
 				String  DESCR = new String(byte_data);
 				System.out.println(DESCR);
 				pageData.put("DESCR", DESCR);
+=======
+				if(blob != null){
+					InputStream is = blob.getBinaryStream();
+					ByteArrayInputStream bais = (ByteArrayInputStream)is;
+					byte[] byte_data = new byte[bais.available()]; //bais.available()返回此输入流的字节数
+
+					bais.read(byte_data, 0,byte_data.length);//将输入流中的内容读到指定的数组
+					String note = new String(byte_data,"utf-8"); //再转为String，并使用指定的编码方式
+					System.out.println(note);
+					is.close();
+				}
+>>>>>>> 1996c7ae236e8767b0f2662e55c7a6c236c37c04
 			}*/
 			mv.addObject("pd", pd);
 		} catch(Exception e){
