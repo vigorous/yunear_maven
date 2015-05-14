@@ -14,6 +14,7 @@
 		<result column="IP" property="IP"/>
 		<result column="STATUS" property="STATUS"/>
 		<result column="SKIN" property="SKIN"/>
+		<result column="BALANCE" property="BALANCE"/>
 		<association property="role" column="ROLE_ID" javaType="Role">
 			<id column="ROLE_ID" property="ROLE_ID"/>
 			<result column="ROLE_NAME" property="ROLE_NAME"/>
@@ -31,6 +32,7 @@
 		<result column="STATUS" property="STATUS"/>
 		<result column="ROLE_ID" property="ROLE_ID"/>
 		<result column="SKIN" property="SKIN"/>
+		<result column="BALANCE" property="BALANCE"/>
 	</resultMap>
 	
 	<!-- 判断用户名和密码 -->
@@ -52,6 +54,7 @@
 				u.RIGHTS as USER_RIGHTS,
 				u.PASSWORD,
 				u.SKIN,
+				u.BALANCE,
 				r.ROLE_ID,
 				r.ROLE_NAME,
 				r.RIGHTS as ROLE_RIGHTS 
