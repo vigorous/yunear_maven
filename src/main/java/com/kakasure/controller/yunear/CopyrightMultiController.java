@@ -117,7 +117,7 @@ public class CopyrightMultiController extends BaseController {
 			mv.setViewName("yunear/copyrightmulti_list");
 			mv.addObject("varList", varList);
 			
-			for (PageData pageData : varList) {
+			/*for (PageData pageData : varList) {
 				Blob blob = (Blob) pageData.get("DESCR");
 				ByteArrayInputStream msgContent = (ByteArrayInputStream) blob.getBinaryStream();
 				byte[] byte_data = new byte[msgContent.available()];
@@ -125,7 +125,7 @@ public class CopyrightMultiController extends BaseController {
 				String  DESCR = new String(byte_data);
 				System.out.println(DESCR);
 				pageData.put("DESCR", DESCR);
-			}
+			}*/
 			mv.addObject("pd", pd);
 		} catch(Exception e){
 			logger.error(e.toString(), e);
