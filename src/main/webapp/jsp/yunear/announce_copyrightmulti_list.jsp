@@ -246,20 +246,16 @@
 		
 		//修改
 		function edit(Id){
-			 window.parent.jzts();
-			 var diag = new top.Dialog();
-			 diag.Drag=true;
-			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>/announcemulti/tuiguan.do?COPYRIGHTMULTI_ID='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
-			 diag.CancelEvent = function(){ //关闭事件
-				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-					 nextPage(${page.currentPage});
+			bootbox.confirm("确定要推广吗?", function(result) {
+				if(result) {
+					var url = "<%=basePath%>/announcemulti/extension.do?COPYRIGHTMULTI_ID="+Id;
+					$.get(url,function(data){
+						if(data=="success"){
+							nextPage(${page.currentPage});
+						}
+					});
 				}
-				diag.close();
-			 };
-			 diag.show();
+			});
 		}
 		</script>
 		

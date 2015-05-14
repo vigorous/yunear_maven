@@ -140,6 +140,14 @@ public class CopyrightMultiController extends BaseController {
 			
 			/*for (PageData pageData : varList) {
 				Blob blob = (Blob) pageData.get("DESCR");
+<<<<<<< HEAD
+				ByteArrayInputStream msgContent = (ByteArrayInputStream) blob.getBinaryStream();
+				byte[] byte_data = new byte[msgContent.available()];
+				msgContent.read(byte_data, 0,byte_data.length);
+				String  DESCR = new String(byte_data);
+				System.out.println(DESCR);
+				pageData.put("DESCR", DESCR);
+=======
 				if(blob != null){
 					InputStream is = blob.getBinaryStream();
 					ByteArrayInputStream bais = (ByteArrayInputStream)is;
@@ -150,6 +158,7 @@ public class CopyrightMultiController extends BaseController {
 					System.out.println(note);
 					is.close();
 				}
+>>>>>>> 1996c7ae236e8767b0f2662e55c7a6c236c37c04
 			}*/
 			mv.addObject("pd", pd);
 		} catch(Exception e){
