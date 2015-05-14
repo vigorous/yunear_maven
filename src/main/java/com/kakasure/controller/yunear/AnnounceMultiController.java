@@ -1,5 +1,8 @@
 package com.kakasure.controller.yunear;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -10,8 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -28,6 +33,7 @@ import com.kakasure.service.yunear.CopyrightMultiService;
 import com.kakasure.util.AppUtil;
 import com.kakasure.util.Const;
 import com.kakasure.util.DateUtil;
+import com.kakasure.util.FileDownload;
 import com.kakasure.util.ObjectExcelView;
 import com.kakasure.util.PageData;
 import com.kakasure.util.barcode.QrcodeUtil;
@@ -102,6 +108,35 @@ public class AnnounceMultiController extends BaseController {
 			pd = this.getPageData();
 			page.setPd(pd);
 			List<PageData> varList = announcemultiService.allMultiList(page); // 列出CopyrightMulti列表
+			//System.out.println(" --- "+varList.get(0).get("DESCR").toString());
+			/*if(varList.get(0).get("DESCR") instanceof Blob){
+				System.out.println("blob");
+			}else{
+				System.out.println("not blob");
+			}
+			Blob blob = (Blob)varList.get(0).get("DESCR");
+			try {
+				BufferedReader bf=new BufferedReader(new InputStreamReader(blob.getBinaryStream()));
+				String temp="";
+				StringBuffer sb=new StringBuffer();
+				while((temp=bf.readLine())!=null)
+				{
+					sb.append(temp);	
+				}
+				
+				System.out.println("DESCR-->"+sb.toString());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			
+			/**
+			 * 处理日期格式问题
+			 */
+			for(int i=0;i<varList.size();i++){
+				System.out.println(varList.get(i).get("DATE_CREATE"));
+			}
+			
 			getHC(); // 调用权限
 			mv.setViewName("yunear/announce_copyrightmulti_list");
 			mv.addObject("varList", varList);
@@ -161,6 +196,45 @@ public class AnnounceMultiController extends BaseController {
 			out.write("error");
 		}
 	}
+	
+	/**
+	 * 下载二维码图片
+	 */
+	@RequestMapping(value = "/downloadCode")
+	public ModelAndView downloadCode(final HttpServletResponse response){
+		
+		OutputStream os = null;
+		try {
+			os = response.getOutputStream();  
+	     
+	    	File file = new File("F:\\img\\api.png");
+	    	response.reset();  
+	    	response.setHeader("Content-Disposition", "attachment; filename=dict.txt");  
+	    	response.setContentType("application/octet-stream; charset=utf-8");  
+	        os.write(FileUtils.readFileToByteArray(file));  
+	        os.flush();  
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}finally {  
+	        if (os != null) {  
+	            try {
+					os.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+	        }  
+	    }  
+		
+		/*try {
+			FileDownload.fileDownload(response, "F:\\img\\api.png", "api1.png");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		return null;
+	}
+	
+	
 
 	/**
 	 * 列表
