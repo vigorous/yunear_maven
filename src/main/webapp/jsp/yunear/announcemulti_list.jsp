@@ -102,7 +102,7 @@
 										<td>${var.IMG_LINK}</td>
 										<td>${var.DATE_CREATE}</td>
 										<td>${var.DATE_MODIFY}</td>
-										<td>${var.IS_DELETE}</td>
+										<td>${var.IS_DELETE=='0'?'未删除':'已删除'}</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
 									

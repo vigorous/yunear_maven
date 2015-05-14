@@ -86,7 +86,7 @@ public class AnnounceMultiController extends BaseController {
 	}
 	
 	/**
-	 * 列表
+	 * 版权方多媒体列表
 	 */
 	@RequestMapping(value="/allMultiList")
 	public ModelAndView allMultiList(Page page){
@@ -136,7 +136,7 @@ public class AnnounceMultiController extends BaseController {
 		
 		pd = this.getPageData();
 		try {
-			mv.setViewName("yunear/announcemulti/announcemulti_edit");
+			mv.setViewName("yunear/announcemulti_edit");
 			mv.addObject("msg", "save");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -155,7 +155,7 @@ public class AnnounceMultiController extends BaseController {
 		pd = this.getPageData();
 		try {
 			pd = announcemultiService.findById(pd);	//根据ID读取
-			mv.setViewName("yunear/announcemulti/announcemulti_edit");
+			mv.setViewName("yunear/announcemulti_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
