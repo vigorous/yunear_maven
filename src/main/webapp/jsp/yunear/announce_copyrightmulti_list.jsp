@@ -248,9 +248,11 @@
 		function edit(Id){
 			bootbox.confirm("确定要推广吗?", function(result) {
 				if(result) {
-					var url = "<%=basePath%>/announcemulti/extension.do?COPYRIGHTMULTI_ID="+Id;
+					var url = "<%=basePath%>/announcemulti/extension.do?COPYRIGHTMULTI_ID="+Id+"&tm="+new Date().getTime();
+					//alert(url);
 					$.get(url,function(data){
 						if(data=="success"){
+							alert("success");
 							nextPage(${page.currentPage});
 						}
 					});

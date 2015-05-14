@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kakasure.controller.base.BaseController;
 import com.kakasure.entity.Page;
 import com.kakasure.service.yunear.AnnounceMultiService;
+import com.kakasure.service.yunear.CopyrightMultiService;
 import com.kakasure.util.AppUtil;
 import com.kakasure.util.ObjectExcelView;
 import com.kakasure.util.PageData;
@@ -37,6 +38,8 @@ public class AnnounceMultiController extends BaseController {
 	
 	@Resource(name="announcemultiService")
 	private AnnounceMultiService announcemultiService;
+	@Resource(name="copyrightmultiService")
+	private CopyrightMultiService copyrightmultiService;
 	
 	/**
 	 * 新增
@@ -104,6 +107,27 @@ public class AnnounceMultiController extends BaseController {
 			logger.error(e.toString(), e);
 		}
 		return mv;
+	}
+	/**
+	 * 发布方进行推广
+	 * @param out
+	 */
+	@RequestMapping(value="/extension")
+	public void extension(PrintWriter out){
+		logBefore(logger, "extension AnnounceMulti");
+		
+		try{
+			pd = this.getPageData();
+			PageData pageData = copyrightmultiService.findById(pd);
+			//根据路径生成二维码图片
+			
+			//在发布方多媒体表中插入一条记录
+			out.write("success");
+			out.close();
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+			out.write("error");
+		}
 	}
 	
 	/**
