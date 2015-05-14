@@ -24,10 +24,7 @@ public class MessageService {
 	public void save(PageData pd)throws Exception{
 		dao.save("MessageMapper.save", pd);
 	}
-	
-	public void savemessage(Message message)throws Exception{
-		dao.save("MessageMapper.savemessage", message);
-	}
+
 	
 	/*
 	* 删除

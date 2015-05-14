@@ -32,7 +32,7 @@ public class CopyrightMultiService {
 	* 删除
 	*/
 	public void delete(PageData pd)throws Exception{
-		dao.delete("CopyrightMultiMapper.delete", pd);
+		dao.delete("CopyrightMultiMapper.deletlj", pd);
 	}
 	
 	/*
