@@ -80,7 +80,8 @@
 			SKIN,
 			EMAIL,
 			NUMBER,
-			PHONE
+			PHONE,
+			BALANCE
 		from 
 			SYS_USER
 		where 
@@ -103,7 +104,8 @@
 			SKIN,
 			EMAIL,
 			NUMBER,
-			PHONE
+			PHONE,
+			BALANCE
 		from 
 			SYS_USER
 		where 
@@ -129,7 +131,8 @@
 			SKIN,
 			EMAIL,
 			NUMBER,
-			PHONE
+			PHONE,
+			BALANCE
 		from 
 			SYS_USER
 		where 
@@ -155,7 +158,8 @@
 			SKIN,
 			EMAIL,
 			NUMBER,
-			PHONE
+			PHONE,
+			BALANCE
 		from 
 			SYS_USER
 		where 
@@ -207,6 +211,7 @@
 				u.EMAIL,
 				u.NUMBER,
 				u.PHONE,
+				u.BALANCE,
 				r.ROLE_ID,
 				r.ROLE_NAME
 		from SYS_USER u, SYS_ROLE r 
@@ -250,6 +255,7 @@
 				u.EMAIL,
 				u.NUMBER,
 				u.PHONE,
+				u.BALANCE,
 				r.ROLE_ID,
 				r.ROLE_NAME
 		from SYS_USER u, SYS_ROLE r 
