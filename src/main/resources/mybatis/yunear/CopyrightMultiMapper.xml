@@ -76,6 +76,14 @@
 			COPYRIGHTMULTI_ID = #{COPYRIGHTMULTI_ID}
 	</delete>
 	
+	<!-- 逻辑删除 -->
+	<update id="deletlj" parameterType="pd">
+		update  YUNEAR_COPYRIGHTMULTI
+			set 
+				IS_DELETE = #{IS_DELETE}
+			where 
+				COPYRIGHTMULTI_ID = #{COPYRIGHTMULTI_ID}
+	</update>
 	
 	<!-- 修改 -->
 	<update id="edit" parameterType="pd">
@@ -84,6 +92,7 @@
 				USER_ID = #{USER_ID},
 				MEDIA_NAME = #{MEDIA_NAME},
 				KEYWORDS = #{KEYWORDS},
+				AUDIT_STATUS = #{AUDIT_STATUS},
 				PAY_TYPE = #{PAY_TYPE},
 				DESCR = #{DESCR},
 				PATH = #{PATH},
@@ -141,7 +150,8 @@
 				a.IS_DELETE,	
 				a.COPYRIGHTMULTI_ID
 		from 
-				YUNEAR_COPYRIGHTMULTI a where a.USER_ID=#{a.USER_ID}
+				YUNEAR_COPYRIGHTMULTI a 
+		where a.USER_ID = #{pd.USER_ID} and a.IS_DELETE = #{pd.IS_DELETE}
 	</select>
 	
 	<!-- 列表(全部) -->

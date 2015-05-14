@@ -10,20 +10,16 @@
 			TYPE,	
 			CONTENT,	
 			DATE_CREATE,	
-			DATE_MODIFY,	
-			IS_DELETE,	
 			MESSAGE_ID
 		) values (
 			#{MEDIA_ID},	
 			#{TYPE},	
 			#{CONTENT},	
 			#{DATE_CREATE},	
-			#{DATE_MODIFY},	
-			#{IS_DELETE},	
 			#{MESSAGE_ID}
 		)
 	</insert>
-	
+
 	
 	<!-- 删除-->
 	<delete id="delete" parameterType="pd">

@@ -25,7 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kakasure.controller.base.BaseController;
 import com.kakasure.entity.Page;
 import com.kakasure.entity.system.User;
+import com.kakasure.entity.yunear.Message;
 import com.kakasure.service.yunear.CopyrightMultiService;
+import com.kakasure.service.yunear.MessageService;
 import com.kakasure.util.AppUtil;
 import com.kakasure.util.ObjectExcelView;
 import com.kakasure.util.PageData;
@@ -42,7 +44,9 @@ public class CopyrightMultiController extends BaseController {
 	
 	@Resource(name="copyrightmultiService")
 	private CopyrightMultiService copyrightmultiService;
-	
+
+
+
 	/**
 	 * 新增
 	 */
@@ -76,7 +80,21 @@ public class CopyrightMultiController extends BaseController {
 		if (PAY_TYPE.equals("0")) {
 			pd.put("PRICE", 0.00);
 		}
+		pd.put("AUDIT_STATUS", 99);
 		copyrightmultiService.edit(pd);
+		
+	/*	Message message = new Message();
+		message.setMESSAGE_ID(this.get32UUID());
+		String MEDIA_ID=(String) pd.get("COPYRIGHTMULTI_ID");
+		message.setMEDIA_ID(MEDIA_ID);
+		message.setTYPE("0");
+		message.setCONTENT("对多媒体做了修改操作");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String a = df.format(new Date());
+		Date date = df.parse(a);
+		message.setDATE_CREATE(date);
+		messageService.savemessage(message);*/
+		
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
@@ -91,6 +109,7 @@ public class CopyrightMultiController extends BaseController {
 		
 		try{
 			pd = this.getPageData();
+			pd.put("IS_DELETE", 1);
 			copyrightmultiService.delete(pd);
 			out.write("success");
 			out.close();
@@ -112,34 +131,12 @@ public class CopyrightMultiController extends BaseController {
 			User user= (User) session.getAttribute("sessionUser");
 			String USER_ID=user.getUSER_ID();
 			pd.put("USER_ID", USER_ID);
+			pd.put("IS_DELETE", 0);
 			page.setPd(pd);
 			List<PageData>	varList = copyrightmultiService.list(page);	//列出CopyrightMulti列表
 			getHC(); //调用权限
 			mv.setViewName("yunear/copyrightmulti_list");
 			mv.addObject("varList", varList);
-			
-			/*for (PageData pageData : varList) {
-				Blob blob = (Blob) pageData.get("DESCR");
-<<<<<<< HEAD
-				ByteArrayInputStream msgContent = (ByteArrayInputStream) blob.getBinaryStream();
-				byte[] byte_data = new byte[msgContent.available()];
-				msgContent.read(byte_data, 0,byte_data.length);
-				String  DESCR = new String(byte_data);
-				System.out.println(DESCR);
-				pageData.put("DESCR", DESCR);
-=======
-				if(blob != null){
-					InputStream is = blob.getBinaryStream();
-					ByteArrayInputStream bais = (ByteArrayInputStream)is;
-					byte[] byte_data = new byte[bais.available()]; //bais.available()返回此输入流的字节数
-
-					bais.read(byte_data, 0,byte_data.length);//将输入流中的内容读到指定的数组
-					String note = new String(byte_data,"utf-8"); //再转为String，并使用指定的编码方式
-					System.out.println(note);
-					is.close();
-				}
->>>>>>> 1996c7ae236e8767b0f2662e55c7a6c236c37c04
-			}*/
 			mv.addObject("pd", pd);
 		} catch(Exception e){
 			logger.error(e.toString(), e);
