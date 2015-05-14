@@ -162,7 +162,7 @@
 		<div id="zhongxin" align="center">
 		<table>
 			<tr>
-				<td><input type="text" name="USER_ID" id="USER_ID" value="${pd.USER_ID}" maxlength="32" placeholder="版权方ID" title="版权方ID" readonly="readonly"/></td>
+				<td><input type="hidden" name="USER_ID" id="USER_ID" value="${pd.USER_ID}" maxlength="32" placeholder="版权方ID" title="版权方ID" readonly="readonly"/></td>
 			</tr>
 			<tr>
 				<td><input type="text" name="MEDIA_NAME" id="MEDIA_NAME" value="${pd.MEDIA_NAME}" maxlength="32" placeholder="多媒体名称" title="多媒体名称"/></td>
@@ -172,7 +172,7 @@
 			</tr>
 			<tr>
 				<td><select id="selectError3" name="PAY_TYPE" id="PAY_TYPE"
-						onchange="feeType()" style="width: 220px">
+						onchange="feeType()" style="width: 220px" class="chzn-select">
 							<option value="0" ${pd.PAY_TYPE=="0"?"selected":""}>免费</option>
 							<option value="1" ${pd.PAY_TYPE=="1"?"selected":""}>付费</option>
 					</select>
@@ -193,7 +193,7 @@
 						maxlength="32" placeholder="多媒体路径" title="多媒体路径" /></td>
 			</tr>
 			<tr>
-				<td><select name="TYPE" id="TYPE" style="width: 220px">
+				<td><select name="TYPE" id="TYPE" style="width: 220px" class="chzn-select">
 							<option value="01"  ${pd.TYPE=="01"?"selected":""}>视频</option>
 							<option value="02"  ${pd.TYPE=="02"?"selected":""}>音频</option>
 					</select>

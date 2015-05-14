@@ -157,7 +157,7 @@
 				</tr>
 				<tr>
 					<td><select id="selectError3" name="PAY_TYPE" id="PAY_TYPE"
-						onchange="feeType()" style="width: 220px">
+						onchange="feeType()" style="width: 220px" class="chzn-select">
 							<option value="0" selected>免费</option>
 							<option value="1">付费</option>
 					</select>
@@ -179,7 +179,7 @@
 				</tr>
 				<tr>
 					<td>
-						<select name="TYPE" id="TYPE" style="width: 220px">
+						<select name="TYPE" id="TYPE" style="width: 220px" class="chzn-select">
 							<option value="01" selected>视频</option>
 							<option value="02">音频</option>
 					</select>

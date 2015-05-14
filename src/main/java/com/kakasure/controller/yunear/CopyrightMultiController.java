@@ -1,7 +1,7 @@
 package com.kakasure.controller.yunear;
 
+import java.io.ByteArrayInputStream;
 import java.io.PrintWriter;
-import java.security.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.mail.Session;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -30,6 +28,7 @@ import com.kakasure.service.yunear.CopyrightMultiService;
 import com.kakasure.util.AppUtil;
 import com.kakasure.util.ObjectExcelView;
 import com.kakasure.util.PageData;
+import com.mysql.jdbc.Blob;
 
 /** 
  * 类名称：CopyrightMultiController
@@ -118,6 +117,15 @@ public class CopyrightMultiController extends BaseController {
 			mv.setViewName("yunear/copyrightmulti_list");
 			mv.addObject("varList", varList);
 			
+			for (PageData pageData : varList) {
+				Blob blob = (Blob) pageData.get("DESCR");
+				ByteArrayInputStream msgContent = (ByteArrayInputStream) blob.getBinaryStream();
+				byte[] byte_data = new byte[msgContent.available()];
+				msgContent.read(byte_data, 0,byte_data.length);
+				String  DESCR = new String(byte_data);
+				System.out.println(DESCR);
+				pageData.put("DESCR", DESCR);
+			}
 			mv.addObject("pd", pd);
 		} catch(Exception e){
 			logger.error(e.toString(), e);
