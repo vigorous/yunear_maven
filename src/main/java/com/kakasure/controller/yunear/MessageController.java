@@ -40,20 +40,49 @@ public class MessageController extends BaseController {
 	private MessageService messageService;
 	
 	/**
-	 * 新增
+	 * 修改的新增
 	 */
 	@RequestMapping(value="/save")
-	public ModelAndView save() throws Exception{
+	public ModelAndView save(HttpSession session) throws Exception{
+		String MEDIA_ID=(String) session.getAttribute("MEDIA_ID");
 		logBefore(logger, "新增Message");
 		
 		pd = this.getPageData();
 		pd.put("MESSAGE_ID", this.get32UUID());	//主键
+		pd.put("MEDIA_ID", MEDIA_ID);
+		pd.put("TYPE", 0);
+		pd.put("CONTENT", "对多媒体做了修改操作");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String a = df.format(new Date());
+		Date DATE_CREATE = df.parse(a);
+		pd.put("DATE_CREATE", DATE_CREATE);		
 		messageService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
 	}
 	
+	/**
+	 * 删除的新增
+	 */
+	@RequestMapping(value="/deletesave")
+	public ModelAndView deletesave(HttpSession session) throws Exception{
+		String MEDIA_ID=(String) session.getAttribute("MEDIA_ID");
+		logBefore(logger, "新增Message");
+		
+		pd = this.getPageData();
+		pd.put("MESSAGE_ID", this.get32UUID());	//主键
+		pd.put("MEDIA_ID", MEDIA_ID);
+		pd.put("TYPE", 1);
+		pd.put("CONTENT", "对多媒体做了删除操作");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String a = df.format(new Date());
+		Date DATE_CREATE = df.parse(a);
+		pd.put("DATE_CREATE", DATE_CREATE);		
+		messageService.save(pd);
+		mv.setViewName("redirect:/copyrightmulti/list.do");
+		return mv;
+	}
 	/**
 	 * 删除
 	 */

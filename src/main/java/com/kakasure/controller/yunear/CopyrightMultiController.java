@@ -46,6 +46,8 @@ public class CopyrightMultiController extends BaseController {
 	private CopyrightMultiService copyrightmultiService;
 
 
+	@Resource(name="messageService")
+	private MessageService messageService;
 
 	/**
 	 * 新增
@@ -72,9 +74,8 @@ public class CopyrightMultiController extends BaseController {
 	 * 修改
 	 */
 	@RequestMapping(value="/edit")
-	public ModelAndView edit() throws Exception{
+	public ModelAndView edit(HttpSession session) throws Exception{
 		logBefore(logger, "修改CopyrightMulti");
-		System.out.println(pd.get("COPYRIGHTMULTI_ID"));
 		pd = this.getPageData();
 		String PAY_TYPE=(String) pd.get("PAY_TYPE");
 		if (PAY_TYPE.equals("0")) {
@@ -82,21 +83,9 @@ public class CopyrightMultiController extends BaseController {
 		}
 		pd.put("AUDIT_STATUS", 99);
 		copyrightmultiService.edit(pd);
-		
-	/*	Message message = new Message();
-		message.setMESSAGE_ID(this.get32UUID());
 		String MEDIA_ID=(String) pd.get("COPYRIGHTMULTI_ID");
-		message.setMEDIA_ID(MEDIA_ID);
-		message.setTYPE("0");
-		message.setCONTENT("对多媒体做了修改操作");
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String a = df.format(new Date());
-		Date date = df.parse(a);
-		message.setDATE_CREATE(date);
-		messageService.savemessage(message);*/
-		
-		mv.addObject("msg","success");
-		mv.setViewName("save_result");
+		session.setAttribute("MEDIA_ID", MEDIA_ID);
+		mv.setViewName("redirect:/message/save.do");
 		return mv;
 	}
 	
@@ -104,18 +93,20 @@ public class CopyrightMultiController extends BaseController {
 	 * 删除
 	 */
 	@RequestMapping(value="/delete")
-	public void delete(PrintWriter out){
+	public ModelAndView delete(PrintWriter out,HttpSession session){
 		logBefore(logger, "删除CopyrightMulti");
 		
 		try{
 			pd = this.getPageData();
 			pd.put("IS_DELETE", 1);
 			copyrightmultiService.delete(pd);
-			out.write("success");
-			out.close();
+			String MEDIA_ID=(String) pd.get("COPYRIGHTMULTI_ID");
+			session.setAttribute("MEDIA_ID", MEDIA_ID);
+			mv.setViewName("redirect:/message/deletesave.do");
 		} catch(Exception e){
 			logger.error(e.toString(), e);
-		}
+		}		
+		return mv;
 		
 	}
 	
@@ -124,6 +115,7 @@ public class CopyrightMultiController extends BaseController {
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page,HttpSession session){
+		System.out.println("-------");
 		logBefore(logger, "列表CopyrightMulti");
 		
 		try{
