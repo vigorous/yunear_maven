@@ -105,7 +105,7 @@
 										<td>${var.PAY_TYPE=='0'?'免费':'收费'}</td>
 										<td>${var.DESCR}</td>
 										<td>${var.PATH}</td>
-										<td>${var.TYPE=='0'?'视频':'音频'}</td>
+										<td>${var.TYPE=='01'?'视频':'音频'}</td>
 										<td>${var.AUDIT_STATUS=='00'?'审核通过':''}</td>
 										<td>${var.PRICE}</td>
 										<td>${var.SPREAD_NUM}</td>
@@ -124,7 +124,7 @@
 										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
 										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
 											<c:if test="${QX.edit == 1 }">
-											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.COPYRIGHTMULTI_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
+											<li><a style="cursor:pointer;" title="推广" onclick="edit('${var.COPYRIGHTMULTI_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
 											</c:if>
 											<c:if test="${QX.del == 1 }">
 											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.COPYRIGHTMULTI_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
