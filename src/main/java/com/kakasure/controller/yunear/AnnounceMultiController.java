@@ -86,7 +86,7 @@ public class AnnounceMultiController extends BaseController {
 	}
 	
 	/**
-	 * 列表
+	 * 版权方多媒体列表
 	 */
 	@RequestMapping(value="/allMultiList")
 	public ModelAndView allMultiList(Page page){
