@@ -42,7 +42,33 @@
 		)
 	</insert>
 	
+	<!-- 多媒体指定字段添加 -->
 	
+	<insert id="savemulti" parameterType="pd">
+		insert into YUNEAR_COPYRIGHTMULTI(
+			USER_ID,	
+			MEDIA_NAME,	
+			KEYWORDS,
+			PAY_TYPE,	
+			DESCR,	
+			PATH,	
+			TYPE,		
+			PRICE,	
+			DATE_CREATE,	
+			COPYRIGHTMULTI_ID
+		) values (
+			#{USER_ID},	
+			#{MEDIA_NAME},	
+			#{KEYWORDS},
+			#{PAY_TYPE},	
+			#{DESCR},	
+			#{PATH},	
+			#{TYPE},	
+			#{PRICE},	
+			#{DATE_CREATE},	
+			#{COPYRIGHTMULTI_ID}
+		)
+	</insert>
 	<!-- 删除-->
 	<delete id="delete" parameterType="pd">
 		delete from YUNEAR_COPYRIGHTMULTI
@@ -62,14 +88,7 @@
 				DESCR = #{DESCR},
 				PATH = #{PATH},
 				TYPE = #{TYPE},
-				AUDIT_STATUS = #{AUDIT_STATUS},
 				PRICE = #{PRICE},
-				SPREAD_NUM = #{SPREAD_NUM},
-				CLICK_NUM = #{CLICK_NUM},
-				SCAN_CODE_NUM = #{SCAN_CODE_NUM},
-				DATE_CREATE = #{DATE_CREATE},
-				DATE_MODIFY = #{DATE_MODIFY},
-				IS_DELETE = #{IS_DELETE},
 			COPYRIGHTMULTI_ID = COPYRIGHTMULTI_ID
 			where 
 				COPYRIGHTMULTI_ID = #{COPYRIGHTMULTI_ID}
@@ -122,7 +141,7 @@
 				a.IS_DELETE,	
 				a.COPYRIGHTMULTI_ID
 		from 
-				YUNEAR_COPYRIGHTMULTI a
+				YUNEAR_COPYRIGHTMULTI a where a.USER_ID=#{a.USER_ID}
 	</select>
 	
 	<!-- 列表(全部) -->

@@ -1,6 +1,7 @@
 package com.kakasure.controller.yunear;
 
 import java.io.PrintWriter;
+import java.security.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.mail.Session;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -21,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kakasure.controller.base.BaseController;
 import com.kakasure.entity.Page;
+import com.kakasure.entity.system.User;
 import com.kakasure.service.yunear.CopyrightMultiService;
 import com.kakasure.util.AppUtil;
 import com.kakasure.util.ObjectExcelView;
@@ -47,7 +52,31 @@ public class CopyrightMultiController extends BaseController {
 		
 		pd = this.getPageData();
 		pd.put("COPYRIGHTMULTI_ID", this.get32UUID());	//主键
-		copyrightmultiService.save(pd);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String a = df.format(new Date());
+		Date date = df.parse(a);
+		pd.put("DATE_CREATE", date);
+		copyrightmultiService.savemulti(pd);
+		mv.addObject("msg","success");
+		mv.setViewName("save_result");
+		return mv;
+	}
+	
+	
+	
+	/**
+	 * 修改
+	 */
+	@RequestMapping(value="/edit")
+	public ModelAndView edit() throws Exception{
+		logBefore(logger, "修改CopyrightMulti");
+		System.out.println(pd.get("COPYRIGHTMULTI_ID"));
+		pd = this.getPageData();
+		String PAY_TYPE=(String) pd.get("PAY_TYPE");
+		if (PAY_TYPE.equals("0")) {
+			pd.put("PRICE", 0.00);
+		}
+		copyrightmultiService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
@@ -72,33 +101,23 @@ public class CopyrightMultiController extends BaseController {
 	}
 	
 	/**
-	 * 修改
-	 */
-	@RequestMapping(value="/edit")
-	public ModelAndView edit() throws Exception{
-		logBefore(logger, "修改CopyrightMulti");
-		
-		pd = this.getPageData();
-		copyrightmultiService.edit(pd);
-		mv.addObject("msg","success");
-		mv.setViewName("save_result");
-		return mv;
-	}
-	
-	/**
 	 * 列表
 	 */
 	@RequestMapping(value="/list")
-	public ModelAndView list(Page page){
+	public ModelAndView list(Page page,HttpSession session){
 		logBefore(logger, "列表CopyrightMulti");
 		
 		try{
 			pd = this.getPageData();
+			User user= (User) session.getAttribute("sessionUser");
+			String USER_ID=user.getUSER_ID();
+			pd.put("USER_ID", USER_ID);
 			page.setPd(pd);
 			List<PageData>	varList = copyrightmultiService.list(page);	//列出CopyrightMulti列表
 			getHC(); //调用权限
-			mv.setViewName("yunear/copyrightmulti/copyrightmulti_list");
+			mv.setViewName("yunear/copyrightmulti_list");
 			mv.addObject("varList", varList);
+			
 			mv.addObject("pd", pd);
 		} catch(Exception e){
 			logger.error(e.toString(), e);
@@ -115,7 +134,7 @@ public class CopyrightMultiController extends BaseController {
 		
 		pd = this.getPageData();
 		try {
-			mv.setViewName("yunear/copyrightmulti/copyrightmulti_edit");
+			mv.setViewName("yunear/copyrightmulti_insert");
 			mv.addObject("msg", "save");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -134,7 +153,10 @@ public class CopyrightMultiController extends BaseController {
 		pd = this.getPageData();
 		try {
 			pd = copyrightmultiService.findById(pd);	//根据ID读取
-			mv.setViewName("yunear/copyrightmulti/copyrightmulti_edit");
+			String DESCR=pd.get("DESCR").toString();
+			System.out.println(DESCR);
+			pd.put("DESCR", DESCR);
+			mv.setViewName("yunear/copyrightmulti_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {

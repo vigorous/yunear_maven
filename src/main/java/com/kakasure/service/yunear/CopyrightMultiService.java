@@ -24,6 +24,10 @@ public class CopyrightMultiService {
 		dao.save("CopyrightMultiMapper.save", pd);
 	}
 	
+	public void savemulti(PageData pd)throws Exception{
+		dao.save("CopyrightMultiMapper.savemulti", pd);
+	}
+	
 	/*
 	* 删除
 	*/

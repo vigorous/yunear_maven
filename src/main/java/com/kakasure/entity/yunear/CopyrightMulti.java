@@ -11,7 +11,7 @@ public class CopyrightMulti implements Serializable {
 	private String USER_ID;//版权方ID
 	private String MEDIA_NAME;//多媒体名称
 	private String MEDIA_THEME;//主题
-	private String KEYWORD;//关键字
+	private String KEYWORD;//标签
 	private String PAY_TYPE;//付费类型
 	private String DESCR;//描述
 	private String PATH;//多媒体路径

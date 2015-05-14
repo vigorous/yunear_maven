@@ -39,16 +39,6 @@
 	
 	//保存
 	function save(){
-			if($("#USER_ID").val()==""){
-			$("#USER_ID").tips({
-				side:3,
-	            msg:'请输入版权方ID',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#USER_ID").focus();
-			return false;
-		}
 		if($("#MEDIA_NAME").val()==""){
 			$("#MEDIA_NAME").tips({
 				side:3,
@@ -62,7 +52,7 @@
 		if($("#KEYWORDS").val()==""){
 			$("#KEYWORDS").tips({
 				side:3,
-	            msg:'请输入关键字',
+	            msg:'请输入主题',
 	            bg:'#AE81FF',
 	            time:2
 	        });
@@ -72,11 +62,31 @@
 		if($("#PAY_TYPE").val()==""){
 			$("#PAY_TYPE").tips({
 				side:3,
-	            msg:'请输入付费类型:0-免费，1-收费',
+	            msg:'请输入付费类型',
 	            bg:'#AE81FF',
 	            time:2
 	        });
 			$("#PAY_TYPE").focus();
+			return false;
+		}
+		if($("#PRICE").val()==""){
+			$("#PRICE").tips({
+				side:3,
+	            msg:'请输入价格',
+	            bg:'#AE81FF',
+	            time:2
+	        });
+			$("#PRICE").focus();
+			return false;
+		}
+		if($("#PRICE").val() <= "-1"){
+			$("#PRICE").tips({
+				side:3,
+	            msg:'价格不能为负值',
+	            bg:'#AE81FF',
+	            time:2
+	        });
+			$("#PRICE").focus();
 			return false;
 		}
 		if($("#DESCR").val()==""){
@@ -102,93 +112,14 @@
 		if($("#TYPE").val()==""){
 			$("#TYPE").tips({
 				side:3,
-	            msg:'请输入多媒体类型:01-视频，02-音频',
+	            msg:'请输入多媒体类型',
 	            bg:'#AE81FF',
 	            time:2
 	        });
 			$("#TYPE").focus();
 			return false;
 		}
-		if($("#AUDIT_STATUS").val()==""){
-			$("#AUDIT_STATUS").tips({
-				side:3,
-	            msg:'请输入审核状态：99-待审核，00-审核通过，01-审核不通过',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#AUDIT_STATUS").focus();
-			return false;
-		}
-		if($("#PRICE").val()==""){
-			$("#PRICE").tips({
-				side:3,
-	            msg:'请输入价格',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#PRICE").focus();
-			return false;
-		}
-		if($("#SPREAD_NUM").val()==""){
-			$("#SPREAD_NUM").tips({
-				side:3,
-	            msg:'请输入推广次数',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#SPREAD_NUM").focus();
-			return false;
-		}
-		if($("#CLICK_NUM").val()==""){
-			$("#CLICK_NUM").tips({
-				side:3,
-	            msg:'请输入点击数',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#CLICK_NUM").focus();
-			return false;
-		}
-		if($("#SCAN_CODE_NUM").val()==""){
-			$("#SCAN_CODE_NUM").tips({
-				side:3,
-	            msg:'请输入扫码次数',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#SCAN_CODE_NUM").focus();
-			return false;
-		}
-		if($("#DATE_CREATE").val()==""){
-			$("#DATE_CREATE").tips({
-				side:3,
-	            msg:'请输入创建日期',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#DATE_CREATE").focus();
-			return false;
-		}
-		if($("#DATE_MODIFY").val()==""){
-			$("#DATE_MODIFY").tips({
-				side:3,
-	            msg:'请输入修改日期',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#DATE_MODIFY").focus();
-			return false;
-		}
-		if($("#IS_DELETE").val()==""){
-			$("#IS_DELETE").tips({
-				side:3,
-	            msg:'请输入状态：0-未删除，1-已删除',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#IS_DELETE").focus();
-			return false;
-		}
+		
 		$("#Form").submit();
 		$("#zhongxin").hide();
 		$("#zhongxin2").show();
@@ -211,8 +142,8 @@
 	</div>
 	<form action="copyrightmulti/${msg }.do" name="Form" id="Form"
 		method="post">
-		<input type="hidden" name="COPYRIGHTMULTI_ID" id="COPYRIGHTMULTI_ID"
-			value="${pd.COPYRIGHTMULTI_ID}" />
+		<input type="hidden" name="USER_ID" id="USER_ID"
+			value="${sessionUser.USER_ID}" />
 		<div id="zhongxin" align="center">
 			<table>
 				<tr>
@@ -232,7 +163,7 @@
 					</select>
 						<div id="v2" style="display: none;">
 							<div>
-								<input type="number" name="PRICE" id="PRICE" value="0.0"
+								<input type="number" name="PRICE" id="PRICE" value="0.00"
 									maxlength="32" placeholder="价格" title="价格" />
 							</div>
 						</div></td>
@@ -247,9 +178,12 @@
 						maxlength="32" placeholder="多媒体路径" title="多媒体路径" /></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="TYPE" id="TYPE"
-						value="${pd.TYPE}" maxlength="32" placeholder="多媒体类型"
-						title="多媒体类型:01-视频，02-音频" /></td>
+					<td>
+						<select name="TYPE" id="TYPE" style="width: 220px">
+							<option value="01" selected>视频</option>
+							<option value="02">音频</option>
+					</select>
+						</td>
 				</tr>
 				<tr>
 					<td style="text-align: center;"><a
@@ -301,25 +235,17 @@
 								//校验数据				
 								'script' : '<%=basePath%>uploadify/uploadFile.jsp', //指定上传控件的主体文件，默认‘uploader.swf’
 								'uploader' : 'uploadify/uploadify.swf', //指定服务器端上传处理文件，默认‘upload.php’
-								'auto' : true, //手动上传												
+								'auto' : true, //自动上传												
 								'multi' : false, //单文件上传
 								'cancelImg': 'uploadify/cancel.png', //取消图片路径 
-								'fileTypeExts' : '*.avi;*.rmvb;*.rm;*.asf;*.divx;*.mpg;*.mpeg;*.mpe;*.wmv;*.mp4;*.mkv;*.vob;', //允许上传的文件后缀
-								'fileSizeLimit' : '300MB', //上传文件的大小限制，单位为B, KB, MB, 或 GB
+								'fileExt' : '*.avi;*.rmvb;*.rm;*.asf;*.divx;*.mpg;*.mpeg;*.mpe;*.wmv;*.mp4;*.mkv;*.vob',//允许的格式
+								'sizeLimit' : 314572800, //上传文件的大小限制，单位为B, KB, MB, 或 GB
 								'successTimeout' : '30', //成功等待时间
-								'buttonText' : '上传多媒体',
-								'onUploadSuccess' : function(file, data,
-										response) {//每成功完成一次文件上传时触发一次
-									console.log(file);
-									console.log(response);
-									console.log(data);
-									document.getElementById("PATH").value=data;								
-								},
+								'buttonText' : 'Upload Multi',//按钮上的文字  
+								'displayData' : 'speed',//有speed和percentage两种，一个显示速度，一个显示完成百分比   
 								'onComplete' : function(event, queueID, fileObj,  
-			                            response, data) {  
-									console.log(fileObj);
-									console.log(response);
-									console.log(data);
+			                            response, data) { 
+									document.getElementById("PATH").value=response;
 			                    },
 								'onUploadError' : function(file, data, response) {//当上传返回错误时触发
 									$('#url').append("<li>" + data + "</li>");

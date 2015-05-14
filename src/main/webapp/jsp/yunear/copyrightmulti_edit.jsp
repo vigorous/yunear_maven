@@ -37,16 +37,6 @@
 	
 	//保存
 	function save(){
-			if($("#USER_ID").val()==""){
-			$("#USER_ID").tips({
-				side:3,
-	            msg:'请输入版权方ID',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#USER_ID").focus();
-			return false;
-		}
 		if($("#MEDIA_NAME").val()==""){
 			$("#MEDIA_NAME").tips({
 				side:3,
@@ -60,7 +50,7 @@
 		if($("#KEYWORDS").val()==""){
 			$("#KEYWORDS").tips({
 				side:3,
-	            msg:'请输入关键字',
+	            msg:'请输入标签',
 	            bg:'#AE81FF',
 	            time:2
 	        });
@@ -70,11 +60,31 @@
 		if($("#PAY_TYPE").val()==""){
 			$("#PAY_TYPE").tips({
 				side:3,
-	            msg:'请输入付费类型:0-免费，1-收费',
+	            msg:'请输入付费类型',
 	            bg:'#AE81FF',
 	            time:2
 	        });
 			$("#PAY_TYPE").focus();
+			return false;
+		}
+		if($("#PRICE").val()==""){
+			$("#PRICE").tips({
+				side:3,
+	            msg:'请输入价格',
+	            bg:'#AE81FF',
+	            time:2
+	        });
+			$("#PRICE").focus();
+			return false;
+		}
+		if($("#PRICE").val() <= "-1"){
+			$("#PRICE").tips({
+				side:3,
+	            msg:'价格不能为负值',
+	            bg:'#AE81FF',
+	            time:2
+	        });
+			$("#PRICE").focus();
 			return false;
 		}
 		if($("#DESCR").val()==""){
@@ -100,21 +110,11 @@
 		if($("#TYPE").val()==""){
 			$("#TYPE").tips({
 				side:3,
-	            msg:'请输入多媒体类型:01-视频，02-音频',
+	            msg:'请输入多媒体类型',
 	            bg:'#AE81FF',
 	            time:2
 	        });
 			$("#TYPE").focus();
-			return false;
-		}
-		if($("#AUDIT_STATUS").val()==""){
-			$("#AUDIT_STATUS").tips({
-				side:3,
-	            msg:'请输入审核状态：99-待审核，00-审核通过，01-审核不通过',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#AUDIT_STATUS").focus();
 			return false;
 		}
 		if($("#PRICE").val()==""){
@@ -127,66 +127,17 @@
 			$("#PRICE").focus();
 			return false;
 		}
-		if($("#SPREAD_NUM").val()==""){
-			$("#SPREAD_NUM").tips({
+		if($("#PRICE").val() <= "-1"){
+			$("#PRICE").tips({
 				side:3,
-	            msg:'请输入推广次数',
+	            msg:'价格不能为负值',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#SPREAD_NUM").focus();
+			$("#PRICE").focus();
 			return false;
 		}
-		if($("#CLICK_NUM").val()==""){
-			$("#CLICK_NUM").tips({
-				side:3,
-	            msg:'请输入点击数',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#CLICK_NUM").focus();
-			return false;
-		}
-		if($("#SCAN_CODE_NUM").val()==""){
-			$("#SCAN_CODE_NUM").tips({
-				side:3,
-	            msg:'请输入扫码次数',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#SCAN_CODE_NUM").focus();
-			return false;
-		}
-		if($("#DATE_CREATE").val()==""){
-			$("#DATE_CREATE").tips({
-				side:3,
-	            msg:'请输入创建日期',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#DATE_CREATE").focus();
-			return false;
-		}
-		if($("#DATE_MODIFY").val()==""){
-			$("#DATE_MODIFY").tips({
-				side:3,
-	            msg:'请输入修改日期',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#DATE_MODIFY").focus();
-			return false;
-		}
-		if($("#IS_DELETE").val()==""){
-			$("#IS_DELETE").tips({
-				side:3,
-	            msg:'请输入状态：0-未删除，1-已删除',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#IS_DELETE").focus();
-			return false;
-		}
+
 		$("#Form").submit();
 		$("#zhongxin").hide();
 		$("#zhongxin2").show();
@@ -195,54 +146,57 @@
 </script>
 	</head>
 <body>
+<div class="container-fluid" id="main-container">
+
+	<div id="breadcrumbs">
+	
+	<ul class="breadcrumb">
+		<li><i class="icon-home"></i> <a>多媒体管理</a><span class="divider"><i class="icon-angle-right"></i></span></li>
+		<li class="active">修改多媒体</li>
+	</ul><!--.breadcrumb-->
+	
+</div><!--#breadcrumbs-->
+</div>
 	<form action="copyrightmulti/${msg }.do" name="Form" id="Form" method="post">
 		<input type="hidden" name="COPYRIGHTMULTI_ID" id="COPYRIGHTMULTI_ID" value="${pd.COPYRIGHTMULTI_ID}"/>
-		<div id="zhongxin">
+		<div id="zhongxin" align="center">
 		<table>
 			<tr>
-				<td><input type="text" name="USER_ID" id="USER_ID" value="${pd.USER_ID}" maxlength="32" placeholder="这里输入版权方ID" title="版权方ID"/></td>
+				<td><input type="text" name="USER_ID" id="USER_ID" value="${pd.USER_ID}" maxlength="32" placeholder="版权方ID" title="版权方ID" readonly="readonly"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="MEDIA_NAME" id="MEDIA_NAME" value="${pd.MEDIA_NAME}" maxlength="32" placeholder="这里输入多媒体名称" title="多媒体名称"/></td>
+				<td><input type="text" name="MEDIA_NAME" id="MEDIA_NAME" value="${pd.MEDIA_NAME}" maxlength="32" placeholder="多媒体名称" title="多媒体名称"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="KEYWORDS" id="KEYWORDS" value="${pd.KEYWORDS}" maxlength="32" placeholder="这里输入关键字" title="关键字"/></td>
+				<td><input type="text" name="KEYWORDS" id="KEYWORDS" value="${pd.KEYWORDS}" maxlength="32" placeholder="标签" title="标签"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="PAY_TYPE" id="PAY_TYPE" value="${pd.PAY_TYPE}" maxlength="32" placeholder="这里输入付费类型:0-免费，1-收费" title="付费类型:0-免费，1-收费"/></td>
+				<td><select id="selectError3" name="PAY_TYPE" id="PAY_TYPE"
+						onchange="feeType()" style="width: 220px">
+							<option value="0" ${pd.PAY_TYPE=="0"?"selected":""}>免费</option>
+							<option value="1" ${pd.PAY_TYPE=="1"?"selected":""}>付费</option>
+					</select>
+						<div id="v2" style="display: none;">
+							<div>
+								<input type="number" name="PRICE" id="PRICE"
+									maxlength="32" placeholder="价格" title="价格" value="${pd.PRICE}" />
+							</div>
+						</div></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="DESCR" id="DESCR" value="${pd.DESCR}" maxlength="32" placeholder="这里输入描述" title="描述"/></td>
+				<td><textarea rows="" cols="" name="DESCR" id="DESCR"
+							maxlength="32" placeholder="描述" title="描述" >${pd.DESCR}</textarea>
 			</tr>
 			<tr>
-				<td><input type="text" name="PATH" id="PATH" value="${pd.PATH}" maxlength="32" placeholder="这里输入多媒体路径" title="多媒体路径"/></td>
+				<td><input type="file" name="file_upload" id="file_upload">
+						<input type="hidden" name="PATH" id="PATH" value="${pd.PATH}"
+						maxlength="32" placeholder="多媒体路径" title="多媒体路径" /></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="TYPE" id="TYPE" value="${pd.TYPE}" maxlength="32" placeholder="这里输入多媒体类型:01-视频，02-音频" title="多媒体类型:01-视频，02-音频"/></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="AUDIT_STATUS" id="AUDIT_STATUS" value="${pd.AUDIT_STATUS}" maxlength="32" placeholder="这里输入审核状态：99-待审核，00-审核通过，01-审核不通过" title="审核状态：99-待审核，00-审核通过，01-审核不通过"/></td>
-			</tr>
-			<tr>
-				<td><input type="number" name="PRICE" id="PRICE" value="${pd.PRICE}" maxlength="32" placeholder="这里输入价格" title="价格"/></td>
-			</tr>
-			<tr>
-				<td><input type="number" name="SPREAD_NUM" id="SPREAD_NUM" value="${pd.SPREAD_NUM}" maxlength="32" placeholder="这里输入推广次数" title="推广次数"/></td>
-			</tr>
-			<tr>
-				<td><input type="number" name="CLICK_NUM" id="CLICK_NUM" value="${pd.CLICK_NUM}" maxlength="32" placeholder="这里输入点击数" title="点击数"/></td>
-			</tr>
-			<tr>
-				<td><input type="number" name="SCAN_CODE_NUM" id="SCAN_CODE_NUM" value="${pd.SCAN_CODE_NUM}" maxlength="32" placeholder="这里输入扫码次数" title="扫码次数"/></td>
-			</tr>
-			<tr>
-				<td><input class="span10 date-picker" name="DATE_CREATE" id="DATE_CREATE" value="${pd.DATE_CREATE}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="创建日期" title="创建日期"/></td>
-			</tr>
-			<tr>
-				<td><input class="span10 date-picker" name="DATE_MODIFY" id="DATE_MODIFY" value="${pd.DATE_MODIFY}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="修改日期" title="修改日期"/></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="IS_DELETE" id="IS_DELETE" value="${pd.IS_DELETE}" maxlength="32" placeholder="这里输入状态：0-未删除，1-已删除" title="状态：0-未删除，1-已删除"/></td>
+				<td><select name="TYPE" id="TYPE" style="width: 220px">
+							<option value="01"  ${pd.TYPE=="01"?"selected":""}>视频</option>
+							<option value="02"  ${pd.TYPE=="02"?"selected":""}>音频</option>
+					</select>
 			</tr>
 			<tr>
 				<td style="text-align: center;">
@@ -265,6 +219,10 @@
 		<script src="js/ace.min.js"></script>
 		<script type="text/javascript" src="js/chosen.jquery.min.js"></script><!-- 下拉框 -->
 		<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script><!-- 日期框 -->
+		<link href="uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+		<script src="uploadify/jquery.uploadify.v2.1.4.min.js"
+		type="text/javascript"></script>
+		<script src="uploadify/swfobject.js" type="text/javascript"></script>
 		<script type="text/javascript">
 		$(window.parent.hangge());
 		$(function() {
@@ -277,6 +235,42 @@
 			$('.date-picker').datepicker();
 			
 		});
+		
+		 $(document).ready(function () {
+			  //$('#file_upload').change(function(){
+				  $('#file_upload')
+					.uploadify({
+								//校验数据				
+								'script' : '<%=basePath%>uploadify/uploadFile.jsp', //指定上传控件的主体文件，默认‘uploader.swf’
+								'uploader' : 'uploadify/uploadify.swf', //指定服务器端上传处理文件，默认‘upload.php’
+								'auto' : true, //自动上传												
+								'multi' : false, //单文件上传
+								'cancelImg': 'uploadify/cancel.png', //取消图片路径 
+								'fileExt' : '*.avi;*.rmvb;*.rm;*.asf;*.divx;*.mpg;*.mpeg;*.mpe;*.wmv;*.mp4;*.mkv;*.vob',//允许的格式
+								'sizeLimit' : 314572800, //上传文件的大小限制，单位为B, KB, MB, 或 GB
+								'successTimeout' : '30', //成功等待时间
+								'buttonText' : 'Upload Multi',//按钮上的文字  
+								'displayData' : 'speed',//有speed和percentage两种，一个显示速度，一个显示完成百分比   
+								'onComplete' : function(event, queueID, fileObj,  
+			                            response, data) { 
+									document.getElementById("PATH").value=response;
+			                    },
+								'onUploadError' : function(file, data, response) {//当上传返回错误时触发
+									$('#url').append("<li>" + data + "</li>");
+								}
+							});
+			//});
+			  })
+			
+		
+		function feeType(){
+			var feeType = $("#selectError3").val();
+			if (feeType == "0") {
+				document.getElementById("v2").style.display="none";
+			} else{
+				document.getElementById("v2").style.display="block";
+			};
+		}
 		
 		</script>
 </body>

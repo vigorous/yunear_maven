@@ -9,7 +9,7 @@
 <html lang="en">
 	<head>
 	<base href="<%=basePath%>"><!-- jsp文件头和头部 -->
-	<%@ include file="../../system/admin/top.jsp"%> 
+	<%@ include file="../system/admin/top.jsp"%> 
 	</head>
 <body>
 		
@@ -18,8 +18,8 @@
 	<div id="breadcrumbs">
 	
 	<ul class="breadcrumb">
-		<li><i class="icon-home"></i> <a>XX管理</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-		<li class="active">XX管理</li>
+		<li><i class="icon-home"></i> <a>多媒体管理</a><span class="divider"><i class="icon-angle-right"></i></span></li>
+		<li class="active">多媒体管理</li>
 	</ul><!--.breadcrumb-->
 	
 	<div id="nav-search">
@@ -68,21 +68,19 @@
 						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
 						</th>
 						<th>序号</th>
-						<th>版权方ID</th>
 						<th>多媒体名称</th>
-						<th>关键字</th>
-						<th>付费类型:0-免费，1-收费</th>
+						<th>标签</th>
+						<th>付费类型</th>
 						<th>描述</th>
-						<th>多媒体路径</th>
-						<th>多媒体类型:01-视频，02-音频</th>
-						<th>审核状态：99-待审核，00-审核通过，01-审核不通过</th>
+						<th>多媒体类型</th>
+						<th>审核状态</th>
 						<th>价格</th>
 						<th>推广次数</th>
 						<th>点击数</th>
 						<th>扫码次数</th>
 						<th>创建日期</th>
 						<th>修改日期</th>
-						<th>状态：0-未删除，1-已删除</th>
+						<th>状态</th>
 						<th class="center">操作</th>
 					</tr>
 				</thead>
@@ -99,21 +97,21 @@
 									<label><input type='checkbox' name='ids' value="${var.COPYRIGHTMULTI_ID}" /><span class="lbl"></span></label>
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td>
-										<td>${var.USER_ID}</td>
 										<td>${var.MEDIA_NAME}</td>
 										<td>${var.KEYWORDS}</td>
-										<td>${var.PAY_TYPE}</td>
+										<td>${var.PAY_TYPE=="0"?"免费":"收费"}</td>
 										<td>${var.DESCR}</td>
-										<td>${var.PATH}</td>
-										<td>${var.TYPE}</td>
-										<td>${var.AUDIT_STATUS}</td>
+										<td>${var.TYPE=="01"?"视频":"音频"}</td>
+										<td>${var.AUDIT_STATUS=="99"?"待审核":""}
+											${var.AUDIT_STATUS=="00"?"审核通过":""}
+											${var.AUDIT_STATUS=="01"?"审核不通过":""}</td>
 										<td>${var.PRICE}</td>
 										<td>${var.SPREAD_NUM}</td>
 										<td>${var.CLICK_NUM}</td>
 										<td>${var.SCAN_CODE_NUM}</td>
 										<td>${var.DATE_CREATE}</td>
 										<td>${var.DATE_MODIFY}</td>
-										<td>${var.IS_DELETE}</td>
+										<td>${var.IS_DELETE=="0"?"未删除":""}</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
 									
@@ -230,20 +228,6 @@
 			 diag.show();
 		}
 		
-		//删除
-		function del(Id){
-			bootbox.confirm("确定要删除吗?", function(result) {
-				if(result) {
-					var url = "<%=basePath%>/copyrightmulti/delete.do?COPYRIGHTMULTI_ID="+Id+"&tm="+new Date().getTime();
-					$.get(url,function(data){
-						if(data=="success"){
-							nextPage(${page.currentPage});
-						}
-					});
-				}
-			});
-		}
-		
 		//修改
 		function edit(Id){
 			 window.parent.jzts();
@@ -261,6 +245,22 @@
 			 };
 			 diag.show();
 		}
+		
+		//删除
+		function del(Id){
+			bootbox.confirm("确定要删除吗?", function(result) {
+				if(result) {
+					var url = "<%=basePath%>/copyrightmulti/delete.do?COPYRIGHTMULTI_ID="+Id+"&tm="+new Date().getTime();
+					$.get(url,function(data){
+						if(data=="success"){
+							nextPage(${page.currentPage});
+						}
+					});
+				}
+			});
+		}
+		
+		
 		</script>
 		
 		<script type="text/javascript">
