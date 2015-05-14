@@ -144,6 +144,21 @@
 				YUNEAR_COPYRIGHTMULTI a
 		where a.IS_DELETE = '0'
 			and a.AUDIT_STATUS = '00'
+		<if test="pd.DATE_CREATE_START!=null and pd.DATE_CREATE_START!=''">
+		<![CDATA[
+			and DATE_FORMAT(a.DATE_CREATE, '%Y-%m-%d') >=  #{pd.DATE_CREATE_START}
+		]]>
+		</if>
+		<if test="pd.DATE_CREATE_END!=null and pd.DATE_CREATE_END!=''">
+		<![CDATA[
+			and DATE_FORMAT(a.DATE_CREATE, '%Y-%m-%d') <=  #{pd.DATE_CREATE_END}
+		]]>
+		</if>
+		<if test="pd.KEYWORDS!=null and pd.KEYWORDS!=''">
+		<![CDATA[
+			and FIND_IN_SET(trim(#{pd.KEYWORDS}),a.KEYWORDS) > 0
+		]]>
+		</if>
 	</select>
 	
 </mapper>
