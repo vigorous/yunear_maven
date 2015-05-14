@@ -73,5 +73,9 @@ public class AnnounceMultiService {
 		dao.delete("AnnounceMultiMapper.deleteAll", ArrayDATA_IDS);
 	}
 	
+	public PageData findByUserIdAndMediaId(PageData pd) throws Exception{
+		return (PageData)dao.findForObject("AnnounceMultiMapper.findByUserIdAndMediaId", pd);
+	}
+	
 }
 

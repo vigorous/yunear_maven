@@ -161,4 +161,23 @@
 		</if>
 	</select>
 	
+	<!-- 通过ID获取数据 -->
+	<select id="findByUserIdAndMediaId" parameterType="pd" resultType="pd">
+		select 
+			USER_ID,	
+			MEDIA_ID,	
+			CODE_ID,	
+			SCAN_CODE_LINK,	
+			SCAN_CODE_NUM,	
+			IMG_LINK,	
+			DATE_CREATE,	
+			DATE_MODIFY,	
+			IS_DELETE,	
+			ANNOUNCEMULTI_ID
+		from 
+			YUNEAR_ANNOUNCEMULTI
+		where MEDIA_ID = #{COPYRIGHTMULTI_ID}
+			AND USER_ID = #{USER_ID}
+	</select>
+	
 </mapper>
