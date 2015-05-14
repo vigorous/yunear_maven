@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kakasure.dao.DaoSupport;
 import com.kakasure.entity.Page;
+import com.kakasure.entity.yunear.Message;
 import com.kakasure.util.PageData;
 
 
@@ -22,6 +23,10 @@ public class MessageService {
 	*/
 	public void save(PageData pd)throws Exception{
 		dao.save("MessageMapper.save", pd);
+	}
+	
+	public void savemessage(Message message)throws Exception{
+		dao.save("MessageMapper.savemessage", message);
 	}
 	
 	/*

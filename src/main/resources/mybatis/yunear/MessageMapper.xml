@@ -24,6 +24,22 @@
 		)
 	</insert>
 	
+	<!-- 新增-->
+	<insert id="savemessage" parameterType="com.kakasure.entity.yunear.Message">
+		insert into YUNEAR_MESSAGE(
+			MEDIA_ID,	
+			TYPE,	
+			CONTENT,	
+			DATE_CREATE,
+			MESSAGE_ID
+		) values (
+			#{MEDIA_ID},	
+			#{TYPE},	
+			#{CONTENT},	
+			#{DATE_CREATE},	
+			#{MESSAGE_ID}
+		)
+	</insert>
 	
 	<!-- 删除-->
 	<delete id="delete" parameterType="pd">

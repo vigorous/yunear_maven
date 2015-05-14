@@ -25,7 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kakasure.controller.base.BaseController;
 import com.kakasure.entity.Page;
 import com.kakasure.entity.system.User;
+import com.kakasure.entity.yunear.Message;
 import com.kakasure.service.yunear.CopyrightMultiService;
+import com.kakasure.service.yunear.MessageService;
 import com.kakasure.util.AppUtil;
 import com.kakasure.util.ObjectExcelView;
 import com.kakasure.util.PageData;
@@ -43,6 +45,11 @@ public class CopyrightMultiController extends BaseController {
 	@Resource(name="copyrightmultiService")
 	private CopyrightMultiService copyrightmultiService;
 	
+	@Resource(name="messageService")
+	private MessageService messageService;
+
+
+
 	/**
 	 * 新增
 	 */
@@ -77,6 +84,19 @@ public class CopyrightMultiController extends BaseController {
 			pd.put("PRICE", 0.00);
 		}
 		copyrightmultiService.edit(pd);
+		
+		Message message = new Message();
+		message.setMESSAGE_ID(this.get32UUID());
+		String MEDIA_ID=(String) pd.get("COPYRIGHTMULTI_ID");
+		message.setMEDIA_ID(MEDIA_ID);
+		message.setTYPE("0");
+		message.setCONTENT("对多媒体做了修改操作");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String a = df.format(new Date());
+		Date date = df.parse(a);
+		message.setDATE_CREATE(date);
+		messageService.savemessage(message);
+		
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
 		return mv;
