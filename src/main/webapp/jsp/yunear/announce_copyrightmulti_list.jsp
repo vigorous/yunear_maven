@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.kakasure.util.DateUtil" language="java"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -111,8 +112,12 @@
 										<td>${var.SPREAD_NUM}</td>
 										<td>${var.CLICK_NUM}</td>
 										<td>${var.SCAN_CODE_NUM}</td>
-										<td>${var.DATE_CREATE}</td>
-										<td>${var.DATE_MODIFY}</td>
+										<td>
+											<fmt:formatDate value="${var.DATE_CREATE}" pattern="yyyy-MM-dd HH:mm:ss"/>
+										</td>
+										<td>
+											<fmt:formatDate value="${var.DATE_MODIFY}" pattern="yyyy-MM-dd HH:mm:ss"/>
+										</td>
 										<td>${var.IS_DELETE=='0'?'未删除':'已删除'}</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>

@@ -345,6 +345,7 @@ public class CopyrightMultiController extends BaseController {
 			dataMap.put("titles", titles);
 			List<PageData> varOList = copyrightmultiService.listAll(pd);
 			List<PageData> varList = new ArrayList<PageData>();
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 			for(int i=0;i<varOList.size();i++){
 				PageData vpd = new PageData();
 				vpd.put("var1", varOList.get(i).getString("USER_ID"));	//1
@@ -359,8 +360,13 @@ public class CopyrightMultiController extends BaseController {
 				vpd.put("var10", varOList.get(i).get("SPREAD_NUM").toString());	//10
 				vpd.put("var11", varOList.get(i).get("CLICK_NUM").toString());	//11
 				vpd.put("var12", varOList.get(i).get("SCAN_CODE_NUM").toString());	//12
-				vpd.put("var13", varOList.get(i).getString("DATE_CREATE"));	//13
-				vpd.put("var14", varOList.get(i).getString("DATE_MODIFY"));	//14
+				vpd.put("var13", sdf.format((Date)(varOList.get(i).get("DATE_CREATE"))));	//13
+				if(varOList.get(i).get("DATE_MODIFY")==null){
+					vpd.put("var14", "");	//14
+				}else{
+					vpd.put("var14", sdf.format((Date)(varOList.get(i).get("DATE_MODIFY"))));	//14
+				}
+				
 				vpd.put("var15", varOList.get(i).getString("IS_DELETE"));	//15
 				varList.add(vpd);
 			}
