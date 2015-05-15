@@ -142,6 +142,8 @@
 				a.ANNOUNCEMULTI_ID
 		from 
 				YUNEAR_ANNOUNCEMULTI a
+		where a.USER_ID = #{USER_ID}
+			and a.IS_DELETE = '0'
 	</select>
 	
 	<!-- 批量删除 -->

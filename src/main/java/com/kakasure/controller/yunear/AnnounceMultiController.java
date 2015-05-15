@@ -291,10 +291,14 @@ public class AnnounceMultiController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/excel")
-	public ModelAndView exportExcel() {
+	public ModelAndView exportExcel(HttpSession session) {
 		logBefore(logger, "导出AnnounceMulti到excel");
 		ModelAndView mv = new ModelAndView();
 		pd = this.getPageData();
+		User user = (User) session.getAttribute(Const.SESSION_USER);
+		pd.put("USER_ID", user.getUSER_ID());
+		pd.put("IS_DELETE", "0");
+		
 		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 		try {
 			Map<String, Object> dataMap = new HashMap<String, Object>();
