@@ -279,8 +279,8 @@ public class CopyrightMultiController extends BaseController {
 				vpd.put("var10", varOList.get(i).get("SPREAD_NUM").toString());	//10
 				vpd.put("var11", varOList.get(i).get("CLICK_NUM").toString());	//11
 				vpd.put("var12", varOList.get(i).get("SCAN_CODE_NUM").toString());	//12
-				vpd.put("var13", varOList.get(i).getString("DATE_CREATE"));	//13
-				vpd.put("var14", varOList.get(i).getString("DATE_MODIFY"));	//14
+				vpd.put("var13", varOList.get(i).get("DATE_CREATE"));	//13
+				vpd.put("var14", varOList.get(i).get("DATE_MODIFY"));	//14
 				vpd.put("var15", varOList.get(i).getString("IS_DELETE"));	//15
 				varList.add(vpd);
 			}

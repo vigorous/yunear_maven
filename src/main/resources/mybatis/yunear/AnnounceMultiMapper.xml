@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AnnounceMultiMapper">
 	
+	<resultMap type="com.kakasure.entity.yunear.AnnounceMulti" id="AnnounceMultiMap">
+		<id column="ANNOUNCEMULTI_ID" property="ANNOUNCEMULTI_ID"/>
+		<result column="USER_ID" property="USER_ID"/>
+		<result column="MEDIA_ID" property="MEDIA_ID"/>
+		<result column="MEDIA_NAME" property="MEDIA_NAME"/>
+		<result column="CODE_ID" property="CODE_ID"/>
+		<result column="SCAN_CODE_LINK" property="SCAN_CODE_LINK"/>
+		<result column="SCAN_CODE_NUM" property="SCAN_CODE_NUM"/>
+		<result column="IMG_LINK" property="IMG_LINK"/>
+		<result column="DATE_CREATE" property="DATE_CREATE"/>
+		<result column="DATE_MODIFY" property="DATE_MODIFY"/>
+		<result column="IS_DELETE" property="IS_DELETE"/>
+	</resultMap>
 	
 	<!-- 新增-->
 	<insert id="save" parameterType="pd">
@@ -33,7 +46,8 @@
 	
 	<!-- 删除-->
 	<delete id="delete" parameterType="pd">
-		delete from YUNEAR_ANNOUNCEMULTI
+		update YUNEAR_ANNOUNCEMULTI
+		set IS_DELETE = '1'
 		where 
 			ANNOUNCEMULTI_ID = #{ANNOUNCEMULTI_ID}
 	</delete>
@@ -81,7 +95,8 @@
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
 				a.USER_ID,	
-				a.MEDIA_ID,	
+				a.MEDIA_ID,
+				b.MEDIA_NAME,
 				a.CODE_ID,	
 				a.SCAN_CODE_LINK,	
 				a.SCAN_CODE_NUM,	
@@ -91,7 +106,25 @@
 				a.IS_DELETE,	
 				a.ANNOUNCEMULTI_ID
 		from 
-				YUNEAR_ANNOUNCEMULTI a
+				YUNEAR_ANNOUNCEMULTI a,YUNEAR_COPYRIGHTMULTI b
+		where a.MEDIA_ID = b.COPYRIGHTMULTI_ID
+			and a.IS_DELETE = '0'
+			and a.USER_ID = #{pd.USER_ID}
+		<if test="pd.DATE_CREATE_START!=null and pd.DATE_CREATE_START!=''">
+		<![CDATA[
+			and DATE_FORMAT(a.DATE_CREATE, '%Y-%m-%d') >=  #{pd.DATE_CREATE_START}
+		]]>
+		</if>
+		<if test="pd.DATE_CREATE_END!=null and pd.DATE_CREATE_END!=''">
+		<![CDATA[
+			and DATE_FORMAT(a.DATE_CREATE, '%Y-%m-%d') <=  #{pd.DATE_CREATE_END}
+		]]>
+		</if>
+		<if test="pd.MEDIA_NAME!=null and pd.MEDIA_NAME!=''">
+		<![CDATA[
+			and b.MEDIA_NAME like '%${pd.MEDIA_NAME}%'
+		]]>
+		</if>
 	</select>
 	
 	<!-- 列表(全部) -->
