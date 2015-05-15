@@ -44,13 +44,11 @@
 	function pass(status,id) {
 		var COPYRIGHTMULTI_ID = id;
 		var status = status;
-		alert(status+"--"+COPYRIGHTMULTI_ID);
-		<%-- var url = "<%=basePath%>/copyrightmulti/lock.do"; --%>
-		
+		<%-- var url = "<%=basePath%>/copyrightmulti/lock.do"; --%>	
 		var url = "<%=basePath%>/copyrightmulti/lock.do?COPYRIGHTMULTI_ID="+COPYRIGHTMULTI_ID+"&status="+status;
 		$.get(url,function(data){
 			if(data=="success"){
-				nextPage(${page.currentPage});
+				nextPage(${page.currentPage});				
 			}
 		});
 		<%-- $.post(url,{'status':status,'COPYRIGHTMULTI_ID':COPYRIGHTMULTI_ID},function(data){
@@ -126,7 +124,7 @@
 				<tr>
 					<td align="right">视频类型:</td>
 					<td align="center"><input type="text" name="TYPE" id="TYPE"
-						value="${pd.TYPE==" 01"?"视频":"音频"}" maxlength="32"
+						value="${pd.TYPE=="01"?"视频":"音频"}" maxlength="32"
 						placeholder="多媒体类型" title="标签" readonly="readonly" /></td>
 				</tr>
 				<tr>

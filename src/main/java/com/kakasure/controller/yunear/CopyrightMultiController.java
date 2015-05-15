@@ -271,20 +271,21 @@ public class CopyrightMultiController extends BaseController {
 	 * 审核多媒体
 	 */
 	@RequestMapping(value="/lock")
-	public void lock() throws Exception{
-		System.out.println("-----------=========");
+	public ModelAndView lock(PrintWriter out) throws Exception{
 		logBefore(logger, "修改CopyrightMulti");
 	
 		pd = this.getPageData();
 		System.out.println(pd.get("status")+"---");
 		if (pd.get("status").equals("1")) {
-			pd.put("AUDIT_STATUS", 00);
+			pd.put("AUDIT_STATUS", "00");
 			copyrightmultiService.update(pd);
 		}
 		if (pd.get("status").equals("2")) {
-			pd.put("AUDIT_STATUS", 01);
+			pd.put("AUDIT_STATUS", "01");
 			copyrightmultiService.update(pd);
 		}
+		mv.setViewName("redirect:/copyrightmulti/auditlist.do");
+		return mv;
 	}
 	/**
 	 * 批量删除
