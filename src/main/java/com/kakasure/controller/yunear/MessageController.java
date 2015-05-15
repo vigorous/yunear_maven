@@ -66,7 +66,7 @@ public class MessageController extends BaseController {
 	 * 删除的新增
 	 */
 	@RequestMapping(value="/deletesave")
-	public ModelAndView deletesave(HttpSession session) throws Exception{
+	public ModelAndView deletesave(PrintWriter out,HttpSession session) throws Exception{
 		String MEDIA_ID=(String) session.getAttribute("MEDIA_ID");
 		logBefore(logger, "新增Message");
 		
@@ -80,8 +80,7 @@ public class MessageController extends BaseController {
 		Date DATE_CREATE = df.parse(a);
 		pd.put("DATE_CREATE", DATE_CREATE);		
 		messageService.save(pd);
-		mv.addObject("msg","success");
-		mv.setViewName("save_result");
+		mv.setViewName("redirect:/copyrightmulti/list.do");
 		return mv;
 	}
 	/**

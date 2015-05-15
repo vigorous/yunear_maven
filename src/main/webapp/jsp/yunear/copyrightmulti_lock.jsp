@@ -47,15 +47,15 @@
 		<%-- var url = "<%=basePath%>/copyrightmulti/lock.do"; --%>	
 		var url = "<%=basePath%>/copyrightmulti/lock.do?COPYRIGHTMULTI_ID="+COPYRIGHTMULTI_ID+"&status="+status;
 		$.get(url,function(data){
-			if(data=="success"){
-				nextPage(${page.currentPage});				
-			}
+			$("#zhongxin").hide();
+			$("#zhongxin2").show();
+			Dialog.close();
 		});
 		<%-- $.post(url,{'status':status,'COPYRIGHTMULTI_ID':COPYRIGHTMULTI_ID},function(data){
 			window.location = "<%=basePath%>/copyrightmulti/auditlist.do";
 		}); --%>
 		
-		Dialog.close();
+		
 	}
 </script>
 </head>

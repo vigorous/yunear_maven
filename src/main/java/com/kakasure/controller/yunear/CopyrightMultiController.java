@@ -109,22 +109,19 @@ public class CopyrightMultiController extends BaseController {
 	
 	/**
 	 * 删除
+	 * @throws Exception 
 	 */
 	@RequestMapping(value="/delete")
-	public ModelAndView delete(PrintWriter out,HttpSession session){
+	public ModelAndView delete(PrintWriter out,HttpSession session) throws Exception{
 		logBefore(logger, "删除CopyrightMulti");
 		
-		try{
 			pd = this.getPageData();
 			pd.put("IS_DELETE", 1);
 			copyrightmultiService.delete(pd);
 			String MEDIA_ID=(String) pd.get("COPYRIGHTMULTI_ID");
 			session.setAttribute("MEDIA_ID", MEDIA_ID);
-			mv.setViewName("redirect:/message/deletesave.do");
-		} catch(Exception e){
-			logger.error(e.toString(), e);
-		}		
-		return mv;
+			mv.setViewName("redirect:/message/deletesave.do");				
+			return mv;
 		
 	}
 	
@@ -227,21 +224,6 @@ public class CopyrightMultiController extends BaseController {
 		pd = this.getPageData();
 		try {
 			pd = copyrightmultiService.findById(pd);	//根据ID读取
-			/*String DESCR=pd.get("DESCR").toString();
-			System.out.println(DESCR);
-			pd.put("DESCR", DESCR);*/
-			/*ResultSet rs =(ResultSet) pd.get("DESCR");
-			Blob blob = rs.getBlob("content");  
-			int bolblen = (int) blob.length();  
-			byte[] data = blob.getBytes(1, bolblen);  
-			String DESCR = new String(data);  
-			System.out.println(DESCR);*/
-			/*System.out.println(blob);
-			if (blob!=null) {
-				String DESCR = conventBlobToString(blob);
-				System.out.println(DESCR);
-				pd.put("DESCR", DESCR);
-			}*/
 			mv.setViewName("yunear/copyrightmulti_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
@@ -284,7 +266,8 @@ public class CopyrightMultiController extends BaseController {
 			pd.put("AUDIT_STATUS", "01");
 			copyrightmultiService.update(pd);
 		}
-		mv.setViewName("redirect:/copyrightmulti/auditlist.do");
+		mv.addObject("msg","success");
+		mv.setViewName("save_result");
 		return mv;
 	}
 	/**
