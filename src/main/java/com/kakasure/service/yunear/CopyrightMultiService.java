@@ -41,12 +41,31 @@ public class CopyrightMultiService {
 	public void edit(PageData pd)throws Exception{
 		dao.update("CopyrightMultiMapper.edit", pd);
 	}
-	
+	/**
+	 * 审核状态修改
+	 * @param pd
+	 * @throws Exception
+	 */
+	public void update(PageData pd)throws Exception{
+		dao.update("CopyrightMultiMapper.update", pd);
+	}
 	/*
 	*列表
 	*/
 	public List<PageData> list(Page page)throws Exception{
 		return (List<PageData>)dao.findForList("CopyrightMultiMapper.datalistPage", page);
+	}
+	/*
+	*列表
+	*/
+	public List<PageData> fuzzylist(Page page)throws Exception{
+		return (List<PageData>)dao.findForList("CopyrightMultiMapper.fuzzylistPage", page);
+	}
+	/*
+	*审核多媒体列表
+	*/
+	public List<PageData> auditlist(Page page)throws Exception{
+		return (List<PageData>)dao.findForList("CopyrightMultiMapper.auditlistPage", page);
 	}
 	
 	/*

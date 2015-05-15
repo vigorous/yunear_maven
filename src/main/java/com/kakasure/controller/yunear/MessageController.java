@@ -80,7 +80,8 @@ public class MessageController extends BaseController {
 		Date DATE_CREATE = df.parse(a);
 		pd.put("DATE_CREATE", DATE_CREATE);		
 		messageService.save(pd);
-		mv.setViewName("redirect:/copyrightmulti/list.do");
+		mv.addObject("msg","success");
+		mv.setViewName("save_result");
 		return mv;
 	}
 	/**

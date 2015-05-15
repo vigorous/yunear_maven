@@ -10,7 +10,6 @@ public class CopyrightMulti implements Serializable {
 	private String COPYRIGHTMULTI_ID;//上传多媒体id
 	private String USER_ID;//版权方ID
 	private String MEDIA_NAME;//多媒体名称
-	private String MEDIA_THEME;//主题
 	private String KEYWORD;//标签
 	private String PAY_TYPE;//付费类型
 	private String DESCR;//描述
@@ -18,11 +17,32 @@ public class CopyrightMulti implements Serializable {
 	private String TYPE;//多媒体类型
 	private String AUDIT_STATUS;//审核状态
 	private double PRICE;//价格
-	private Date UPLOAD_TIME;//上传日期
-	private Date UPD_TIME;//修改日期
-	private String STATUS;//状态
+	private Date DATE_CREATE;//上传日期
+	private Date DATE_CREATE1;
+	private Date DATE_MODIFY;//修改日期
+	private String IS_DELETE;//状态
 	private String SPREAD_NUM;//推广次数
 	private String CLICK_NUM;//点击次数
+	private String SCAN_CODE_NUM;//扫码次数
+	public Date getDATE_CREATE1() {
+		return DATE_CREATE1;
+	}
+	public void setDATE_CREATE1(Date dATE_CREATE1) {
+		DATE_CREATE1 = dATE_CREATE1;
+	}
+	public Date getDATE_CREATE() {
+		return DATE_CREATE;
+	}
+	public void setDATE_CREATE(Date dATE_CREATE) {
+		DATE_CREATE = dATE_CREATE;
+	}
+	public Date getDATE_MODIFY() {
+		return DATE_MODIFY;
+	}
+	public void setDATE_MODIFY(Date dATE_MODIFY) {
+		DATE_MODIFY = dATE_MODIFY;
+	}
+	
 	public String getCOPYRIGHTMULTI_ID() {
 		return COPYRIGHTMULTI_ID;
 	}
@@ -41,12 +61,7 @@ public class CopyrightMulti implements Serializable {
 	public void setMEDIA_NAME(String mEDIA_NAME) {
 		MEDIA_NAME = mEDIA_NAME;
 	}
-	public String getMEDIA_THEME() {
-		return MEDIA_THEME;
-	}
-	public void setMEDIA_THEME(String mEDIA_THEME) {
-		MEDIA_THEME = mEDIA_THEME;
-	}
+
 	public String getKEYWORD() {
 		return KEYWORD;
 	}
@@ -89,23 +104,18 @@ public class CopyrightMulti implements Serializable {
 	public void setPRICE(double pRICE) {
 		PRICE = pRICE;
 	}
-	public Date getUPLOAD_TIME() {
-		return UPLOAD_TIME;
+
+	public String getIS_DELETE() {
+		return IS_DELETE;
 	}
-	public void setUPLOAD_TIME(Date uPLOAD_TIME) {
-		UPLOAD_TIME = uPLOAD_TIME;
+	public void setIS_DELETE(String iS_DELETE) {
+		IS_DELETE = iS_DELETE;
 	}
-	public Date getUPD_TIME() {
-		return UPD_TIME;
+	public String getSCAN_CODE_NUM() {
+		return SCAN_CODE_NUM;
 	}
-	public void setUPD_TIME(Date uPD_TIME) {
-		UPD_TIME = uPD_TIME;
-	}
-	public String getSTATUS() {
-		return STATUS;
-	}
-	public void setSTATUS(String sTATUS) {
-		STATUS = sTATUS;
+	public void setSCAN_CODE_NUM(String sCAN_CODE_NUM) {
+		SCAN_CODE_NUM = sCAN_CODE_NUM;
 	}
 	public String getSPREAD_NUM() {
 		return SPREAD_NUM;
