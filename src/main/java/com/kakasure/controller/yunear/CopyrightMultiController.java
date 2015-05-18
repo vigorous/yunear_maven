@@ -1,8 +1,10 @@
 package com.kakasure.controller.yunear;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Blob;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,13 +27,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kakasure.controller.base.BaseController;
 import com.kakasure.entity.Page;
 import com.kakasure.entity.system.User;
-import com.kakasure.entity.yunear.Message;
 import com.kakasure.service.yunear.CopyrightMultiService;
 import com.kakasure.service.yunear.MessageService;
 import com.kakasure.util.AppUtil;
 import com.kakasure.util.ObjectExcelView;
 import com.kakasure.util.PageData;
-import com.mysql.jdbc.Blob;
 
 /** 
  * 类名称：CopyrightMultiController
@@ -46,7 +46,27 @@ public class CopyrightMultiController extends BaseController {
 	private CopyrightMultiService copyrightmultiService;
 
 
+	@Resource(name="messageService")
+	private MessageService messageService;
 
+	
+	/**
+	 * 把blob类型转换为string类型
+	 */
+	public String conventBlobToString(Blob blob){
+		String result = "";
+		try {
+			ByteArrayInputStream msgContent = (ByteArrayInputStream) blob.getBinaryStream();
+			byte[] byte_date = new byte[msgContent.available()];
+			msgContent.read(byte_date,0,byte_date.length);
+			result = new String(byte_date);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	/**
 	 * 新增
 	 */
@@ -72,9 +92,8 @@ public class CopyrightMultiController extends BaseController {
 	 * 修改
 	 */
 	@RequestMapping(value="/edit")
-	public ModelAndView edit() throws Exception{
+	public ModelAndView edit(HttpSession session) throws Exception{
 		logBefore(logger, "修改CopyrightMulti");
-		System.out.println(pd.get("COPYRIGHTMULTI_ID"));
 		pd = this.getPageData();
 		String PAY_TYPE=(String) pd.get("PAY_TYPE");
 		if (PAY_TYPE.equals("0")) {
@@ -82,40 +101,27 @@ public class CopyrightMultiController extends BaseController {
 		}
 		pd.put("AUDIT_STATUS", 99);
 		copyrightmultiService.edit(pd);
-		
-	/*	Message message = new Message();
-		message.setMESSAGE_ID(this.get32UUID());
 		String MEDIA_ID=(String) pd.get("COPYRIGHTMULTI_ID");
-		message.setMEDIA_ID(MEDIA_ID);
-		message.setTYPE("0");
-		message.setCONTENT("对多媒体做了修改操作");
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String a = df.format(new Date());
-		Date date = df.parse(a);
-		message.setDATE_CREATE(date);
-		messageService.savemessage(message);*/
-		
-		mv.addObject("msg","success");
-		mv.setViewName("save_result");
+		session.setAttribute("MEDIA_ID", MEDIA_ID);
+		mv.setViewName("redirect:/message/save.do");
 		return mv;
 	}
 	
 	/**
 	 * 删除
+	 * @throws Exception 
 	 */
 	@RequestMapping(value="/delete")
-	public void delete(PrintWriter out){
+	public ModelAndView delete(PrintWriter out,HttpSession session) throws Exception{
 		logBefore(logger, "删除CopyrightMulti");
 		
-		try{
 			pd = this.getPageData();
 			pd.put("IS_DELETE", 1);
 			copyrightmultiService.delete(pd);
-			out.write("success");
-			out.close();
-		} catch(Exception e){
-			logger.error(e.toString(), e);
-		}
+			String MEDIA_ID=(String) pd.get("COPYRIGHTMULTI_ID");
+			session.setAttribute("MEDIA_ID", MEDIA_ID);
+			mv.setViewName("redirect:/message/deletesave.do");				
+			return mv;
 		
 	}
 	
@@ -136,6 +142,53 @@ public class CopyrightMultiController extends BaseController {
 			List<PageData>	varList = copyrightmultiService.list(page);	//列出CopyrightMulti列表
 			getHC(); //调用权限
 			mv.setViewName("yunear/copyrightmulti_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
+		return mv;
+	}
+	
+	/**
+	 * 审核多媒体列表
+	 */
+	@RequestMapping(value="/auditlist")
+	public ModelAndView auditlist(Page page){
+		logBefore(logger, "列表CopyrightMulti");
+		/*String KEYWORDS = pd.getString("KEYWORDS");
+
+		if (null != KEYWORDS && !"".equals(KEYWORDS)) {
+			KEYWORDS = KEYWORDS.trim();
+			pd.put("KEYWORDS", KEYWORDS);
+		}
+		
+		String AUDIT_STATUS = pd.getString("AUDIT_STATUS");
+		
+		if (null != AUDIT_STATUS && !"".equals(AUDIT_STATUS)) {
+			AUDIT_STATUS = AUDIT_STATUS.trim();
+			pd.put("AUDIT_STATUS", AUDIT_STATUS);
+		}
+		String DATE_CREATE = pd.getString("DATE_CREATE");
+		String DATE_CREATE1 = pd.getString("DATE_CREATE1");
+
+		if (DATE_CREATE != null && !"".equals(DATE_CREATE)) {
+			DATE_CREATE = DATE_CREATE + " 00:00:00";
+			pd.put("DATE_CREATE", DATE_CREATE);
+		}
+		if (DATE_CREATE1 != null && !"".equals(DATE_CREATE1)) {
+			DATE_CREATE1 = DATE_CREATE1 + " 00:00:00";
+			pd.put("DATE_CREATE1", DATE_CREATE1);
+		}*/
+		
+		try{
+			pd = this.getPageData();
+			pd.put("IS_DELETE", 0);
+			page.setPd(pd);
+			List<PageData>	varList = copyrightmultiService.auditlist(page);	//列出CopyrightMulti列表
+			System.out.println(varList.size()+"--------------");
+			getHC(); //调用权限
+			mv.setViewName("yunear/copyrightmulti_auditlist");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 		} catch(Exception e){
@@ -168,13 +221,9 @@ public class CopyrightMultiController extends BaseController {
 	@RequestMapping(value="/goEdit")
 	public ModelAndView goEdit(){
 		logBefore(logger, "去修改CopyrightMulti页面");
-		
 		pd = this.getPageData();
 		try {
 			pd = copyrightmultiService.findById(pd);	//根据ID读取
-			String DESCR=pd.get("DESCR").toString();
-			System.out.println(DESCR);
-			pd.put("DESCR", DESCR);
 			mv.setViewName("yunear/copyrightmulti_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
@@ -184,6 +233,43 @@ public class CopyrightMultiController extends BaseController {
 		return mv;
 	}	
 	
+	/**
+	 * 去查看页面
+	 */
+	@RequestMapping(value="/golock")
+	public ModelAndView golock(){
+		logBefore(logger, "去修改CopyrightMulti页面");
+		pd = this.getPageData();
+		try {
+			pd = copyrightmultiService.findById(pd);	//根据ID读取
+			mv.setViewName("yunear/copyrightmulti_lock");
+			mv.addObject("pd", pd);
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		}						
+		return mv;
+	}	
+	/**
+	 * 审核多媒体
+	 */
+	@RequestMapping(value="/lock")
+	public ModelAndView lock(PrintWriter out) throws Exception{
+		logBefore(logger, "修改CopyrightMulti");
+	
+		pd = this.getPageData();
+		System.out.println(pd.get("status")+"---");
+		if (pd.get("status").equals("1")) {
+			pd.put("AUDIT_STATUS", "00");
+			copyrightmultiService.update(pd);
+		}
+		if (pd.get("status").equals("2")) {
+			pd.put("AUDIT_STATUS", "01");
+			copyrightmultiService.update(pd);
+		}
+		mv.addObject("msg","success");
+		mv.setViewName("save_result");
+		return mv;
+	}
 	/**
 	 * 批量删除
 	 */
@@ -243,6 +329,7 @@ public class CopyrightMultiController extends BaseController {
 			dataMap.put("titles", titles);
 			List<PageData> varOList = copyrightmultiService.listAll(pd);
 			List<PageData> varList = new ArrayList<PageData>();
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 			for(int i=0;i<varOList.size();i++){
 				PageData vpd = new PageData();
 				vpd.put("var1", varOList.get(i).getString("USER_ID"));	//1
@@ -257,8 +344,13 @@ public class CopyrightMultiController extends BaseController {
 				vpd.put("var10", varOList.get(i).get("SPREAD_NUM").toString());	//10
 				vpd.put("var11", varOList.get(i).get("CLICK_NUM").toString());	//11
 				vpd.put("var12", varOList.get(i).get("SCAN_CODE_NUM").toString());	//12
-				vpd.put("var13", varOList.get(i).getString("DATE_CREATE"));	//13
-				vpd.put("var14", varOList.get(i).getString("DATE_MODIFY"));	//14
+				vpd.put("var13", sdf.format((Date)(varOList.get(i).get("DATE_CREATE"))));	//13
+				if(varOList.get(i).get("DATE_MODIFY")==null){
+					vpd.put("var14", "");	//14
+				}else{
+					vpd.put("var14", sdf.format((Date)(varOList.get(i).get("DATE_MODIFY"))));	//14
+				}
+				
 				vpd.put("var15", varOList.get(i).getString("IS_DELETE"));	//15
 				varList.add(vpd);
 			}

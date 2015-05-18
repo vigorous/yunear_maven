@@ -52,6 +52,8 @@
 		<!-- 提现 -->
 		<mapper resource="mybatis/yunear/DrawMapper.xml"/>
 		
+		<!-- 消息记录表 -->
+		<mapper resource="mybatis/yunear/MessageMapper.xml"/>
 		<!-- yunear 	结束-->
 		
 		

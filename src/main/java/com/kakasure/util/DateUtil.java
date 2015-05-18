@@ -53,6 +53,10 @@ public class DateUtil {
 	public static String getTime() {
 		return sdfTime.format(new Date());
 	}
+	
+	public static String getTime(Date date){
+		return sdfTime.format(date);
+	}
 
 	/**
 	* @Title: compareDate

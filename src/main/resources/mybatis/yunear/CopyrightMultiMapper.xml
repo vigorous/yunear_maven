@@ -103,7 +103,14 @@
 				COPYRIGHTMULTI_ID = #{COPYRIGHTMULTI_ID}
 	</update>
 	
-	
+	<!-- 审核状态修改 -->
+	<update id="update" parameterType="pd">
+		update  YUNEAR_COPYRIGHTMULTI
+			set 
+				AUDIT_STATUS = #{AUDIT_STATUS}
+			where 
+				COPYRIGHTMULTI_ID = #{COPYRIGHTMULTI_ID}
+	</update>
 	<!-- 通过ID获取数据 -->
 	<select id="findById" parameterType="pd" resultType="pd">
 		select 
@@ -152,6 +159,43 @@
 		from 
 				YUNEAR_COPYRIGHTMULTI a 
 		where a.USER_ID = #{pd.USER_ID} and a.IS_DELETE = #{pd.IS_DELETE}
+		
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''">
+			and a.KEYWORDS LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')	
+		</if>
+		<if test="pd.AUDIT_STATUS != null and pd.AUDIT_STATUS != ''">
+			and a.AUDIT_STATUS=#{pd.AUDIT_STATUS} 
+		</if>
+		<if test="pd.DATE_CREATE!=null and pd.DATE_CREATE!=''">
+			and a.DATE_CREATE &gt;= #{pd.DATE_CREATE} 
+		</if>
+		<if test="pd.DATE_CREATE1!=null and pd.DATE_CREATE1!=''">
+			and a.DATE_CREATE1 &lt;= #{pd.DATE_CREATE1} 
+		</if>
+	</select>
+
+	<!-- 审核多媒体列表 -->
+	<select id="auditlistPage" parameterType="page" resultType="pd">
+		select
+				a.USER_ID,	
+				a.MEDIA_NAME,	
+				a.KEYWORDS,	
+				a.PAY_TYPE,	
+				a.DESCR,	
+				a.PATH,	
+				a.TYPE,	
+				a.AUDIT_STATUS,	
+				a.PRICE,	
+				a.SPREAD_NUM,	
+				a.CLICK_NUM,	
+				a.SCAN_CODE_NUM,	
+				a.DATE_CREATE,	
+				a.DATE_MODIFY,	
+				a.IS_DELETE,	
+				a.COPYRIGHTMULTI_ID
+		from 
+				YUNEAR_COPYRIGHTMULTI a 
+		where  a.IS_DELETE = #{pd.IS_DELETE}
 	</select>
 	
 	<!-- 列表(全部) -->

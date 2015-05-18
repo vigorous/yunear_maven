@@ -34,7 +34,7 @@
 	<div class="row-fluid">
 	
 			<!-- 检索  -->
-			<form action="copyrightmulti/list.do" method="post" name="Form" id="Form">
+			<form action="copyrightmulti/auditlist.do" method="post" name="Form" id="Form">
 			<table>
 				<tr>
 					<td>
@@ -46,9 +46,11 @@
 					<td><input class="span10 date-picker" name="DATE_CREATE" id="DATE_CREATE" value="${pd.DATE_CREATE}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
 					<td><input class="span10 date-picker" name="DATE_CREATE1" id="DATE_CREATE1" value="${pd.DATE_CREATE}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
 					<td style="vertical-align:top;"> 
-					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
-							<option value="">1</option>
-							<option value="">2</option>
+					 	<select class="chzn-select" name="AUDIT_STATUS" id="AUDIT_STATUS" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+							<option value=""></option>
+							<option value="99">待审核</option>
+							<option value="00">审核通过</option>
+							<option value="01">审核不通过</option>
 					  	</select>
 					</td>
 					<td style="vertical-align:top;"><button class="btn btn-mini btn-light" onclick="search();"  title="检索"><i id="nav-search-icon" class="icon-search"></i></button></td>
@@ -71,13 +73,9 @@
 						<th>多媒体名称</th>
 						<th>标签</th>
 						<th>付费类型</th>
-						<th>描述</th>
-						<th>多媒体类型</th>
-						<th>审核状态</th>
 						<th>价格</th>
-						<th>推广次数</th>
-						<th>点击数</th>
-						<th>扫码次数</th>
+						<th>多媒体类型</th>
+						<th>审核状态</th>						
 						<th>创建日期</th>
 						<th>修改日期</th>
 						<th>状态</th>
@@ -100,18 +98,14 @@
 										<td>${var.MEDIA_NAME}</td>
 										<td>${var.KEYWORDS}</td>
 										<td>${var.PAY_TYPE=="0"?"免费":"收费"}</td>
-										<td>${var.DESCR}</td>
+										<td>${var.PRICE}</td>
 										<td>${var.TYPE=="01"?"视频":"音频"}</td>
 										<td>${var.AUDIT_STATUS=="99"?"待审核":""}
 											${var.AUDIT_STATUS=="00"?"审核通过":""}
-											${var.AUDIT_STATUS=="01"?"审核不通过":""}</td>
-										<td>${var.PRICE}</td>
-										<td>${var.SPREAD_NUM}</td>
-										<td>${var.CLICK_NUM}</td>
-										<td>${var.SCAN_CODE_NUM}</td>
+											${var.AUDIT_STATUS=="01"?"审核不通过":""}</td>										
 										<td>${var.DATE_CREATE}</td>
 										<td>${var.DATE_MODIFY}</td>
-										<td class="label label-success arrowed">${var.IS_DELETE=="0"?"未删除":""}</td>
+										<td class="label label-success arrowed">${var.IS_DELETE=="0"?"未删除":"已删除"}</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
 									
@@ -231,9 +225,9 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>/copyrightmulti/goEdit.do?COPYRIGHTMULTI_ID='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.URL = '<%=basePath%>/copyrightmulti/golock.do?COPYRIGHTMULTI_ID='+Id;
+			 diag.Width = 600;
+			 diag.Height = 500;
 			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 nextPage(${page.currentPage});

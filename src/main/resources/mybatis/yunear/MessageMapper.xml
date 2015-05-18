@@ -8,14 +8,14 @@
 		insert into YUNEAR_MESSAGE(
 			MEDIA_ID,	
 			TYPE,	
-			CONTENT,	
-			DATE_CREATE,	
+			CONTENT,
+			DATE_CREATE,
 			MESSAGE_ID
 		) values (
 			#{MEDIA_ID},	
 			#{TYPE},	
 			#{CONTENT},	
-			#{DATE_CREATE},	
+			#{DATE_CREATE},
 			#{MESSAGE_ID}
 		)
 	</insert>
