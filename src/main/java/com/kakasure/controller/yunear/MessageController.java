@@ -67,7 +67,6 @@ public class MessageController extends BaseController {
 	 */
 	@RequestMapping(value="/deletesave")
 	public void deletesave(PrintWriter out,HttpSession session) throws Exception{
-		System.out.println("----------------------");
 		String MEDIA_ID=(String) session.getAttribute("MEDIA_ID");
 		logBefore(logger, "新增Message");
 		
