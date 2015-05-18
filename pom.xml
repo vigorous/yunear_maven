@@ -23,6 +23,11 @@
 		fcsampleshelper.jar fctl.jar -->
 
 	<dependencies>
+		<!-- <dependency>
+			<groupId>com.github.ki4so</groupId>
+			<artifactId>ki4so-java-client</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency> -->
 		<!-- poi -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>

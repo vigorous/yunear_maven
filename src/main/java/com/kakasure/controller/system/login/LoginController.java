@@ -218,84 +218,90 @@ public class LoginController extends BaseController {
 				} else {
 					user = userr;
 				}
-				Role role = user.getRole();
-				String roleRights = role != null ? role.getRIGHTS() : "";
-				// 避免每次拦截用户操作时查询数据库，以下将用户所属角色权限、用户权限限都存入session
-				session.setAttribute(Const.SESSION_ROLE_RIGHTS, roleRights); // 将角色权限存入session
-				session.setAttribute(Const.SESSION_USERNAME, user.getUSERNAME());
+				
+				if(user == null){
+					mv.setViewName("system/admin/login");// session失效后跳转登录页面
+					
+				} else {
+					Role role = user.getRole();
+					String roleRights = role != null ? role.getRIGHTS() : "";
+					// 避免每次拦截用户操作时查询数据库，以下将用户所属角色权限、用户权限限都存入session
+					session.setAttribute(Const.SESSION_ROLE_RIGHTS, roleRights); // 将角色权限存入session
+					session.setAttribute(Const.SESSION_USERNAME, user.getUSERNAME());
 
-				List<Menu> allmenuList = new ArrayList<Menu>();
+					List<Menu> allmenuList = new ArrayList<Menu>();
 
-				if (null == session.getAttribute(Const.SESSION_allmenuList)) {
-					allmenuList = menuService.listAllMenu();
-					if (Tools.notEmpty(roleRights)) {
-						for (Menu menu : allmenuList) {
-							menu.setHasMenu(RightsHelper.testRights(roleRights, menu.getMENU_ID()));
-							if (menu.isHasMenu()) {
-								List<Menu> subMenuList = menu.getSubMenu();
-								for (Menu sub : subMenuList) {
-									sub.setHasMenu(RightsHelper.testRights(roleRights,
-											sub.getMENU_ID()));
+					if (null == session.getAttribute(Const.SESSION_allmenuList)) {
+						allmenuList = menuService.listAllMenu();
+						if (Tools.notEmpty(roleRights)) {
+							for (Menu menu : allmenuList) {
+								menu.setHasMenu(RightsHelper.testRights(roleRights, menu.getMENU_ID()));
+								if (menu.isHasMenu()) {
+									List<Menu> subMenuList = menu.getSubMenu();
+									for (Menu sub : subMenuList) {
+										sub.setHasMenu(RightsHelper.testRights(roleRights,
+												sub.getMENU_ID()));
+									}
 								}
 							}
 						}
-					}
-					session.setAttribute(Const.SESSION_allmenuList, allmenuList); // 菜单权限放入session中
-				} else {
-					allmenuList = (List<Menu>) session.getAttribute(Const.SESSION_allmenuList);
-				}
-
-				//先不要切换菜单的功能，by zhangbin at 2015-05-13
-				/*// 切换菜单=====
-				List<Menu> menuList = new ArrayList<Menu>();
-				if (null == session.getAttribute(Const.SESSION_menuList)
-						|| "yes".equals(pd.getString("changeMenu"))) {
-					List<Menu> menuList1 = new ArrayList<Menu>();
-					List<Menu> menuList2 = new ArrayList<Menu>();
-
-					// 拆分菜单
-					for (int i = 0; i < allmenuList.size(); i++) {
-						Menu menu = allmenuList.get(i);
-						if ("1".equals(menu.getMENU_TYPE())) {
-							menuList1.add(menu);
-						} else {
-							menuList2.add(menu);
-						}
-					}
-
-					session.removeAttribute(Const.SESSION_menuList);
-					if ("1".equals(session.getAttribute("changeMenu"))
-							|| null == session.getAttribute("changeMenu")) {
-						session.setAttribute(Const.SESSION_menuList, menuList1);
-						session.removeAttribute("changeMenu");
-						session.setAttribute("changeMenu", "2");
-						menuList = menuList1;
+						session.setAttribute(Const.SESSION_allmenuList, allmenuList); // 菜单权限放入session中
 					} else {
-						session.setAttribute(Const.SESSION_menuList, menuList2);
-						session.removeAttribute("changeMenu");
-						session.setAttribute("changeMenu", "1");
-						menuList = menuList2;
+						allmenuList = (List<Menu>) session.getAttribute(Const.SESSION_allmenuList);
 					}
-				} else {
-					menuList = (List<Menu>) session.getAttribute(Const.SESSION_menuList);
-				}
-				// 切换菜单=====
-				if (null == session.getAttribute(Const.SESSION_QX)) {
-					session.setAttribute(Const.SESSION_QX, this.getUQX(session)); // 按钮权限放到session中
-				}*/
 
-				// FusionCharts 报表
-//				String strXML = "<graph caption='前12个月订单销量柱状图' xAxisName='月份' yAxisName='值' decimalPrecision='0' formatNumberScale='0'><set name='2013-05' value='4' color='AFD8F8'/><set name='2013-04' value='0' color='AFD8F8'/><set name='2013-03' value='0' color='AFD8F8'/><set name='2013-02' value='0' color='AFD8F8'/><set name='2013-01' value='0' color='AFD8F8'/><set name='2012-01' value='0' color='AFD8F8'/><set name='2012-11' value='0' color='AFD8F8'/><set name='2012-10' value='0' color='AFD8F8'/><set name='2012-09' value='0' color='AFD8F8'/><set name='2012-08' value='0' color='AFD8F8'/><set name='2012-07' value='0' color='AFD8F8'/><set name='2012-06' value='0' color='AFD8F8'/></graph>";
-//				mv.addObject("strXML", strXML);
-				// FusionCharts 报表
+					//先不要切换菜单的功能，by zhangbin at 2015-05-13
+					/*// 切换菜单=====
+					List<Menu> menuList = new ArrayList<Menu>();
+					if (null == session.getAttribute(Const.SESSION_menuList)
+							|| "yes".equals(pd.getString("changeMenu"))) {
+						List<Menu> menuList1 = new ArrayList<Menu>();
+						List<Menu> menuList2 = new ArrayList<Menu>();
 
-				if (null == session.getAttribute(Const.SESSION_QX)) {
-					session.setAttribute(Const.SESSION_QX, this.getUQX(session)); // 按钮权限放到session中
+						// 拆分菜单
+						for (int i = 0; i < allmenuList.size(); i++) {
+							Menu menu = allmenuList.get(i);
+							if ("1".equals(menu.getMENU_TYPE())) {
+								menuList1.add(menu);
+							} else {
+								menuList2.add(menu);
+							}
+						}
+
+						session.removeAttribute(Const.SESSION_menuList);
+						if ("1".equals(session.getAttribute("changeMenu"))
+								|| null == session.getAttribute("changeMenu")) {
+							session.setAttribute(Const.SESSION_menuList, menuList1);
+							session.removeAttribute("changeMenu");
+							session.setAttribute("changeMenu", "2");
+							menuList = menuList1;
+						} else {
+							session.setAttribute(Const.SESSION_menuList, menuList2);
+							session.removeAttribute("changeMenu");
+							session.setAttribute("changeMenu", "1");
+							menuList = menuList2;
+						}
+					} else {
+						menuList = (List<Menu>) session.getAttribute(Const.SESSION_menuList);
+					}
+					// 切换菜单=====
+					if (null == session.getAttribute(Const.SESSION_QX)) {
+						session.setAttribute(Const.SESSION_QX, this.getUQX(session)); // 按钮权限放到session中
+					}*/
+
+					// FusionCharts 报表
+//					String strXML = "<graph caption='前12个月订单销量柱状图' xAxisName='月份' yAxisName='值' decimalPrecision='0' formatNumberScale='0'><set name='2013-05' value='4' color='AFD8F8'/><set name='2013-04' value='0' color='AFD8F8'/><set name='2013-03' value='0' color='AFD8F8'/><set name='2013-02' value='0' color='AFD8F8'/><set name='2013-01' value='0' color='AFD8F8'/><set name='2012-01' value='0' color='AFD8F8'/><set name='2012-11' value='0' color='AFD8F8'/><set name='2012-10' value='0' color='AFD8F8'/><set name='2012-09' value='0' color='AFD8F8'/><set name='2012-08' value='0' color='AFD8F8'/><set name='2012-07' value='0' color='AFD8F8'/><set name='2012-06' value='0' color='AFD8F8'/></graph>";
+//					mv.addObject("strXML", strXML);
+					// FusionCharts 报表
+
+					if (null == session.getAttribute(Const.SESSION_QX)) {
+						session.setAttribute(Const.SESSION_QX, this.getUQX(session)); // 按钮权限放到session中
+					}
+					
+					mv.setViewName("system/admin/index");
+					mv.addObject("user", user);
+					mv.addObject("menuList", allmenuList);
 				}
-				
-				mv.setViewName("system/admin/index");
-				mv.addObject("user", user);
-				mv.addObject("menuList", allmenuList);
 			} else {
 				mv.setViewName("system/admin/login");// session失效后跳转登录页面
 			}
