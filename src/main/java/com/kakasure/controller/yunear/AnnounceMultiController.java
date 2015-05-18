@@ -156,7 +156,7 @@ public class AnnounceMultiController extends BaseController {
 			// 根据路径生成二维码图片
 			String imgName = this.get32UUID();
 			QrcodeUtil.generateQrcode(
-					"http://localhost:8080/" + pageData.getString("PATH"),
+					"http://localhost:8080/announcemulti/COPYRIGHTMULTI_ID=" + pageData.getString("COPYRIGHTMULTI_ID"),
 					"C://qrcode", imgName + ".jpg");
 			pageData.put("ANNOUNCEMULTI_ID", this.get32UUID()); // 主键
 			
@@ -165,7 +165,7 @@ public class AnnounceMultiController extends BaseController {
 			pageData.put("CODE_ID", this.get32UUID());
 			pageData.put("SCAN_CODE_LINK", pageData.getString("PATH"));
 			pageData.put("SCAN_CODE_NUM", 0);
-			pageData.put("IMG_LINK", "C://qrcode" + imgName + ".jpg");
+			pageData.put("IMG_LINK", "C://qrcode//" + imgName + ".jpg");
 			pageData.put("DATE_CREATE", DateUtil.getTime());
 			//pageData.put("DATE_MODIFY", DateUtil.getTime());
 			pageData.put("IS_DELETE", "0");
