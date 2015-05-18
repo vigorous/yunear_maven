@@ -200,6 +200,22 @@
 			#{PHONE}
 		)
 	</insert>
+	<!-- 扫码新增用户 -->
+	<insert id="savecode" parameterType="pd">
+		insert into SYS_USER (
+			USER_ID,
+			USERNAME,
+			PASSWORD,
+			LAST_LOGIN,
+			EMAIL,
+		) values (
+			#{USER_ID},
+			#{USERNAME},
+			#{PASSWORD},
+			#{LAST_LOGIN},
+			#{EMAIL}
+		)
+	</insert>
 	<!-- 用户列表(用户组) -->
 	<select id="userlistPage" parameterType="page" resultType="pd">
 		select  u.USER_ID,

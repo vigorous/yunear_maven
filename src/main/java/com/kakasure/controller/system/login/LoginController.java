@@ -181,7 +181,7 @@ public class LoginController extends BaseController {
 
 					session.setAttribute(Const.SESSION_USER, user);
 					session.removeAttribute(Const.SESSION_SECURITY_CODE);
-				} else {
+				} else { 
 					errInfo = "用户名或密码有误！";
 				}
 			} else {

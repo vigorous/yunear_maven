@@ -156,37 +156,12 @@ public class CopyrightMultiController extends BaseController {
 	@RequestMapping(value="/auditlist")
 	public ModelAndView auditlist(Page page){
 		logBefore(logger, "列表CopyrightMulti");
-		/*String KEYWORDS = pd.getString("KEYWORDS");
-
-		if (null != KEYWORDS && !"".equals(KEYWORDS)) {
-			KEYWORDS = KEYWORDS.trim();
-			pd.put("KEYWORDS", KEYWORDS);
-		}
-		
-		String AUDIT_STATUS = pd.getString("AUDIT_STATUS");
-		
-		if (null != AUDIT_STATUS && !"".equals(AUDIT_STATUS)) {
-			AUDIT_STATUS = AUDIT_STATUS.trim();
-			pd.put("AUDIT_STATUS", AUDIT_STATUS);
-		}
-		String DATE_CREATE = pd.getString("DATE_CREATE");
-		String DATE_CREATE1 = pd.getString("DATE_CREATE1");
-
-		if (DATE_CREATE != null && !"".equals(DATE_CREATE)) {
-			DATE_CREATE = DATE_CREATE + " 00:00:00";
-			pd.put("DATE_CREATE", DATE_CREATE);
-		}
-		if (DATE_CREATE1 != null && !"".equals(DATE_CREATE1)) {
-			DATE_CREATE1 = DATE_CREATE1 + " 00:00:00";
-			pd.put("DATE_CREATE1", DATE_CREATE1);
-		}*/
 		
 		try{
 			pd = this.getPageData();
 			pd.put("IS_DELETE", 0);
 			page.setPd(pd);
 			List<PageData>	varList = copyrightmultiService.auditlist(page);	//列出CopyrightMulti列表
-			System.out.println(varList.size()+"--------------");
 			getHC(); //调用权限
 			mv.setViewName("yunear/copyrightmulti_auditlist");
 			mv.addObject("varList", varList);

@@ -75,7 +75,15 @@ public class UserService {
 	public void saveU(PageData pd) throws Exception {
 		dao.save("UserXMapper.saveU", pd);
 	}
-
+	/**
+	 * 扫码保存用户
+	 * 
+	 * @param pd
+	 * @throws Exception
+	 */
+	public void savecode(PageData pd) throws Exception {
+		dao.save("UserXMapper.savecode", pd);
+	}
 	/**
 	 * 修改用户
 	 * 
