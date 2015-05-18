@@ -185,7 +185,7 @@
 			</tr>
 			<tr>
 				<td><textarea rows="" cols="" name="DESCR" id="DESCR"
-							maxlength="32" placeholder="描述" title="描述" >${pd.DESCR}</textarea>
+							maxlength="127" placeholder="描述（最多127个字）" title="描述" >${pd.DESCR}</textarea>
 			</tr>
 			<tr>
 				<td><input type="file" name="file_upload" id="file_upload">

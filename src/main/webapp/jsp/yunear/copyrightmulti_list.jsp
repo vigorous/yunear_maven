@@ -43,12 +43,14 @@
 							<i id="nav-search-icon" class="icon-search"></i>
 						</span>
 					</td>
-					<td><input class="span10 date-picker" name="DATE_CREATE" id="DATE_CREATE" value="${pd.DATE_CREATE}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
-					<td><input class="span10 date-picker" name="DATE_CREATE1" id="DATE_CREATE1" value="${pd.DATE_CREATE}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
+					<td><input class="span10 date-picker" name="DATE_CREATE_START" id="DATE_CREATE_START" value="${pd.DATE_CREATE}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
+					<td><input class="span10 date-picker" name="DATE_CREATE_END" id="DATE_CREATE_END" value="${pd.DATE_CREATE}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
 					<td style="vertical-align:top;"> 
-					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
-							<option value="">1</option>
-							<option value="">2</option>
+					 	<select class="chzn-select" name="AUDIT_STATUS" id="AUDIT_STATUS" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+							<option value=""></option>
+							<option value="99">待审核</option>
+							<option value="00">审核通过</option>
+							<option value="01">审核不通过</option>
 					  	</select>
 					</td>
 					<td style="vertical-align:top;"><button class="btn btn-mini btn-light" onclick="search();"  title="检索"><i id="nav-search-icon" class="icon-search"></i></button></td>
