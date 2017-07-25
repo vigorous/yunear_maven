@@ -10,17 +10,19 @@
     </settings>
 
 	<typeAliases>
-		<typeAlias type="com.kakasure.entity.system.User" alias="User"/>
-		<typeAlias type="com.kakasure.entity.system.Role" alias="Role"/>
-		<typeAlias type="com.kakasure.entity.system.Menu" alias="Menu"/>
-		<typeAlias type="com.kakasure.util.PageData" alias="pd"/>
+		<typeAlias type="com.haopai.entity.system.User" alias="User"/>
+		<typeAlias type="com.haopai.entity.system.Role" alias="Role"/>
+		<typeAlias type="com.haopai.entity.system.Menu" alias="Menu"/>
+		<typeAlias type="com.haopai.util.PageData" alias="pd"/>
+		<typeAlias type="com.haopai.entity.yunear.ProductClass" alias="ProductClass"/>
+		<typeAlias type="com.haopai.entity.tree.ProductClassTree" alias="ProductClassTree"/>
 		<!-- 分页 -->
-		<typeAlias type="com.kakasure.entity.Page" alias="Page"/>
+		<typeAlias type="com.haopai.entity.Page" alias="Page"/>
 		
 	</typeAliases>
 	
 	<plugins>
-		<plugin interceptor="com.kakasure.plugin.PagePlugin">
+		<plugin interceptor="com.haopai.plugin.PagePlugin">
 			<property name="dialect" value="mysql"/>
 			<property name="pageSqlId" value=".*listPage.*"/>
 		</plugin>
@@ -40,20 +42,25 @@
 		<mapper resource="mybatis/system/AppuserMapper.xml"/>
 		<!-- 数据字典 -->
 		<mapper resource="mybatis/system/ZidianMapper.xml"/>
+		<mapper resource="mybatis/system/PersonMapper.xml"/>
+		<mapper resource="mybatis/callsystem/StudentMapper.xml"/>
 		<!-- 系统模块    结束 -->
 		
 		<!-- yunear 	开始-->
 		<!-- 版权方多媒体 -->
-		<mapper resource="mybatis/yunear/CopyrightMultiMapper.xml"/>
+		<!-- <mapper resource="mybatis/yunear/CopyrightMultiMapper.xml"/> -->
 		<!-- 发布方多媒体 -->
-		<mapper resource="mybatis/yunear/AnnounceMultiMapper.xml"/>
+		<!-- <mapper resource="mybatis/yunear/AnnounceMultiMapper.xml"/> -->
 		<!-- 信息 -->
-		<mapper resource="mybatis/yunear/MessageUserMapper.xml"/>
+		<!-- <mapper resource="mybatis/yunear/MessageUserMapper.xml"/> -->
 		<!-- 提现 -->
-		<mapper resource="mybatis/yunear/DrawMapper.xml"/>
+		<!-- <mapper resource="mybatis/yunear/DrawMapper.xml"/> -->
 		
 		<!-- 消息记录表 -->
-		<mapper resource="mybatis/yunear/MessageMapper.xml"/>
+		<!-- <mapper resource="mybatis/yunear/MessageMapper.xml"/>
+		<mapper resource="mybatis/yunear/ProcessMapper.xml"/>
+		<mapper resource="mybatis/yunear/ProductMapper.xml"/>
+		<mapper resource="mybatis/yunear/ProductClassMapper.xml"/> -->
 		<!-- yunear 	结束-->
 		
 		

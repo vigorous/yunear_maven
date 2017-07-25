@@ -1,8 +1,8 @@
 -- ----------------------------
--- Table structure for "C##NEWO"."YUNEAR_${objectNameUpper}"
+-- Table structure for "C##NEWO"."SYS_${objectNameUpper}"
 -- ----------------------------
--- DROP TABLE "C##NEWO"."YUNEAR_${objectNameUpper}";
-CREATE TABLE "C##NEWO"."YUNEAR_${objectNameUpper}" (
+-- DROP TABLE "C##NEWO"."SYS_${objectNameUpper}";
+CREATE TABLE "C##NEWO"."SYS_${objectNameUpper}" (
 <#list fieldList as var>
 	<#if var[1] == 'Integer'>
 	"${var[0]}" NUMBER(10) NULL ,
@@ -18,22 +18,22 @@ NOCACHE
 ;
 
 <#list fieldList as var>
-COMMENT ON COLUMN "C##NEWO"."YUNEAR_${objectNameUpper}"."${var[0]}" IS '${var[2]}';
+COMMENT ON COLUMN "C##NEWO"."SYS_${objectNameUpper}"."${var[0]}" IS '${var[2]}';
 </#list>
-COMMENT ON COLUMN "C##NEWO"."YUNEAR_${objectNameUpper}"."${objectNameUpper}_ID" IS 'ID';
+COMMENT ON COLUMN "C##NEWO"."SYS_${objectNameUpper}"."${objectNameUpper}_ID" IS 'ID';
 
 -- ----------------------------
--- Indexes structure for table YUNEAR_${objectNameUpper}
+-- Indexes structure for table SYS_${objectNameUpper}
 -- ----------------------------
 
 -- ----------------------------
--- Checks structure for table "C##NEWO"."YUNEAR_${objectNameUpper}"
+-- Checks structure for table "C##NEWO"."SYS_${objectNameUpper}"
 
 -- ----------------------------
 
-ALTER TABLE "C##NEWO"."YUNEAR_${objectNameUpper}" ADD CHECK ("${objectNameUpper}_ID" IS NOT NULL);
+ALTER TABLE "C##NEWO"."SYS_${objectNameUpper}" ADD CHECK ("${objectNameUpper}_ID" IS NOT NULL);
 
 -- ----------------------------
--- Primary Key structure for table "C##NEWO"."YUNEAR_${objectNameUpper}"
+-- Primary Key structure for table "C##NEWO"."SYS_${objectNameUpper}"
 -- ----------------------------
-ALTER TABLE "C##NEWO"."YUNEAR_${objectNameUpper}" ADD PRIMARY KEY ("${objectNameUpper}_ID");
+ALTER TABLE "C##NEWO"."SYS_${objectNameUpper}" ADD PRIMARY KEY ("${objectNameUpper}_ID");

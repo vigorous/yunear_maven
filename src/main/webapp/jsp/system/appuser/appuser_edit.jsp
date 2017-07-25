@@ -272,7 +272,7 @@
 			</tr>
 			
 			<tr>
-				<td><input type="text" name="NUMBER" id="NUMBER" value="${pd.NUMBER }" maxlength="32" placeholder="这里输入编号" title="编号" onblur="hasN('${pd.USERNAME }')"/></td>
+				<td><input type="text" name="NUMBERNO" id="NUMBER" value="${pd.NUMBERNO }" maxlength="32" placeholder="这里输入编号" title="编号" onblur="hasN('${pd.USERNAME }')"/></td>
 				<td><input type="email" name="EMAIL" id="EMAIL"  value="${pd.EMAIL }" maxlength="32" placeholder="这里输入邮箱" title="邮箱" onblur="hasE('${pd.USERNAME }')"/></td>
 			</tr>
 			

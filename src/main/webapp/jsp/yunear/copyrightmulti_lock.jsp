@@ -99,7 +99,7 @@
 				<tr>
 					<td align="right">收费类型:</td>
 					<td align="center"><input type="text" name="PAY_TYPE" id="PAY_TYPE"
-						value="${pd.PAY_TYPE=="0"?"免费":"收费"}" maxlength="32"
+						value="${pd.PAY_TYPE=='0'?'免费':'收费'}" maxlength="32"
 						placeholder="收费类型" title="标签" readonly="readonly" /></td>
 				</tr>
 				<tr>
@@ -124,7 +124,7 @@
 				<tr>
 					<td align="right">视频类型:</td>
 					<td align="center"><input type="text" name="TYPE" id="TYPE"
-						value="${pd.TYPE=="01"?"视频":"音频"}" maxlength="32"
+						value="${pd.TYPE=='01'?'视频':'音频'}" maxlength="32"
 						placeholder="多媒体类型" title="标签" readonly="readonly" /></td>
 				</tr>
 				<tr>
@@ -142,15 +142,15 @@
 				<tr>
 					<td align="right">状态:</td>
 					<td align="center"><input type="text" name="IS_DELETE" id="IS_DELETE"
-						value="${pd.IS_DELETE=="0"?"未删除":"已删除"}" maxlength="32"
+						value="${pd.IS_DELETE=='0'?'未删除':'已删除'}" maxlength="32"
 						placeholder="状态" title="标签" readonly="readonly" /></td>
 				</tr>
 				<tr>
 					<td align="right">审核状态:</td>
 					<td align="center"><input type="text" name="AUDIT_STATUS" id="AUDIT_STATUS"
-						value="${pd.AUDIT_STATUS==" 99"?"待审核":""}${pd.AUDIT_STATUS==
-						"00"?"审核通过":""}${pd.AUDIT_STATUS==
-						"01"?"审核不通过":""}" maxlength="32" placeholder="审核状态" title="标签"
+						value="${pd.AUDIT_STATUS=='99'?'待审核':''}${pd.AUDIT_STATUS==
+						'00'?'审核通过':''}${pd.AUDIT_STATUS==
+						'01'?'审核不通过':''}" maxlength="32" placeholder="审核状态" title="标签"
 						readonly="readonly" /></td>
 				</tr>
 

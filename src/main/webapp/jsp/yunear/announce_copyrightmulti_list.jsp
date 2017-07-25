@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.kakasure.util.DateUtil" language="java"%>
+<%@ page import="com.haopai.util.DateUtil" language="java"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -36,6 +36,8 @@
 	
 			<!-- 检索  -->
 			<form action="announcemulti/allMultiList.do" method="post" name="Form" id="Form">
+			<fieldset>
+			<legend><span style="font-size: 12px">查询条件</span></legend>
 			<table>
 				<tr>
 					<td>
@@ -44,8 +46,8 @@
 							<i id="nav-search-icon" class="icon-search"></i>
 						</span>
 					</td>
-					<td><input class="span10 date-picker" name="DATE_CREATE_START" id="DATE_CREATE_START" value="${pd.DATE_CREATE_START}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
-					<td><input class="span10 date-picker" name="DATE_CREATE_END" id="DATE_CREATE_END" value="${pd.DATE_CREATE_END}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
+					<td>开始日期：<input class="span10 date-picker" name="DATE_CREATE_START" id="DATE_CREATE_START" value="${pd.DATE_CREATE_START}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;height:20px" placeholder="开始日期"/></td>
+					<td>结束日期：<input class="span10 date-picker" name="DATE_CREATE_END" id="DATE_CREATE_END" value="${pd.DATE_CREATE_END}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
 					<!-- <td style="vertical-align:top;"> 
 					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
 							<option value="">1</option>
@@ -58,9 +60,12 @@
 					</c:if>
 				</tr>
 			</table>
+			</fieldset>
 			<!-- 检索  -->
 		
-		
+			
+			<fieldset>
+			<legend>查询结果</legend>
 			<table id="table_report" class="table table-striped table-bordered table-hover">
 				
 				<thead>
@@ -158,6 +163,7 @@
 				
 				</tbody>
 			</table>
+			</fieldset>
 			
 		<div class="page-header position-relative">
 		<table style="width:100%;">
@@ -227,7 +233,7 @@
 						 window.parent.jzts();
 						 setTimeout("self.location.reload()",100);
 					 }else{
-						 nextPage(${page.currentPage});
+						 nextPage('${page.currentPage}');
 					 }
 				}
 				diag.close();
@@ -242,7 +248,7 @@
 					var url = "<%=basePath%>/copyrightmulti/delete.do?COPYRIGHTMULTI_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						if(data=="success"){
-							nextPage(${page.currentPage});
+							nextPage('${page.currentPage}');
 						}
 					});
 				}
@@ -263,7 +269,7 @@
 						}else{
 							alert("操作失败");
 						}
-						nextPage(${page.currentPage});
+						nextPage('${page.currentPage}');
 					});
 				}
 			});
@@ -339,7 +345,7 @@
 								cache: false,
 								success: function(data){
 									 $.each(data.list, function(i, list){
-											nextPage(${page.currentPage});
+											nextPage('${page.currentPage}');
 									 });
 								}
 							});

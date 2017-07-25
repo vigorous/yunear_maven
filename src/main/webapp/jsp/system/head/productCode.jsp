@@ -335,7 +335,7 @@
 			<tr>
 				<td style="width:15%;text-align: right;">上级包名：</td>
 				<td><input type="text" name="packageName" id="packageName" value="" placeholder="这里输入包名  (请不要输入特殊字符,请用纯字母)" style="width:370px" title="包名称"/></td>
-				<td>&nbsp;&nbsp;例如:com.kakasure.controller.<font color="red" style="font-weight: bold;">system</font>&nbsp;&nbsp;红色部分</td>
+				<td>&nbsp;&nbsp;例如:com.haopai.controller.<font color="red" style="font-weight: bold;">system</font>&nbsp;&nbsp;红色部分</td>
 			</tr>
 			<tr>
 				<td style="width:15%;text-align: right;">处理类名：</td>

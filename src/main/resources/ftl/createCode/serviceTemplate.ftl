@@ -1,4 +1,4 @@
-package com.kakasure.service.${packageName}.${objectNameLower};
+package com.haopai.service.${packageName}.${objectNameLower};
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.kakasure.dao.DaoSupport;
-import com.kakasure.entity.Page;
-import com.kakasure.util.PageData;
+import com.haopai.dao.DaoSupport;
+import com.haopai.entity.Page;
+import com.haopai.util.PageData;
 
 
 @Service("${objectNameLower}Service")

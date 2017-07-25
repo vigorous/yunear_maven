@@ -75,15 +75,15 @@
 			$("#loginname").val(jQuery.trim($('#loginname').val()));
 		}
 		
-		if($("#NUMBER").val()==""){
+		if($("#NUMBERNO").val()==""){
 			
-			$("#NUMBER").tips({
+			$("#NUMBERNO").tips({
 				side:3,
 	            msg:'输入编号',
 	            bg:'#AE81FF',
 	            time:3
 	        });
-			$("#NUMBER").focus();
+			$("#NUMBERNO").focus();
 			return false;
 		}
 		
@@ -165,13 +165,13 @@
 			$("#EMAIL").focus();
 			return false;
 		}
-		
 		if($("#user_id").val()==""){
 			hasU();
 		}else{
 			$("#userForm").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();
+			
 		}
 	}
 	
@@ -219,19 +219,19 @@
 	
 	//判断编码是否存在
 	function hasN(USERNAME){
-		var NUMBER = $("#NUMBER").val();
-		var url = "user/hasN.do?NUMBER="+NUMBER+"&USERNAME="+USERNAME+"&tm="+new Date().getTime();
+		var NUMBERNO = $("#NUMBERNO").val();
+		var url = "user/hasN.do?NUMBERNO="+NUMBERNO+"&USERNAME="+USERNAME+"&tm="+new Date().getTime();
 		$.get(url,function(data){
 			if(data=="error"){
 				
-				$("#NUMBER").tips({
+				$("#NUMBERNO").tips({
 					side:3,
 		            msg:'编号已存在',
 		            bg:'#AE81FF',
 		            time:3
 		        });
 				
-				setTimeout("$('#NUMBER').val('')",2000);
+				setTimeout("$('#NUMBERNO').val('')",2000);
 				
 			}
 		});
@@ -271,7 +271,7 @@
 				<td><input type="text" name="USERNAME" id="loginname" value="${pd.USERNAME }" maxlength="32" placeholder="这里输入用户名" title="用户名"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="NUMBER" id="NUMBER" value="${pd.NUMBER }" maxlength="32" placeholder="这里输入编号" title="编号" onblur="hasN('${pd.USERNAME }')"/></td>
+				<td><input type="text" name="NUMBERNO" id="NUMBERNO" value="${pd.NUMBERNO }" maxlength="32" placeholder="这里输入编号" title="编号" onblur="hasN('${pd.USERNAME }')"/></td>
 			</tr>
 			<tr>
 				<td><input type="password" name="PASSWORD" id="password"  maxlength="32" placeholder="输入密码" title="密码"/></td>

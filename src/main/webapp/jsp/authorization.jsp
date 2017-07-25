@@ -103,8 +103,8 @@ footer {
 	</script>
 	<footer>
 		<div style="width: 100%;" class="center">
-			<a class="btn btn-mini btn-primary" onclick="save();">保存</a> <a
-				class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>
+			<a class="btn btn-mini btn-primary" onclick="save();">保存</a> 
+			<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>
 		</div>
 	</footer>
 </body>

@@ -10,22 +10,22 @@
 	<head>
 		<base href="<%=basePath%>">
 		
-		<meta charset="utf-8" />
-		<title></title>
+		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+		<meta charset="utf-8">
+		<title>菜单图片</title>
 		
-		<meta name="description" content="overview & stats" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link href="css/bootstrap.min.css" rel="stylesheet" />
-		<link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="css/font-awesome.min.css" />
-		<!--[if IE 7]><link rel="stylesheet" href="css/font-awesome-ie7.min.css" /><![endif]-->
-		<!--[if lt IE 9]><link rel="stylesheet" href="css/ace-ie.min.css" /><![endif]-->
-		<link rel="stylesheet" href="css/ace.min.css" />
-		<link rel="stylesheet" href="css/ace-responsive.min.css" />
-		<link rel="stylesheet" href="css/ace-skins.min.css" />
+		<meta name="description" content="overview &amp; stats" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="Ace_Admin_1.3.3/assets/css/bootstrap.css" />
+		<link rel="stylesheet" href="Ace_Admin_1.3.3/assets/css/font-awesome.css" />
+		<!-- text fonts -->
+		<link rel="stylesheet" href="Ace_Admin_1.3.3/assets/css/ace-fonts.css" />
+		<!-- ace styles -->
+		<link rel="stylesheet" href="Ace_Admin_1.3.3/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
 		
-		<script type="text/javascript" src="js/jquery-1.7.2.js"></script>	
+		<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
 
 		<script type="text/javascript">
 				
@@ -56,26 +56,26 @@
 			<table id="table_report" class="table table-striped table-bordered table-hover">
 				
 				<tr>
-					<td><label onclick="seticon('icon-desktop');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-desktop"></i></span></label></td>
-					<td><label onclick="seticon('icon-list');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-list"></i></span></label></td>
-					<td><label onclick="seticon('icon-edit');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-edit"></i></span></label></td>
-					<td><label onclick="seticon('icon-list-alt');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-list-alt"></i></span></label></td>
-					<td><label onclick="seticon('icon-calendar');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-calendar"></i></span></label></td>
-					<td><label onclick="seticon('icon-picture');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-picture"></i></span></label></td>
-					<td><label onclick="seticon('icon-th');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-th"></i></span></label></td>
-					<td><label onclick="seticon('icon-file');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-file"></i></span></label></td>
-					<td><label onclick="seticon('icon-folder-open');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-folder-open"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-desktop');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-desktop"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-list');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-list"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-edit');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-edit"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-list-alt');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-list-alt"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-calendar');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-calendar"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-picture-o');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-picture-o"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-th');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-th"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-file');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-file"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-folder-open');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-folder-open"></i></span></label></td>
 				</tr>
 				<tr>
-					<td><label onclick="seticon('icon-book');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-book"></i></span></label></td>
-					<td><label onclick="seticon('icon-cogs');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-cogs"></i></span></label></td>
-					<td><label onclick="seticon('icon-comments');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-comments"></i></span></label></td>
-					<td><label onclick="seticon('icon-envelope-alt');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-envelope-alt"></i></span></label></td>
-					<td><label onclick="seticon('icon-film');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-film"></i></span></label></td>
-					<td><label onclick="seticon('icon-heart');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-heart"></i></span></label></td>
-					<td><label onclick="seticon('icon-lock');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-lock"></i></span></label></td>
-					<td><label onclick="seticon('icon-exclamation-sign');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-exclamation-sign"></i></span></label></td>
-					<td><label onclick="seticon('icon-facetime-video');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="icon-facetime-video"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-book');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-book"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-cogs');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-cogs"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-comments');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-comments"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-envelope-o');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-envelope-o"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-film');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-film"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-heart');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-heart"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-lock');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-lock"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-briefcase');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-briefcase"></i></span></label></td>
+					<td><label onclick="seticon('menu-icon fa fa-file-video-o');"><input name="form-field-radio" type="radio" value="icon-edit"><span class="lbl">&nbsp;<i class="ace-icon fa fa-file-video-o"></i></span></label></td>
 				</tr>
 				<tr>
 				<td style="text-align: center;" colspan="100">

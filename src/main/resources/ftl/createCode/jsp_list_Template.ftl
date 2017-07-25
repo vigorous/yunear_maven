@@ -8,179 +8,330 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-	<base href="<%=basePath%>"><!-- jsp文件头和头部 -->
-	<%@ include file="../../system/admin/top.jsp"%> 
+		<base href="<%=basePath%>"><!-- jsp文件头和头部 -->
+		<%@ include file="../system/admin/top.jsp"%> 
 	</head>
 <body>
-		
-<div class="container-fluid" id="main-container">
 
-	<div id="breadcrumbs">
-	
-	<ul class="breadcrumb">
-		<li><i class="icon-home"></i> <a>XX管理</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-		<li class="active">XX管理</li>
-	</ul><!--.breadcrumb-->
-	
-	<div id="nav-search">
-	</div><!--#nav-search-->
-	
-	</div><!--#breadcrumbs-->
+<!-- main-container -->
+<div class="main-container">
+	<!-- #section:basics/content.breadcrumbs -->
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+			try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+		</script>
 
-<div id="page-content" class="clearfix">
-						
-  <div class="row-fluid">
-
-	<div class="row-fluid">
-	
-			<!-- 检索  -->
-			<form action="${objectNameLower}/list.do" method="post" name="Form" id="Form">
-			<table>
-				<tr>
-					<td>
-						<span class="input-icon">
-							<input autocomplete="off" id="nav-search-input" type="text" name="field1" value="" placeholder="这里输入关键词" />
-							<i id="nav-search-icon" class="icon-search"></i>
-						</span>
-					</td>
-					<td><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart" value="${r"${pd.lastLoginStart}"}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
-					<td><input class="span10 date-picker" name="lastLoginEnd" id="lastLoginEnd" value="${r"${pd.lastLoginEnd}"}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
-					<td style="vertical-align:top;"> 
-					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
-							<option value="">1</option>
-							<option value="">2</option>
-					  	</select>
-					</td>
-					<td style="vertical-align:top;"><button class="btn btn-mini btn-light" onclick="search();"  title="检索"><i id="nav-search-icon" class="icon-search"></i></button></td>
-					<c:if test="${r"${QX.cha == 1 }"}">
-					<td style="vertical-align:top;"><a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i></a></td>
-					</c:if>
-				</tr>
-			</table>
-			<!-- 检索  -->
-		
-		
-			<table id="table_report" class="table table-striped table-bordered table-hover">
-				
-				<thead>
-					<tr>
-						<th class="center">
-						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
-						</th>
-						<th>序号</th>
-				<#list fieldList as var>
-						<th>${var[2]}</th>
-				</#list>
-						<th class="center">操作</th>
-					</tr>
-				</thead>
-										
-				<tbody>
-					
-				<!-- 开始循环 -->	
-				<c:choose>
-					<c:when test="${r"${not empty varList}"}">
-						<c:if test="${r"${QX.cha == 1 }"}">
-						<c:forEach items="${r"${varList}"}" var="var" varStatus="vs">
-							<tr>
-								<td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${r"${var."}${objectNameUpper}_ID${r"}"}" /><span class="lbl"></span></label>
-								</td>
-								<td class='center' style="width: 30px;">${r"${vs.index+1}"}</td>
-								<#list fieldList as var>
-										<td>${r"${var."}${var[0]}${r"}"}</td>
-								</#list>
-								<td style="width: 30px;" class="center">
-									<div class='hidden-phone visible-desktop btn-group'>
-									
-										<c:if test="${r"${QX.edit != 1 && QX.del != 1 }"}">
-										<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="icon-lock" title="无权限"></i></span>
-										</c:if>
-										<div class="inline position-relative">
-										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
-										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
-											<c:if test="${r"${QX.edit == 1 }"}">
-											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${r"${var."}${objectNameUpper}_ID${r"}"}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
-											</c:if>
-											<c:if test="${r"${QX.del == 1 }"}">
-											<li><a style="cursor:pointer;" title="删除" onclick="del('${r"${var."}${objectNameUpper}_ID${r"}"}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
-											</c:if>
-										</ul>
-										</div>
-									</div>
-								</td>
-							</tr>
-						
-						</c:forEach>
-						</c:if>
-						<c:if test="${r"${QX.cha == 0 }"}">
-							<tr>
-								<td colspan="100" class="center">您无权查看</td>
-							</tr>
-						</c:if>
-					</c:when>
-					<c:otherwise>
-						<tr class="main_info">
-							<td colspan="100" class="center" >没有相关数据</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-					
-				
-				</tbody>
-			</table>
-			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;">
-					<c:if test="${r"${QX.add == 1 }"}">
-					<a class="btn btn-small btn-success" onclick="add();">新增</a>
-					</c:if>
-					<c:if test="${r"${QX.del == 1 }"}">
-					<a class="btn btn-small btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='icon-trash'></i></a>
-					</c:if>
-				</td>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${r"${page.pageStr}"}</div></td>
-			</tr>
-		</table>
-		</div>
-		</form>
+		<ul class="breadcrumb">
+			<li>
+				<i class="ace-icon fa fa-home home-icon"></i>
+				<a href="javascript:void(0);">XX管理</a>
+			</li>
+			<li class="active">XX管理</li>
+		</ul><!-- /.breadcrumb -->
 	</div>
- 
- 
- 
- 
-	<!-- PAGE CONTENT ENDS HERE -->
-  </div><!--/row-->
-	
-</div><!--/#page-content-->
-</div><!--/.fluid-container#main-container-->
+	<!-- /section:basics/content.breadcrumbs -->
+
+	<!-- page-content -->
+	<div class="page-content">
+		<div class="row">
+			<div class="col-xs-12">
+				
+				<!-- 查询  -->
+				<form class="form-horizontal" role="form" action="${objectNameLower}/list.do" method="post" name="Form" id="Form">
+					
+					<!-- 条件 -->
+					<div class="form-group">
+						<!--  -->
+						<label class="col-sm-1 control-label no-padding-right" for="form-field-1">关键词:</label>
+						<div class="col-sm-2">
+							<span class="input-icon">
+								<input autocomplete="on" id="nav-search-input" class="form-control" type="text" name="field1" placeholder="关键词" />
+								<i class="ace-icon fa fa-search nav-search-icon"></i>
+							</span>
+						</div>
+						
+						<!--  -->
+						<label class="col-sm-1 control-label no-padding-right" for="lastLoginStart">开始日期:</label>
+						<div class="col-sm-2">
+							<div class="input-group">
+								<input id="lastLoginStart" name="lastLoginStart" class="form-control date-picker" type="text" readonly="readonly" data-date-format="yyyy-mm-dd" placeholder="开始日期" title="开始日期">
+								<span class="input-group-addon">
+									<i class="fa fa-calendar bigger-110"></i>
+								</span>
+							</div>
+						</div>
+						
+						<!--  -->
+						<label class="col-sm-1 control-label no-padding-right" for="lastLoginEnd">结束日期:</label>
+						<div class="col-sm-2">
+							<div class="input-group">
+								<input id="lastLoginEnd" name="lastLoginEnd" class="form-control date-picker" type="text" readonly="readonly" data-date-format="yyyy-mm-dd" placeholder="结束日期" title="结束日期">
+								<span class="input-group-addon">
+									<i class="fa fa-calendar bigger-110"></i>
+								</span>
+							</div>
+						</div>
+						
+						<!--  -->
+						<label class="col-sm-1 control-label no-padding-right" for="STATUS">状态:</label>
+						<div class="col-sm-2">
+							<select class="form-control" name="STATUS" id="status" placeholder="请选择等级">
+								<option value=""></option>
+								<option value="1">正常</option>
+								<option value="2">冻结</option>
+						  	</select>
+						</div>
+						
+					</div>
+					<!-- /条件 -->
+					
+					<!-- 按钮控件 -->
+					<div class="form-group">
+						<label class="col-sm-12 control-label no-padding-right" for="form-field-1-1">
+							<button class="btn btn-mini btn-light" onclick="search();"  title="查询">
+								<i class="ace-icon fa fa-search nav-search-icon"></i>
+							</button>
+							<c:if test="${r"${QX.cha == 1 }"}">
+								<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL">
+									<i id="nav-search-icon" class="ace-icon fa fa-download"></i>
+								</a>
+							</c:if>
+						</label>
+					</div>
+					<!-- /按钮控件 -->
+				</form>
+				<!-- /查询  -->
+				
+				<div class="hr hr-8 dotted hr-double"></div>
+			
+				<!-- 结果 -->
+				<table id="simple-table" class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="center">
+								<label class="pos-rel">
+									<input type="checkbox" class="ace" id="zcheckbox" />
+									<span class="lbl"></span>
+								</label>
+							</th>
+							<th>序号</th>
+							<#list fieldList as var>
+							<th>${var[2]}</th>
+							</#list>
+							<th class="center">操作</th>
+						</tr>
+					</thead>
+											
+					<tbody>
+						
+					<!-- 开始循环 -->	
+					<c:choose>
+						<c:when test="${r"${not empty varList}"}">
+							
+							<c:if test="${r"${QX.cha == 1 }"}">
+								<c:forEach items="${r"${varList}"}" var="var" varStatus="vs">
+									<tr>
+										<td class="center" style="width:30px;">
+											<label class="pos-rel">
+												<input type='checkbox' class="ace" name='ids' value="${r"${var."}${objectNameUpper}_ID${r"}"}" />
+												<span class="lbl"></span>
+											</label>
+										</td>
+										<td class="center" style="width:50px;">${r"${vs.index+1}"}</td>
+										<#list fieldList as var>
+										<td>${r"${var."}${var[0]}${r"}"}</td>
+										</#list>
+										<td class="center" style="width:120px;">
+										
+											<!-- 正常窗口	按钮控件 -->
+											<div class="hidden-sm hidden-xs btn-group">
+												<c:if test="${r"${QX.edit != 1 && QX.del != 1 }"}">
+													<span class="label label-large label-grey arrowed-in-right arrowed-in">
+														<i class="ace-icon fa fa-lock" title="无权限"></i>
+													</span>
+												</c:if>
+												<c:if test="${r"${QX.edit == 1 }"}">
+													<a title="编辑" onclick="edit('${r"${var."}${objectNameUpper}_ID${r"}"}');" class="btn btn-mini btn-success">
+														<i class="ace-icon fa fa-edit"></i>
+													</a>
+												</c:if>
+												<c:if test="${r"${QX.del == 1 }"}">
+													<a title="删除" onclick="del('${r"${var."}${objectNameUpper}_ID${r"}"}');" class="btn btn-mini btn-danger">
+														<i class="glyphicon glyphicon-trash"></i>
+													</a>
+												</c:if>
+											</div>
+											
+											<!-- 缩小窗口	按钮控件 -->
+											<div class="hidden-md hidden-lg">
+												<c:choose>
+													<c:when test="${r"${QX.edit != 1 && QX.del != 1 }"}">
+														<span class="label label-large label-grey arrowed-in-right arrowed-in">
+															<i class="ace-icon fa fa-lock" title="无权限"></i>
+														</span>
+													</c:when>
+													<c:otherwise>
+														<div class="inline pos-rel">
+															<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+																<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+															</button>
+															<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+																<c:if test="${r"${QX.edit == 1 }"}">
+																	<li>
+																		<a href="javascript:edit('${r"${var."}${objectNameUpper}_ID${r"}"}');" class="tooltip-success" data-rel="tooltip" title="编辑">
+																			<span class="green">
+																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+																			</span>
+																		</a>
+																	</li>
+																</c:if>
+																
+																<c:if test="${r"${QX.del == 1 }"}">
+																	<li>
+																		<a href="javascript:del('${r"${var."}${objectNameUpper}_ID${r"}"}');" class="tooltip-error" data-rel="tooltip" title="删除">
+																			<span class="red">
+																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																			</span>
+																		</a>
+																	</li>
+																</c:if>
+															</ul>
+														</div>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:if>
+							
+							<c:if test="${r"${QX.cha == 0 }"}">
+								<tr>
+									<td colspan="100" class="center">您无权查看</td>
+								</tr>
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<tr class="main_info">
+								<td colspan="100" class="center" >没有相关数据</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+					</tbody>
+				</table>
+				<!-- /结果 -->
+			
+			</div><!-- /.col-xs-12 -->
+		</div><!--/.row-->
+		
+		
+		<div class="row">
+			
+			<!-- 批处理 按钮控件 -->
+			<div class="col-sm-5">
+				<c:if test="${r"${QX.add == 1 }"}">
+					<a class="btn btn-small btn-success" onclick="add();">新增</a>
+				</c:if>
+				<c:if test="${r"${QX.del == 1 }"}">
+					<a class="btn btn-small btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" >
+						<i class='glyphicon glyphicon-trash'></i>
+					</a>
+				</c:if>
+			</div>
+			<!-- /批处理 按钮控件 -->
+			
+			<!-- 分页 -->
+			<div class="col-sm-7">
+				<div style="float: right;padding-top: 0px;margin-top: 0px;">
+					${r"${page.pageStr}"}
+				</div>
+			</div>
+			<!-- /分页 -->
+		</div>
+		
+	</div><!--/.page-content-->
+</div><!--/.main-container-->
 		
 		<!-- 返回顶部  -->
-		<a href="#" id="btn-scroll-up" class="btn btn-small btn-inverse">
-			<i class="icon-double-angle-up icon-only"></i>
+		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+			<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 		</a>
 		
 		<!-- 引入 -->
-		<script type="text/javascript">window.jQuery || document.write("<script src='js/jquery-1.9.1.min.js'>\x3C/script>");</script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/ace-elements.min.js"></script>
-		<script src="js/ace.min.js"></script>
+		<!--[if !IE]> -->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='Ace_Admin_1.3.3/assets/js/jquery.js'>"+"<"+"/script>");
+		</script>
+		<!-- <![endif]-->
+
+		<!--[if IE]-->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='Ace_Admin_1.3.3/assets/js/jquery1x.js'>"+"<"+"/script>");
+		</script>
+		<!--[endif]-->
 		
-		<script type="text/javascript" src="js/chosen.jquery.min.js"></script><!-- 下拉框 -->
-		<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script><!-- 日期框 -->
-		<script type="text/javascript" src="js/bootbox.min.js"></script><!-- 确认窗口 -->
-		<!-- 引入 -->
-		<script type="text/javascript" src="js/jquery.tips.js"></script><!--提示框-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='Ace_Admin_1.3.3/assets/js/jquery.mobile.custom.js'>"+"<"+"/script>");
+		</script>
+		<script src="Ace_Admin_1.3.3/assets/js/bootstrap.js"></script>
+		<script src="Ace_Admin_1.3.3/assets/js/bootbox.js"></script>
+		<!-- page specific plugin scripts -->
+		<!--[if lte IE 8]>
+		  <script src="Ace_Admin_1.3.3/assets/js/excanvas.js"></script>
+		<![endif]-->
+		<script src="Ace_Admin_1.3.3/assets/js/date-time/bootstrap-datepicker.js"></script>
+		<script src="Ace_Admin_1.3.3/assets/js/date-time/moment.js"></script>
+		<script src="Ace_Admin_1.3.3/assets/js/chosen.jquery.js"></script>
+		
 		<script type="text/javascript">
 		
 		$(window.parent.hangge());
+		
+		$(function() {
+			//And for the first simple table, which doesn't have TableTools or dataTables
+			//select/deselect all rows according to table header checkbox
+			var active_class = 'active';
+			$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+				var th_checked = this.checked;//checkbox inside "TH" table header
+				
+				$(this).closest('table').find('tbody > tr').each(function(){
+					var row = this;
+					if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+					else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+				});
+			});
+			
+			//select/deselect a row when the checkbox is checked/unchecked
+			$('#simple-table').on('click', 'td input[type=checkbox]' , function(){
+				var $row = $(this).closest('tr');
+				if(this.checked) $row.addClass(active_class);
+				else $row.removeClass(active_class);
+			});
+			
+			var ksrq = $('#lastLoginStart')[0];
+		 	if(ksrq.type !== 'date') {//if browser doesn't support "date" input
+		    	$(ksrq).datepicker({
+		      	//options
+		    	})
+			}
+		 	
+		 	var jsrq = $('#lastLoginEnd')[0];
+		 	if(jsrq.type !== 'date') {//if browser doesn't support "date" input
+		    	$(jsrq).datepicker({
+		      	//options
+		    	})
+			}
+		});
 		
 		//检索
 		function search(){
 			window.parent.jzts();
 			$("#Form").submit();
+		}
+		
+		//导出excel
+		function toExcel(){
+			window.location.href='<%=basePath%>/${objectNameLower}/excel.do';
 		}
 		
 		//新增
@@ -198,7 +349,7 @@
 						 window.parent.jzts();
 						 setTimeout("self.location.reload()",100);
 					 }else{
-						 nextPage(${r"${page.currentPage}"});
+						 nextPage(${r"'${page.currentPage}'"});
 					 }
 				}
 				diag.close();
@@ -213,7 +364,7 @@
 					var url = "<%=basePath%>/${objectNameLower}/delete.do?${objectNameUpper}_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						if(data=="success"){
-							nextPage(${r"${page.currentPage}"});
+							nextPage(${r"'${page.currentPage}'"});
 						}
 					});
 				}
@@ -231,38 +382,12 @@
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-					 nextPage(${r"${page.currentPage}"});
+					 nextPage(${r"'${page.currentPage}'"});
 				}
 				diag.close();
 			 };
 			 diag.show();
 		}
-		</script>
-		
-		<script type="text/javascript">
-		
-		$(function() {
-			
-			//下拉框
-			$(".chzn-select").chosen(); 
-			$(".chzn-select-deselect").chosen({allow_single_deselect:true}); 
-			
-			//日期框
-			$('.date-picker').datepicker();
-			
-			//复选框
-			$('table th input:checkbox').on('click' , function(){
-				var that = this;
-				$(this).closest('table').find('tr > td:first-child input:checkbox')
-				.each(function(){
-					this.checked = that.checked;
-					$(this).closest('tr').toggleClass('selected');
-				});
-					
-			});
-			
-		});
-		
 		
 		//批量操作
 		function makeAll(msg){
@@ -277,17 +402,19 @@
 						  }
 					}
 					if(str==''){
-						bootbox.dialog("您没有选择任何内容!", 
-							[
-							  {
-								"label" : "关闭",
-								"class" : "btn-small btn-success",
-								"callback": function() {
-									//Example.show("great success");
-									}
-								}
-							 ]
-						);
+						bootbox.dialog({  
+							message: "您没有选择任何内容!",  
+							/* title: "Confirm title",   */
+							buttons: {  
+								Cancel: {  
+									label: "关闭",  
+									className: "btn-small btn-success",  
+									callback: function () {
+										
+									}  
+								}  
+							}  
+						});
 						
 						$("#zcheckbox").tips({
 							side:3,
@@ -308,7 +435,7 @@
 								cache: false,
 								success: function(data){
 									 $.each(data.list, function(i, list){
-											nextPage(${r"${page.currentPage}"});
+											nextPage(${r"'${page.currentPage}'"});
 									 });
 								}
 							});
@@ -317,14 +444,7 @@
 				}
 			});
 		}
-		
-		//导出excel
-		function toExcel(){
-			window.location.href='<%=basePath%>/${objectNameLower}/excel.do';
-		}
 		</script>
-		<script type="text/javascript" src="js/jquery.cookie.js"></script>
-		
 	</body>
 </html>
 

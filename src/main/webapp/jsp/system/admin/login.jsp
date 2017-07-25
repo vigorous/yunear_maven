@@ -115,7 +115,7 @@
 			<div class="controls">
 				<div class="main_input_box">
 					<font color="white"><span id="nameerr">Copyright ©
-							kakasure.com 2015</span></font>
+							haopai.com 2015</span></font>
 				</div>
 			</div>
 		</div>

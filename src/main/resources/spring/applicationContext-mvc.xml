@@ -8,16 +8,16 @@
 
 	<mvc:annotation-driven />
 
-	<context:component-scan base-package="com.kakasure.controller" />
+	<context:component-scan base-package="com.haopai.controller" />
 	<context:component-scan base-package="com.json" />
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**/*.do*" />
-			<bean class="com.kakasure.interceptor.LoginHandlerInterceptor" />
+			<bean class="com.haopai.interceptor.LoginHandlerInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**/*.do*" />
-			<bean class="com.kakasure.interceptor.RightsHandlerInterceptor" />
+			<bean class="com.haopai.interceptor.RightsHandlerInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 
@@ -27,7 +27,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<bean id="exceptionResolver" class="com.kakasure.resolver.MyExceptionResolver"></bean>
+	<bean id="exceptionResolver" class="com.haopai.resolver.MyExceptionResolver"></bean>
 	<!-- 上传拦截，如最大上传值及最小上传值 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

@@ -1,4 +1,4 @@
-package com.kakasure.controller.${packageName}.${objectNameLower};
+package com.haopai.controller.${packageName}.${objectNameLower};
 
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -20,15 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kakasure.controller.base.BaseController;
-import com.kakasure.entity.system.Menu;
-import com.kakasure.entity.Page;
-import com.kakasure.util.AppUtil;
-import com.kakasure.util.ObjectExcelView;
-import com.kakasure.util.Const;
-import com.kakasure.util.PageData;
-import com.kakasure.util.Tools;
-import com.kakasure.service.${packageName}.${objectNameLower}.${objectName}Service;
+import com.haopai.controller.base.BaseController;
+import com.haopai.entity.system.Menu;
+import com.haopai.entity.Page;
+import com.haopai.util.AppUtil;
+import com.haopai.util.ObjectExcelView;
+import com.haopai.util.Const;
+import com.haopai.util.PageData;
+import com.haopai.util.Tools;
+import com.haopai.service.${packageName}.${objectNameLower}.${objectName}Service;
 
 /** 
  * 类名称：${objectName}Controller

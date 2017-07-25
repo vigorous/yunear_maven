@@ -5,7 +5,7 @@
 	
 	<!-- 新增-->
 	<insert id="save" parameterType="pd">
-		insert into "YUNEAR_${objectNameUpper}"(
+		insert into "SYS_${objectNameUpper}"(
 	<#list fieldList as var>
 			"${var[0]}",	
 	</#list>
@@ -21,7 +21,7 @@
 	
 	<!-- 删除-->
 	<delete id="delete" parameterType="pd">
-		delete from "YUNEAR_${objectNameUpper}"
+		delete from "SYS_${objectNameUpper}"
 		where 
 			"${objectNameUpper}_ID" = ${r"#{"}${objectNameUpper}_ID${r"}"}
 	</delete>
@@ -29,7 +29,7 @@
 	
 	<!-- 修改 -->
 	<update id="edit" parameterType="pd">
-		update  "YUNEAR_${objectNameUpper}"
+		update  "SYS_${objectNameUpper}"
 			set 
 	<#list fieldList as var>
 			<#if var[3] == "是">
@@ -50,7 +50,7 @@
 	</#list>
 			"${objectNameUpper}_ID"
 		from 
-			"YUNEAR_${objectNameUpper}"
+			"SYS_${objectNameUpper}"
 		where 
 			"${objectNameUpper}_ID" = ${r"#{"}${objectNameUpper}_ID${r"}"}
 	</select>
@@ -64,7 +64,7 @@
 		</#list>
 				a."${objectNameUpper}_ID"
 		from 
-				"YUNEAR_${objectNameUpper}" a
+				"SYS_${objectNameUpper}" a
 	</select>
 	
 	<!-- 列表(全部) -->
@@ -75,12 +75,12 @@
 		</#list>
 				a."${objectNameUpper}_ID"
 		from 
-				"YUNEAR_${objectNameUpper}" a
+				"SYS_${objectNameUpper}" a
 	</select>
 	
 	<!-- 批量删除 -->
 	<delete id="deleteAll" parameterType="String">
-		delete from "YUNEAR_${objectNameUpper}"
+		delete from "SYS_${objectNameUpper}"
 		where 
 			"${objectNameUpper}_ID" in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
