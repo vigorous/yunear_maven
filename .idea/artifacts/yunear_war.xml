@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="yunear:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="yunear.war">
-      <element id="artifact" artifact-name="yunear:war exploded" />
-    </root>
-  </artifact>
-</component>
